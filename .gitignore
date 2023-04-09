@@ -30,3 +30,5 @@ build
 
 # Ignore .vscode
 .vscode
+
+!gradle/wrapper/gradle-wrapper.jar
