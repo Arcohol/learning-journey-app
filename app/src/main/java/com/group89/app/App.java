@@ -3,12 +3,15 @@
  */
 package com.group89.app;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import javax.swing.SwingUtilities;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+import com.group89.app.view.MainFrame;
+
+public class App {
+  public static void main(String[] args) {
+    // disable scaling
+    System.setProperty("sun.java2d.uiScale.enabled", "false");
+
+    SwingUtilities.invokeLater(MainFrame::new);
+  }
 }
