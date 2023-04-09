@@ -1,15 +1,18 @@
 package com.group89.app.view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import com.group89.app.controller.MainController;
 import com.group89.app.view.comp.Sidebar;
 
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
   private JPanel content;
+
   private JPanel[] pages = new JPanel[3];
 
   public MainFrame() {
@@ -26,6 +29,8 @@ public class MainFrame extends JFrame {
     this.content = new JPanel(new CardLayout());
     this.add(this.content, BorderLayout.CENTER);
 
+    // dummy panels
+    // todo: each panel serves as a page for different functionalities
     this.pages[0] = new JPanel();
     this.pages[0].setBackground(java.awt.Color.RED);
     this.pages[1] = new JPanel();

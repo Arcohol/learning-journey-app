@@ -4,12 +4,12 @@
 package com.group89.app;
 
 import javax.swing.SwingUtilities;
+
 import com.group89.app.view.MainFrame;
 
 public class App {
   public static void main(String[] args) {
-    // disable dpi scaling
-    System.setProperty("sun.java2d.uiScale", "1.0");
+    // disable scaling
     System.setProperty("sun.java2d.uiScale.enabled", "false");
 
     SwingUtilities.invokeLater(MainFrame::new);
