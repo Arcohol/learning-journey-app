@@ -1,9 +1,7 @@
 package com.group89.app.controller;
 
 import java.awt.CardLayout;
-
 import javax.swing.JPanel;
-
 import com.group89.app.view.MainFrame;
 import com.group89.app.view.comp.Sidebar;
 

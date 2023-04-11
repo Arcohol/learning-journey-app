@@ -2,10 +2,8 @@ package com.group89.app.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import com.group89.app.controller.MainController;
 import com.group89.app.view.comp.Sidebar;
 
