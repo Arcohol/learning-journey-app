@@ -5,13 +5,14 @@ import javax.swing.JPanel;
 import com.group89.app.view.MainFrame;
 import com.group89.app.view.comp.Sidebar;
 
-public class MainController {
+public class MainController implements Controller {
   private MainFrame frame;
 
   public MainController(MainFrame frame) {
     this.frame = frame;
   }
 
+  @Override
   public void init() {
     JPanel content = this.frame.getContent();
     Sidebar sidebar = this.frame.getSidebar();
