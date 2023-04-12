@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import com.group89.app.controller.Controller;
 import com.group89.app.controller.MainController;
+import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.Sidebar;
 
 public class MainFrame extends JFrame {
@@ -29,8 +31,8 @@ public class MainFrame extends JFrame {
 
     // dummy panels
     // todo: each panel serves as a page for different functionalities
-    this.pages[0] = new JPanel();
-    this.pages[0].setBackground(java.awt.Color.RED);
+    this.pages[0] = new MarkRecordPage();
+
     this.pages[1] = new JPanel();
     this.pages[1].setBackground(java.awt.Color.GREEN);
     this.pages[2] = new JPanel();
@@ -44,7 +46,7 @@ public class MainFrame extends JFrame {
 
     this.setVisible(true);
 
-    MainController controller = new MainController(this);
+    Controller controller = new MainController(this);
     controller.init();
   }
 
