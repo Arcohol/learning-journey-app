@@ -5,7 +5,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.Controller;
-import com.group89.app.controller.MainController;
+import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.Sidebar;
 
@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(800, 600);
     this.setLocationRelativeTo(null);
-    this.setResizable(false);
+    //this.setResizable(false);
     this.setLayout(new BorderLayout());
 
     this.sidebar = new Sidebar();
@@ -46,7 +46,7 @@ public class MainFrame extends JFrame {
 
     this.setVisible(true);
 
-    Controller controller = new MainController(this);
+    Controller controller = new MainFrameController(this);
     controller.init();
   }
 
