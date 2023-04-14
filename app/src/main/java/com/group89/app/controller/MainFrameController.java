@@ -5,10 +5,10 @@ import javax.swing.JPanel;
 import com.group89.app.view.MainFrame;
 import com.group89.app.view.comp.Sidebar;
 
-public class MainController implements Controller {
+public class MainFrameController implements Controller {
   private MainFrame frame;
 
-  public MainController(MainFrame frame) {
+  public MainFrameController(MainFrame frame) {
     this.frame = frame;
   }
 
