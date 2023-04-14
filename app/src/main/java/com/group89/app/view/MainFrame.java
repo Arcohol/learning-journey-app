@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
   public MainFrame() {
     super("Group 89");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(800, 600);
+    this.setSize(1000, 800);
     this.setLocationRelativeTo(null);
     //this.setResizable(false);
     this.setLayout(new BorderLayout());
