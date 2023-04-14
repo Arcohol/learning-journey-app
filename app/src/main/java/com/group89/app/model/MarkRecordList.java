@@ -16,13 +16,21 @@ public class MarkRecordList extends ArrayList<MarkRecord> {
     return total;
   }
 
-  // TODO: gpa calculation
   public double getGPA() {
-    return 0;
+    double gpa = 0.0;
+    for (MarkRecord record : this) {
+      gpa += record.getGradePoint() * record.getCredits();
+    }
+    gpa /= this.getTotalCredits();
+    return gpa;
   }
 
-  // TODO: average mark calculation
   public double getAverageMark() {
-    return 0;
+    double average = 0;
+    for (MarkRecord record : this) {
+      average += (double) record.getMark() * (double) record.getCredits();
+    }
+    average /= (double) this.getTotalCredits();
+    return average;
   }
 }

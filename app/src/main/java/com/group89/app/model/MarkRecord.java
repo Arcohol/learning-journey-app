@@ -54,4 +54,15 @@ public class MarkRecord {
   public void setCredits(int credits) {
     this.credits = credits;
   }
+
+  // calculate grade point
+  public double getGradePoint() {
+    double gradePoint = 0.0;
+    if (this.mark >= 60) {
+      gradePoint = 4.0 - 3.0 * (100.0 - this.mark) * (100.0 - this.mark) / 1600.0;
+    } else {
+      gradePoint = 0.0;
+    }
+    return gradePoint;
+  }
 }
