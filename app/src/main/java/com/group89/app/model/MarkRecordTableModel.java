@@ -32,31 +32,49 @@ public class MarkRecordTableModel implements TableModel {
 
   @Override
   public boolean isCellEditable(int rowIndex, int columnIndex) {
-    return false;
+    return true;
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-      // find the field
-      MarkRecord record = this.records.get(rowIndex);
-      switch (columnIndex) {
-        case 0:
-          return record.getSemester();
-        case 1:
-          return record.getModuleCode();
-        case 2:
-          return record.getTitle();
-        case 3:
-          return record.getMark();
-        case 4:
-          return record.getCredits();
-        default:
-          return null;
-      }
+    // find the field
+    MarkRecord record = this.records.get(rowIndex);
+    switch (columnIndex) {
+      case 0:
+        return record.getSemester();
+      case 1:
+        return record.getModuleCode();
+      case 2:
+        return record.getTitle();
+      case 3:
+        return record.getMark();
+      case 4:
+        return record.getCredits();
+      default:
+        return null;
+    }
   }
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    MarkRecord record = this.records.get(rowIndex);
+    switch (columnIndex) {
+      case 0:
+        record.setSemester((String) aValue);
+        break;
+      case 1:
+        record.setModuleCode((String) aValue);
+        break;
+      case 2:
+        record.setTitle((String) aValue);
+        break;
+      case 3:
+        record.setMark((Integer) aValue);
+        break;
+      case 4:
+        record.setCredits((Double) aValue);
+        break;
+    }
   }
 
   @Override
@@ -65,5 +83,9 @@ public class MarkRecordTableModel implements TableModel {
 
   @Override
   public void removeTableModelListener(TableModelListener l) {
+  }
+
+  public MarkRecordList getMarkRecordList() {
+    return this.records;
   }
 }

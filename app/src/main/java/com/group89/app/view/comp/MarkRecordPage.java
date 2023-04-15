@@ -17,6 +17,7 @@ public class MarkRecordPage extends JPanel {
   private static final int LABEL_COUNT = 5;
   private JComboBox<String> semesterBox;
   private JButton queryButton;
+  private JButton saveButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
 
@@ -25,6 +26,7 @@ public class MarkRecordPage extends JPanel {
 
     this.semesterBox = new JComboBox<String>();
     this.queryButton = new JButton("Query");
+    this.saveButton = new JButton("Save");
     this.labels = new JLabel[LABEL_COUNT];
     this.labels[0] = new JLabel("Semester:");
     this.labels[1] = new JLabel("Modules Count: ");
@@ -63,6 +65,17 @@ public class MarkRecordPage extends JPanel {
     c.anchor = GridBagConstraints.EAST;
     c.fill = GridBagConstraints.NONE;
     this.add(this.queryButton, c);
+
+    // TODO: interface design
+    // the following code is temporary
+    this.saveButton.setPreferredSize(new Dimension(100, 20));
+    c.gridx = 2;
+    c.gridy = 0;
+    c.weightx = 1;
+    c.weighty = 0;
+    c.anchor = GridBagConstraints.EAST;
+    c.fill = GridBagConstraints.NONE;
+    this.add(this.saveButton, c);
 
     c.insets.set(0, 10, 10, 10);
 
@@ -139,6 +152,10 @@ public class MarkRecordPage extends JPanel {
 
   public JButton getQueryButton() {
     return this.queryButton;
+  }
+
+  public JButton getSaveButton() {
+    return this.saveButton;
   }
 
   public JScrollPane getScrollPane() {

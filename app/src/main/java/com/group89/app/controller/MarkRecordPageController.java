@@ -9,6 +9,7 @@ import com.group89.app.view.comp.MarkRecordPage;
 
 public class MarkRecordPageController implements Controller {
   private MarkRecordPage page;
+  private JTable table;
 
   public MarkRecordPageController(MarkRecordPage page) {
     this.page = page;
@@ -17,6 +18,7 @@ public class MarkRecordPageController implements Controller {
   @Override
   public void init() {
     this.page.getQueryButton().addActionListener(e -> this.query());
+    this.page.getSaveButton().addActionListener(e -> this.save());
   }
 
   private void query() {
@@ -45,7 +47,7 @@ public class MarkRecordPageController implements Controller {
     }
 
     // update table
-    JTable table = new JTable(new MarkRecordTableModel(records));
+    this.table = new JTable(new MarkRecordTableModel(records));
     this.page.getScrollPane().setViewportView(table);
 
     // update labels
@@ -54,5 +56,13 @@ public class MarkRecordPageController implements Controller {
     this.page.getLabels()[2].setText("Total Credits: " + records.getTotalCredits());
     this.page.getLabels()[3].setText("GPA: " + records.getGPA());
     this.page.getLabels()[4].setText("Average Mark: " + records.getAverageMark());
+  }
+
+  private void save() {
+    if (table != null) {
+      MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
+      JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+      converter.toFile(tableModel.getMarkRecordList());
+    }
   }
 }
