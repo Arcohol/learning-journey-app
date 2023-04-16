@@ -1,9 +1,8 @@
 package com.group89.app.model;
 
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
 
-public class MarkRecordTableModel implements TableModel {
+public class MarkRecordTableModel extends AbstractTableModel {
   MarkRecordList records;
 
   public MarkRecordTableModel(MarkRecordList records) {
@@ -17,17 +16,17 @@ public class MarkRecordTableModel implements TableModel {
 
   @Override
   public int getColumnCount() {
-    return this.records.get(0).getClass().getDeclaredFields().length;
+    return MarkRecord.class.getDeclaredFields().length;
   }
 
   @Override
   public String getColumnName(int columnIndex) {
-    return this.records.get(0).getClass().getDeclaredFields()[columnIndex].getName();
+    return MarkRecord.class.getDeclaredFields()[columnIndex].getName();
   }
 
   @Override
   public Class<?> getColumnClass(int columnIndex) {
-    return this.records.get(0).getClass().getDeclaredFields()[columnIndex].getType();
+    return MarkRecord.class.getDeclaredFields()[columnIndex].getType();
   }
 
   @Override
@@ -59,14 +58,7 @@ public class MarkRecordTableModel implements TableModel {
       case 4 -> record.setCredits((Double) aValue);
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
-  }
-
-  @Override
-  public void addTableModelListener(TableModelListener l) {
-  }
-
-  @Override
-  public void removeTableModelListener(TableModelListener l) {
+    fireTableCellUpdated(rowIndex, columnIndex);
   }
 
   public MarkRecordList getMarkRecordList() {

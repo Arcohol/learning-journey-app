@@ -1,6 +1,6 @@
 package com.group89.app.controller;
 
-import javax.swing.JTable;
+import javax.swing.JLabel;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordList;
 import com.group89.app.model.MarkRecordTableModel;
@@ -9,7 +9,6 @@ import com.group89.app.view.comp.MarkRecordPage;
 
 public class MarkRecordPageController implements Controller {
   private MarkRecordPage page;
-  private JTable table;
 
   public MarkRecordPageController(MarkRecordPage page) {
     this.page = page;
@@ -29,40 +28,35 @@ public class MarkRecordPageController implements Controller {
     JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     MarkRecordList records = new MarkRecordList(converter.toList());
 
+    // get labels
+    JLabel[] labels = this.page.getLabels();
+
     // filter records
     if (!semester.equals("all")) {
       records.removeIf(record -> !record.getSemester().equals(semester));
     }
 
-    // if no records, show empty table
-    if (records.isEmpty()) {
-      this.page.getScrollPane().setViewportView(new JTable());
-      // update labels
-      this.page.getLabels()[0].setText("Semester: " + semester);
-      this.page.getLabels()[1].setText("Module Count: 0");
-      this.page.getLabels()[2].setText("Total Credits: ");
-      this.page.getLabels()[3].setText("GPA: ");
-      this.page.getLabels()[4].setText("Average Mark: ");
-      return;
-    }
-
     // update table
-    this.table = new JTable(new MarkRecordTableModel(records));
-    this.page.getScrollPane().setViewportView(table);
+    MarkRecordTableModel tableModel = new MarkRecordTableModel(records);
+
+    // TODO: make use of it or use a actual logger
+    tableModel.addTableModelListener(
+        e -> System.out.println("cell " + e.getFirstRow() + "," + e.getColumn() + " changed"));
+
+    this.page.getTable().setModel(tableModel);
+    this.page.getScrollPane().setViewportView(this.page.getTable());
 
     // update labels
-    this.page.getLabels()[0].setText("Semester: " + semester);
-    this.page.getLabels()[1].setText("Module Count: " + records.size());
-    this.page.getLabels()[2].setText("Total Credits: " + records.getTotalCredits());
-    this.page.getLabels()[3].setText("GPA: " + records.getGPA());
-    this.page.getLabels()[4].setText("Average Mark: " + records.getAverageMark());
+    labels[0].setText("Semester: " + semester);
+    labels[1].setText("Module Count: " + records.size());
+    labels[2].setText("Total Credits: " + records.getTotalCredits());
+    labels[3].setText("GPA: " + records.getGPA());
+    labels[4].setText("Average Mark: " + records.getAverageMark());
   }
 
   private void save() {
-    if (table != null) {
-      MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
-      JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-      converter.toFile(tableModel.getMarkRecordList());
-    }
+    MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
+    JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+    converter.toFile(tableModel.getMarkRecordList());
   }
 }
