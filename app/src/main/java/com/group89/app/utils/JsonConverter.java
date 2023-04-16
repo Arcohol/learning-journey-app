@@ -37,6 +37,7 @@ public class JsonConverter<T> {
 
     try (Writer dst = new BufferedWriter(new FileWriter(fileUrl))) {
       gson.toJson(list.toArray(), dst);
+      dst.write(System.lineSeparator());
       dst.close();
     } catch (IOException e) {
       e.printStackTrace();

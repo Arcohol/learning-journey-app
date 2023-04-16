@@ -22,7 +22,7 @@ public class MarkRecordTableModel implements TableModel {
 
   @Override
   public String getColumnName(int columnIndex) {
-    return this.records.get(0).getClass().getDeclaredFields()[columnIndex].getName(); 
+    return this.records.get(0).getClass().getDeclaredFields()[columnIndex].getName();
   }
 
   @Override
@@ -37,43 +37,27 @@ public class MarkRecordTableModel implements TableModel {
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    // find the field
     MarkRecord record = this.records.get(rowIndex);
-    switch (columnIndex) {
-      case 0:
-        return record.getSemester();
-      case 1:
-        return record.getModuleCode();
-      case 2:
-        return record.getTitle();
-      case 3:
-        return record.getMark();
-      case 4:
-        return record.getCredits();
-      default:
-        return null;
-    }
+    return switch (columnIndex) {
+      case 0 -> record.getSemester();
+      case 1 -> record.getModuleCode();
+      case 2 -> record.getTitle();
+      case 3 -> record.getMark();
+      case 4 -> record.getCredits();
+      default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
+    };
   }
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     MarkRecord record = this.records.get(rowIndex);
     switch (columnIndex) {
-      case 0:
-        record.setSemester((String) aValue);
-        break;
-      case 1:
-        record.setModuleCode((String) aValue);
-        break;
-      case 2:
-        record.setTitle((String) aValue);
-        break;
-      case 3:
-        record.setMark((Integer) aValue);
-        break;
-      case 4:
-        record.setCredits((Double) aValue);
-        break;
+      case 0 -> record.setSemester((String) aValue);
+      case 1 -> record.setModuleCode((String) aValue);
+      case 2 -> record.setTitle((String) aValue);
+      case 3 -> record.setMark((Integer) aValue);
+      case 4 -> record.setCredits((Double) aValue);
+      default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
   }
 
