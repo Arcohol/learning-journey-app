@@ -1,5 +1,6 @@
 package com.group89.app.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,15 +23,17 @@ public class MarkRecordList extends ArrayList<MarkRecord> {
       gpa += record.getGradePoint() * record.getCredits();
     }
     gpa /= this.getTotalCredits();
-    return gpa;
+    DecimalFormat df = new DecimalFormat("#.##");
+    return Double.parseDouble(df.format(gpa));
   }
 
   public double getAverageMark() {
-    double average = 0;
+    double average = 0.0;
     for (MarkRecord record : this) {
-      average += (double) record.getMark() * (double) record.getCredits();
+      average += (double) record.getMark() * record.getCredits();
     }
-    average /= (double) this.getTotalCredits();
-    return average;
+    average /= this.getTotalCredits();
+    DecimalFormat df = new DecimalFormat("#.##");
+    return Double.parseDouble(df.format(average));
   }
 }

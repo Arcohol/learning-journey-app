@@ -2,6 +2,7 @@ package com.group89.app.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,8 +28,12 @@ public class JsonConverter<T> {
     try (Reader src = new BufferedReader(new FileReader(fileUrl))) {
       return new ArrayList<T>(Arrays.asList(gson.fromJson(src, type)));
     } catch (IOException e) {
-      e.printStackTrace();
-      return null;
+      if (e instanceof FileNotFoundException) {
+        return new ArrayList<T>();
+      } else {
+        e.printStackTrace();
+        return null;
+      }
     }
   }
 
@@ -37,6 +42,7 @@ public class JsonConverter<T> {
 
     try (Writer dst = new BufferedWriter(new FileWriter(fileUrl))) {
       gson.toJson(list.toArray(), dst);
+      dst.write(System.lineSeparator());
       dst.close();
     } catch (IOException e) {
       e.printStackTrace();

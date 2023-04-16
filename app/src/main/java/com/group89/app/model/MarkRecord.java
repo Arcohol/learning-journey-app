@@ -4,10 +4,10 @@ public class MarkRecord {
   private String semester;
   private String moduleCode;
   private String title;
-  private int mark;
-  private int credits;
+  private Integer mark;
+  private Double credits;
 
-  public MarkRecord(String semester, String moduleCode, String title, int mark, int credits) {
+  public MarkRecord(String semester, String moduleCode, String title, int mark, double credits) {
     this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
@@ -31,7 +31,7 @@ public class MarkRecord {
     return mark;
   }
 
-  public int getCredits() {
+  public double getCredits() {
     return credits;
   }
 
@@ -51,7 +51,7 @@ public class MarkRecord {
     this.mark = mark;
   }
 
-  public void setCredits(int credits) {
+  public void setCredits(double credits) {
     this.credits = credits;
   }
 
