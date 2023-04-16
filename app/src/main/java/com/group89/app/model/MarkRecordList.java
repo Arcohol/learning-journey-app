@@ -28,7 +28,7 @@ public class MarkRecordList extends ArrayList<MarkRecord> {
   }
 
   public double getAverageMark() {
-    double average = 0;
+    double average = 0.0;
     for (MarkRecord record : this) {
       average += (double) record.getMark() * record.getCredits();
     }

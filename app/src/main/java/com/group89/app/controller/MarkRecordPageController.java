@@ -39,9 +39,8 @@ public class MarkRecordPageController implements Controller {
     // update table
     MarkRecordTableModel tableModel = new MarkRecordTableModel(records);
 
-    // TODO: make use of it or use a actual logger
-    tableModel.addTableModelListener(
-        e -> System.out.println("cell " + e.getFirstRow() + "," + e.getColumn() + " changed"));
+    // enable save button when table is changed
+    tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
 
     this.page.getTable().setModel(tableModel);
     this.page.getScrollPane().setViewportView(this.page.getTable());
@@ -58,5 +57,6 @@ public class MarkRecordPageController implements Controller {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
     JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     converter.toFile(tableModel.getMarkRecordList());
+    this.page.getSaveButton().setEnabled(false);
   }
 }

@@ -130,6 +130,7 @@ public class MarkRecordPage extends JPanel {
     c.weighty = 0;
 
     this.saveButton.setPreferredSize(new Dimension(100, 20));
+    this.saveButton.setEnabled(false);
     c.gridx = 2;
     c.gridy = 3;
     c.gridwidth = 1;
