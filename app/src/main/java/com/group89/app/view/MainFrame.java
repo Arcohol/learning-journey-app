@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1000, 800);
     this.setLocationRelativeTo(null);
-    //this.setResizable(false);
+    // this.setResizable(false);
     this.setLayout(new BorderLayout());
 
     this.sidebar = new Sidebar();

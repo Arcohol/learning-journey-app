@@ -39,7 +39,7 @@ public class TestJsonConverter {
   public void generateSampleMarkRecord() {
     JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     List<MarkRecord> list = new ArrayList<>();
-    
+
     list.add(new MarkRecord("2020-2021-1", "EBU4203", "Software Engineering", 82, 15));
     list.add(new MarkRecord("2020-2021-1", "EBU4224", "Middleware", 76, 15));
     list.add(new MarkRecord("2020-2021-1", "EBU4204", "Software Engineering Practice", 93, 10));

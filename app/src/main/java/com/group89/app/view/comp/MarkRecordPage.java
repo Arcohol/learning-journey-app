@@ -19,6 +19,7 @@ public class MarkRecordPage extends JPanel {
   private JComboBox<String> semesterBox;
   private JButton queryButton;
   private JButton saveButton;
+  private JButton deleteButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
   private JTable table;
@@ -29,6 +30,7 @@ public class MarkRecordPage extends JPanel {
     this.semesterBox = new JComboBox<String>();
     this.queryButton = new JButton("Query");
     this.saveButton = new JButton("Save");
+    this.deleteButton = new JButton("Delete");
     this.labels = new JLabel[LABEL_COUNT];
     this.labels[0] = new JLabel("Semester:");
     this.labels[1] = new JLabel("Modules Count: ");
@@ -117,6 +119,7 @@ public class MarkRecordPage extends JPanel {
     c.weighty = 1;
 
     this.scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED));
+    this.scrollPane.setViewportView(this.table);
     c.gridx = 0;
     c.gridy = 2;
     c.gridwidth = 5;
@@ -139,6 +142,13 @@ public class MarkRecordPage extends JPanel {
     c.fill = GridBagConstraints.NONE;
     this.add(this.saveButton, c);
 
+    this.deleteButton.setPreferredSize(new Dimension(100, 20));
+    c.gridx = 4;
+    c.gridy = 3;
+    c.anchor = GridBagConstraints.EAST;
+    c.fill = GridBagConstraints.NONE;
+    this.add(this.deleteButton, c);
+
     this.setVisible(true);
 
     Controller markRecordPagController = new MarkRecordPageController(this);
@@ -156,6 +166,10 @@ public class MarkRecordPage extends JPanel {
 
   public JButton getSaveButton() {
     return this.saveButton;
+  }
+
+  public JButton getDeleteButton() {
+    return this.deleteButton;
   }
 
   public JScrollPane getScrollPane() {
