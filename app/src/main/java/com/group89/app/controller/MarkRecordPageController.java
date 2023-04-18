@@ -112,11 +112,6 @@ public class MarkRecordPageController implements Controller {
   }
 
   private void add() {
-    // AddMarkRecordFrame frame = new AddMarkRecordFrame();
-    // AddMarkRecordFrameController controller = new AddMarkRecordFrameController(frame,
-    // (MarkRecordTableModel) this.page.getTable().getModel());
-    // controller.init();
-
     // add a blank new row
     MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
     tableModel.addRow(new MarkRecord());

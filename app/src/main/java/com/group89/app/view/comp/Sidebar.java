@@ -2,7 +2,6 @@ package com.group89.app.view.comp;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -42,8 +41,8 @@ public class Sidebar extends JPanel {
 
     this.setVisible(true);
   }
-
-  public void setButtonAction(int index, ActionListener action) {
-    this.buttons[index].addActionListener(action);
+  
+  public JButton[] getButtons() {
+    return this.buttons;
   }
 }
