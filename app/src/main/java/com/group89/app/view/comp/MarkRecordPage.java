@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import com.group89.app.controller.Controller;
 import com.group89.app.controller.MarkRecordPageController;
+import com.group89.app.model.MarkRecordTableModel;
 
 public class MarkRecordPage extends JPanel {
   private static final int LABEL_COUNT = 5;
@@ -20,6 +21,7 @@ public class MarkRecordPage extends JPanel {
   private JButton queryButton;
   private JButton saveButton;
   private JButton deleteButton;
+  private JButton addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
   private JTable table;
@@ -31,6 +33,7 @@ public class MarkRecordPage extends JPanel {
     this.queryButton = new JButton("Query");
     this.saveButton = new JButton("Save");
     this.deleteButton = new JButton("Delete");
+    this.addButton = new JButton("Add");
     this.labels = new JLabel[LABEL_COUNT];
     this.labels[0] = new JLabel("Semester:");
     this.labels[1] = new JLabel("Modules Count: ");
@@ -38,7 +41,7 @@ public class MarkRecordPage extends JPanel {
     this.labels[3] = new JLabel("GPA: ");
     this.labels[4] = new JLabel("Average Mark: ");
     this.scrollPane = new JScrollPane();
-    this.table = new JTable();
+    this.table = new JTable(null);
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -148,6 +151,13 @@ public class MarkRecordPage extends JPanel {
     c.anchor = GridBagConstraints.EAST;
     c.fill = GridBagConstraints.NONE;
     this.add(this.deleteButton, c);
+    
+    this.addButton.setPreferredSize(new Dimension(100, 20));
+    c.gridx = 0;
+    c.gridy = 3;
+    c.anchor = GridBagConstraints.WEST;
+    c.fill = GridBagConstraints.NONE;
+    this.add(this.addButton, c);
 
     this.setVisible(true);
 
@@ -170,6 +180,10 @@ public class MarkRecordPage extends JPanel {
 
   public JButton getDeleteButton() {
     return this.deleteButton;
+  }
+
+  public JButton getAddButton() {
+    return this.addButton;
   }
 
   public JScrollPane getScrollPane() {

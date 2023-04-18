@@ -75,4 +75,9 @@ public class MarkRecordTableModel extends AbstractTableModel {
   public MarkRecord getMarkRecord(Object identifier) {
     return this.records.get((int) identifier);
   }
+
+  public void addRow(MarkRecord record) {
+    this.records.add(record);
+    fireTableDataChanged();
+  }
 }
