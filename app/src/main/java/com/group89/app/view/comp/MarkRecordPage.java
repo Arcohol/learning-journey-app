@@ -36,7 +36,7 @@ public class MarkRecordPage extends JPanel {
     this.labels[1] = new JLabel("Modules Count: ");
     this.labels[2] = new JLabel("Total Credits: ");
     this.labels[3] = new JLabel("GPA: ");
-    this.labels[4] = new JLabel("Average Mark: ");
+    this.labels[4] = new JLabel("Average Mark: ");  // TODO: add new labels
     this.scrollPane = new JScrollPane();
     this.table = new JTable();
 

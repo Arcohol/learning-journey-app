@@ -40,25 +40,32 @@ public class MarkRecordPageController implements Controller {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
 
     int size = table.getRowCount();
-    int totalCredits = 0;
+    double totalCredits = 0;
+    int totalCreditsQMUL = 0;
     double gpa = 0.0;
     double average = 0.0;
+    double averageQMUL = 0.0;
 
     for (int row = 0; row < size; row++) {
       int modelRow = table.convertRowIndexToModel(row);
       MarkRecord record = tableModel.getMarkRecord(modelRow);
       totalCredits += record.getCredits();
+      totalCreditsQMUL += record.getCreditsQMUL();
       gpa += record.getGradePoint() * record.getCredits();
       average += (double) record.getMark() * record.getCredits();
+      averageQMUL += (double) record.getMarkQMUL() * record.getCreditsQMUL();
     }
 
     gpa /= totalCredits;
     average /= totalCredits;
+    averageQMUL /= totalCreditsQMUL;
 
     DecimalFormat df = new DecimalFormat("#.##");
     gpa = Double.parseDouble(df.format(gpa));
     average = Double.parseDouble(df.format(average));
+    averageQMUL = Double.parseDouble(df.format(averageQMUL));
 
+    // TODO: set label content
     labels[0].setText("Semester: " + semester);
     labels[1].setText("Module Count: " + size);
     labels[2].setText("Total Credits: " + totalCredits);
@@ -92,7 +99,6 @@ public class MarkRecordPageController implements Controller {
 
   private void save() {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
-    JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     converter.toFile(tableModel.getMarkRecordList());
     this.page.getSaveButton().setEnabled(false);
   }

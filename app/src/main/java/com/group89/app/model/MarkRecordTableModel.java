@@ -1,9 +1,11 @@
 package com.group89.app.model;
 
 import javax.swing.table.AbstractTableModel;
+import com.group89.app.utils.MarkConverter;
 
 public class MarkRecordTableModel extends AbstractTableModel {
   MarkRecordList records;
+  private MarkConverter converter = new MarkConverter();
 
   public MarkRecordTableModel(MarkRecordList records) {
     this.records = records;
@@ -42,7 +44,9 @@ public class MarkRecordTableModel extends AbstractTableModel {
       case 1 -> record.getModuleCode();
       case 2 -> record.getTitle();
       case 3 -> record.getMark();
-      case 4 -> record.getCredits();
+      case 4 -> record.getMarkQMUL();
+      case 5 -> record.getCredits();
+      case 6 -> record.getCreditsQMUL();
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     };
   }
@@ -51,12 +55,33 @@ public class MarkRecordTableModel extends AbstractTableModel {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     MarkRecord record = this.records.get(rowIndex);
     switch (columnIndex) {
-      case 0 -> record.setSemester((String) aValue);
-      case 1 -> record.setModuleCode((String) aValue);
-      case 2 -> record.setTitle((String) aValue);
-      case 3 -> record.setMark((Integer) aValue);
-      case 4 -> record.setCredits((Double) aValue);
-      default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
+      case 0:
+        record.setSemester((String) aValue);
+        break;
+      case 1:
+        record.setModuleCode((String) aValue);
+        break;
+      case 2:
+        record.setTitle((String) aValue);
+        break;
+      case 3:
+        record.setMark((Integer) aValue);
+        record.setMarkQMUL(this.converter.toQMUL(record.getMark()));
+        fireTableCellUpdated(rowIndex, 4);
+        break;
+      case 4:
+        record.setMarkQMUL((Integer) aValue);
+        record.setMark(this.converter.toBUPT(record.getMarkQMUL()));
+        fireTableCellUpdated(rowIndex, 3);
+        break;
+      case 5:
+        record.setCredits((Double) aValue);
+        break;
+      case 6:
+        record.setCreditsQMUL((Integer) aValue);
+        break;
+      default:
+        throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
     fireTableCellUpdated(rowIndex, columnIndex);
   }

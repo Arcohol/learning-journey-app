@@ -5,14 +5,18 @@ public class MarkRecord {
   private String moduleCode;
   private String title;
   private Integer mark;
+  private Integer markQMUL;
   private Double credits;
+  private Integer creditsQMUL;
 
-  public MarkRecord(String semester, String moduleCode, String title, int mark, double credits) {
+  public MarkRecord(String semester, String moduleCode, String title, int mark, int markQMUL, double credits, int creditsQMUL) {
     this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
     this.mark = mark;
+    this.markQMUL = markQMUL;
     this.credits = credits;
+    this.creditsQMUL = creditsQMUL;
   }
 
   public String getSemester() {
@@ -31,8 +35,16 @@ public class MarkRecord {
     return mark;
   }
 
+  public Integer getMarkQMUL() {
+    return markQMUL;
+  }
+
   public double getCredits() {
     return credits;
+  }
+
+  public int getCreditsQMUL() {
+    return creditsQMUL;
   }
 
   public void setSemester(String semester) {
@@ -51,8 +63,16 @@ public class MarkRecord {
     this.mark = mark;
   }
 
+  public void setMarkQMUL(int markQMUL) {
+    this.markQMUL = markQMUL;
+  }
+
   public void setCredits(double credits) {
     this.credits = credits;
+  }
+
+  public void setCreditsQMUL(int creditsQMUL) {
+    this.creditsQMUL = creditsQMUL;
   }
 
   // calculate grade point
