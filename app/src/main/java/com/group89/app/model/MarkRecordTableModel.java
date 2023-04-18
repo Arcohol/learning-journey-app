@@ -64,4 +64,20 @@ public class MarkRecordTableModel extends AbstractTableModel {
   public MarkRecordList getMarkRecordList() {
     return this.records;
   }
+
+  public void removeRows(int[] selectedRows) {
+    for (int i = selectedRows.length - 1; i >= 0; i--) {
+      this.records.remove(selectedRows[i]);
+    }
+    fireTableDataChanged();
+  }
+
+  public MarkRecord getMarkRecord(Object identifier) {
+    return this.records.get((int) identifier);
+  }
+
+  public void addRow(MarkRecord record) {
+    this.records.add(record);
+    fireTableDataChanged();
+  }
 }
