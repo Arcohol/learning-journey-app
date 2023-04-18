@@ -1,40 +1,42 @@
-package com.group89.app.controller;
+// This file is no longer used, but is kept for possible future use.
 
-import javax.swing.JTextField;
-import com.group89.app.model.MarkRecord;
-import com.group89.app.model.MarkRecordTableModel;
-import com.group89.app.view.AddMarkRecordFrame;
+// package com.group89.app.controller;
 
-public class AddMarkRecordFrameController implements Controller {
-  private AddMarkRecordFrame frame;
-  private MarkRecordTableModel tableModel;
+// import javax.swing.JTextField;
+// import com.group89.app.model.MarkRecord;
+// import com.group89.app.model.MarkRecordTableModel;
+// import com.group89.app.view.AddMarkRecordFrame;
 
-  public AddMarkRecordFrameController(AddMarkRecordFrame frame, MarkRecordTableModel tableModel) {
-    this.frame = frame;
-    this.tableModel = tableModel;
-  }
+// public class AddMarkRecordFrameController implements Controller {
+//   private AddMarkRecordFrame frame;
+//   private MarkRecordTableModel tableModel;
 
-  @Override
-  public void init() {
-    this.frame.getSubmitButton().addActionListener(e -> this.submit());
-    this.frame.getClearButton().addActionListener(e -> this.clear());
-  }
+//   public AddMarkRecordFrameController(AddMarkRecordFrame frame, MarkRecordTableModel tableModel) {
+//     this.frame = frame;
+//     this.tableModel = tableModel;
+//   }
 
-  private void submit() {
-    JTextField[] fields = this.frame.getTextFields();
-    String[] values = new String[fields.length];
-    for (int i = 0; i < fields.length; i++) {
-      values[i] = fields[i].getText();
-    }
+//   @Override
+//   public void init() {
+//     this.frame.getSubmitButton().addActionListener(e -> this.submit());
+//     this.frame.getClearButton().addActionListener(e -> this.clear());
+//   }
 
-    this.tableModel.addRow(new MarkRecord(values[0], values[1], values[2],
-        Integer.parseInt(values[3]), Double.parseDouble(values[4])));
-  }
+//   private void submit() {
+//     JTextField[] fields = this.frame.getTextFields();
+//     String[] values = new String[fields.length];
+//     for (int i = 0; i < fields.length; i++) {
+//       values[i] = fields[i].getText();
+//     }
 
-  private void clear() {
-    JTextField[] fields = this.frame.getTextFields();
-    for (JTextField field : fields) {
-      field.setText("");
-    }
-  }
-}
+//     this.tableModel.addRow(new MarkRecord(values[0], values[1], values[2],
+//         Integer.parseInt(values[3]), Double.parseDouble(values[4])));
+//   }
+
+//   private void clear() {
+//     JTextField[] fields = this.frame.getTextFields();
+//     for (JTextField field : fields) {
+//       field.setText("");
+//     }
+//   }
+// }

@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import com.group89.app.controller.Controller;
 import com.group89.app.controller.MarkRecordPageController;
-import com.group89.app.model.MarkRecordTableModel;
 
 public class MarkRecordPage extends JPanel {
   private static final int LABEL_COUNT = 5;

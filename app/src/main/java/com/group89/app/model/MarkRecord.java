@@ -15,6 +15,14 @@ public class MarkRecord {
     this.credits = credits;
   }
 
+  public MarkRecord() {
+    this.semester = "";
+    this.moduleCode = "";
+    this.title = "";
+    this.mark = 0;
+    this.credits = 0.0;
+  }
+
   public String getSemester() {
     return semester;
   }

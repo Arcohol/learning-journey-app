@@ -9,7 +9,6 @@ import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordList;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.utils.JsonConverter;
-import com.group89.app.view.AddMarkRecordFrame;
 import com.group89.app.view.comp.MarkRecordPage;
 
 public class MarkRecordPageController implements Controller {
@@ -113,9 +112,13 @@ public class MarkRecordPageController implements Controller {
   }
 
   private void add() {
-    AddMarkRecordFrame frame = new AddMarkRecordFrame();
-    AddMarkRecordFrameController controller = new AddMarkRecordFrameController(frame,
-        (MarkRecordTableModel) this.page.getTable().getModel());
-    controller.init();
+    // AddMarkRecordFrame frame = new AddMarkRecordFrame();
+    // AddMarkRecordFrameController controller = new AddMarkRecordFrameController(frame,
+    // (MarkRecordTableModel) this.page.getTable().getModel());
+    // controller.init();
+
+    // add a blank new row
+    MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
+    tableModel.addRow(new MarkRecord());
   }
 }
