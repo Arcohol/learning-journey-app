@@ -29,7 +29,10 @@ public class MarkRecordPageController implements Controller {
     this.page.getQueryButton().addActionListener(e -> this.query());
     this.page.getSaveButton().addActionListener(e -> this.save());
     this.page.getDeleteButton().addActionListener(e -> this.delete());
+    this.page.getAddButton().addActionListener(e -> this.add());
     this.page.getTable().setRowSorter(sorter);
+
+    query();
   }
 
   private void updateLabels() {
@@ -112,5 +115,11 @@ public class MarkRecordPageController implements Controller {
       modelRows[i] = table.convertRowIndexToModel(modelRows[i]);
     }
     tableModel.removeRows(modelRows);
+  }
+
+  private void add() {
+    // add a blank new row
+    MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
+    tableModel.addRow(new MarkRecord());
   }
 }
