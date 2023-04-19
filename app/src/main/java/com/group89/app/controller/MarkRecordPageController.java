@@ -43,30 +43,30 @@ public class MarkRecordPageController implements Controller {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
 
     int size = table.getRowCount();
-    int totalCredits = 0;
+    double totalCreditsCN = 0;
     double gpa = 0.0;
-    double average = 0.0;
+    double averageCN = 0.0;
 
     for (int row = 0; row < size; row++) {
       int modelRow = table.convertRowIndexToModel(row);
       MarkRecord record = tableModel.getMarkRecord(modelRow);
-      totalCredits += record.getCredits();
-      gpa += record.getGradePoint() * record.getCredits();
-      average += (double) record.getMark() * record.getCredits();
+      totalCreditsCN += record.getCreditsCN();
+      gpa += record.getGradePoint() * record.getCreditsCN();
+      averageCN += (double) record.getMarkCN() * record.getCreditsCN();
     }
 
-    gpa /= totalCredits;
-    average /= totalCredits;
+    gpa /= totalCreditsCN;
+    averageCN /= totalCreditsCN;
 
     DecimalFormat df = new DecimalFormat("#.##");
     gpa = Double.parseDouble(df.format(gpa));
-    average = Double.parseDouble(df.format(average));
+    averageCN = Double.parseDouble(df.format(averageCN));
 
     labels[0].setText("Semester: " + semester);
     labels[1].setText("Module Count: " + size);
-    labels[2].setText("Total Credits: " + totalCredits);
+    labels[2].setText("Total Credits: " + totalCreditsCN);
     labels[3].setText("GPA: " + gpa);
-    labels[4].setText("Average Mark: " + average);
+    labels[4].setText("Average Mark: " + averageCN);
   }
 
   private void query() {
@@ -84,18 +84,18 @@ public class MarkRecordPageController implements Controller {
     };
     sorter.setRowFilter(filter);
 
+    JTable table = this.page.getTable();
     MarkRecordTableModel tableModel = new MarkRecordTableModel(records);
+    sorter.setModel(tableModel);
     tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
     tableModel.addTableModelListener(e -> this.updateLabels());
-    sorter.setModel(tableModel);
+    table.setModel(tableModel);
 
-    this.page.getTable().setModel(tableModel);
     updateLabels();
   }
 
   private void save() {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
-    JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     converter.toFile(tableModel.getMarkRecordList());
     this.page.getSaveButton().setEnabled(false);
   }

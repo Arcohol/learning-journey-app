@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class Sidebar extends JPanel {
   private static final int NUM_BUTTONS = 3;
   private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
+
   private JButton[] buttons;
 
   public Sidebar() {
@@ -41,7 +42,7 @@ public class Sidebar extends JPanel {
 
     this.setVisible(true);
   }
-  
+
   public JButton[] getButtons() {
     return this.buttons;
   }

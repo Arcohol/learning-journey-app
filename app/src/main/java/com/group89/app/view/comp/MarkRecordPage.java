@@ -33,12 +33,14 @@ public class MarkRecordPage extends JPanel {
     this.saveButton = new JButton("Save");
     this.deleteButton = new JButton("Delete");
     this.addButton = new JButton("Add");
+
     this.labels = new JLabel[LABEL_COUNT];
     this.labels[0] = new JLabel("Semester:");
     this.labels[1] = new JLabel("Modules Count: ");
     this.labels[2] = new JLabel("Total Credits: ");
     this.labels[3] = new JLabel("GPA: ");
     this.labels[4] = new JLabel("Average Mark: ");
+
     this.scrollPane = new JScrollPane();
     this.table = new JTable(null);
 
@@ -150,7 +152,7 @@ public class MarkRecordPage extends JPanel {
     c.anchor = GridBagConstraints.EAST;
     c.fill = GridBagConstraints.NONE;
     this.add(this.deleteButton, c);
-    
+
     this.addButton.setPreferredSize(new Dimension(100, 20));
     c.gridx = 0;
     c.gridy = 3;

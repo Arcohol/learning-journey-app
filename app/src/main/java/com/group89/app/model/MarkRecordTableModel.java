@@ -41,8 +41,10 @@ public class MarkRecordTableModel extends AbstractTableModel {
       case 0 -> record.getSemester();
       case 1 -> record.getModuleCode();
       case 2 -> record.getTitle();
-      case 3 -> record.getMark();
-      case 4 -> record.getCredits();
+      case 3 -> record.getMarkCN();
+      case 4 -> record.getMarkUK();
+      case 5 -> record.getCreditsCN();
+      case 6 -> record.getCreditsUK();
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     };
   }
@@ -54,15 +56,21 @@ public class MarkRecordTableModel extends AbstractTableModel {
       case 0 -> record.setSemester((String) aValue);
       case 1 -> record.setModuleCode((String) aValue);
       case 2 -> record.setTitle((String) aValue);
-      case 3 -> record.setMark((Integer) aValue);
-      case 4 -> record.setCredits((Double) aValue);
+      case 3 -> record.setMarkCN((int) aValue);
+      case 4 -> record.setMarkUK((int) aValue);
+      case 5 -> record.setCreditsCN((double) aValue);
+      case 6 -> record.setCreditsUK((int) aValue);
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
-    fireTableCellUpdated(rowIndex, columnIndex);
+    fireTableDataChanged();
   }
 
   public MarkRecordList getMarkRecordList() {
     return this.records;
+  }
+
+  public MarkRecord getMarkRecord(Object identifier) {
+    return this.records.get((int) identifier);
   }
 
   public void removeRows(int[] selectedRows) {
@@ -70,10 +78,6 @@ public class MarkRecordTableModel extends AbstractTableModel {
       this.records.remove(selectedRows[i]);
     }
     fireTableDataChanged();
-  }
-
-  public MarkRecord getMarkRecord(Object identifier) {
-    return this.records.get((int) identifier);
   }
 
   public void addRow(MarkRecord record) {
