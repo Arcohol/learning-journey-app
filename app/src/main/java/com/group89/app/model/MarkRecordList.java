@@ -1,6 +1,5 @@
 package com.group89.app.model;
 
-// import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

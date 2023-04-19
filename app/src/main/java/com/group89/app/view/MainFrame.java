@@ -29,8 +29,6 @@ public class MainFrame extends JFrame {
     this.content = new JPanel(new CardLayout());
     this.add(this.content, BorderLayout.CENTER);
 
-    // dummy panels
-    // todo: each panel serves as a page for different functionalities
     this.pages[0] = new MarkRecordPage();
 
     this.pages[1] = new JPanel();
@@ -41,7 +39,6 @@ public class MainFrame extends JFrame {
     this.content.add(this.pages[0], "page1");
     this.content.add(this.pages[1], "page2");
     this.content.add(this.pages[2], "page3");
-
     ((CardLayout) this.content.getLayout()).show(this.content, "page1");
 
     this.setVisible(true);

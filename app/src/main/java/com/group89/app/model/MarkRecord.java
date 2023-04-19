@@ -1,30 +1,35 @@
 package com.group89.app.model;
 
+import com.group89.app.utils.MarkConverter;
+
 public class MarkRecord {
   private String semester;
   private String moduleCode;
   private String title;
-  private Integer mark;
-  private Integer markQMUL;
-  private Double credits;
-  private Integer creditsQMUL;
+  private Integer markCN;
+  private Integer markUK;
+  private Double creditsCN;
+  private Integer creditsUK;
 
-  public MarkRecord(String semester, String moduleCode, String title, int mark, int markQMUL, double credits, int creditsQMUL) {
+  public MarkRecord(String semester, String moduleCode, String title, int markCN, int markUK,
+      double creditsCN, int creditsUK) {
     this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
-    this.mark = mark;
-    this.markQMUL = markQMUL;
-    this.credits = credits;
-    this.creditsQMUL = creditsQMUL;
+    this.markCN = markCN;
+    this.markUK = markUK;
+    this.creditsCN = creditsCN;
+    this.creditsUK = creditsUK;
   }
 
   public MarkRecord() {
     this.semester = "";
     this.moduleCode = "";
     this.title = "";
-    this.mark = 0;
-    this.credits = 0.0;
+    this.markCN = 0;
+    this.markUK = 0;
+    this.creditsCN = 0.0;
+    this.creditsUK = 0;
   }
 
   public String getSemester() {
@@ -39,20 +44,20 @@ public class MarkRecord {
     return title;
   }
 
-  public int getMark() {
-    return mark;
+  public int getMarkCN() {
+    return markCN;
   }
 
-  public Integer getMarkQMUL() {
-    return markQMUL;
+  public int getMarkUK() {
+    return markUK;
   }
 
-  public double getCredits() {
-    return credits;
+  public double getCreditsCN() {
+    return creditsCN;
   }
 
-  public int getCreditsQMUL() {
-    return creditsQMUL;
+  public int getCreditsUK() {
+    return creditsUK;
   }
 
   public void setSemester(String semester) {
@@ -67,27 +72,37 @@ public class MarkRecord {
     this.title = title;
   }
 
-  public void setMark(int mark) {
-    this.mark = mark;
+  public void setMarkCN(int markCN) {
+    MarkConverter converter = new MarkConverter();
+
+    this.markCN = markCN;
+    if (this.moduleCode.startsWith("BBC")) {
+      this.markUK = converter.getUK(markCN);
+    }
   }
 
-  public void setMarkQMUL(int markQMUL) {
-    this.markQMUL = markQMUL;
+  public void setMarkUK(int markUK) {
+    MarkConverter converter = new MarkConverter();
+
+    this.markUK = markUK;
+    if (this.moduleCode.startsWith("EBU")) {
+      this.markCN = converter.getCN(markUK);
+    }
   }
 
-  public void setCredits(double credits) {
-    this.credits = credits;
+  public void setCreditsCN(double creditsCN) {
+    this.creditsCN = creditsCN;
   }
 
-  public void setCreditsQMUL(int creditsQMUL) {
-    this.creditsQMUL = creditsQMUL;
+  public void setCreditsUK(int creditsUK) {
+    this.creditsUK = creditsUK;
   }
 
-  // calculate grade point
   public double getGradePoint() {
+    // for now, gradle point is calculated from markCN
     double gradePoint = 0.0;
-    if (this.mark >= 60) {
-      gradePoint = 4.0 - 3.0 * (100.0 - this.mark) * (100.0 - this.mark) / 1600.0;
+    if (this.markCN >= 60) {
+      gradePoint = 4.0 - 3.0 * (100.0 - this.markCN) * (100.0 - this.markCN) / 1600.0;
     } else {
       gradePoint = 0.0;
     }

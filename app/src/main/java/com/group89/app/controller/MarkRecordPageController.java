@@ -43,37 +43,30 @@ public class MarkRecordPageController implements Controller {
     MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
 
     int size = table.getRowCount();
-    double totalCredits = 0;
-    int totalCreditsQMUL = 0;
+    double totalCreditsCN = 0;
     double gpa = 0.0;
-    double average = 0.0;
-    double averageQMUL = 0.0;
+    double averageCN = 0.0;
 
     for (int row = 0; row < size; row++) {
       int modelRow = table.convertRowIndexToModel(row);
       MarkRecord record = tableModel.getMarkRecord(modelRow);
-      totalCredits += record.getCredits();
-      totalCreditsQMUL += record.getCreditsQMUL();
-      gpa += record.getGradePoint() * record.getCredits();
-      average += (double) record.getMark() * record.getCredits();
-      averageQMUL += (double) record.getMarkQMUL() * record.getCreditsQMUL();
+      totalCreditsCN += record.getCreditsCN();
+      gpa += record.getGradePoint() * record.getCreditsCN();
+      averageCN += (double) record.getMarkCN() * record.getCreditsCN();
     }
 
-    gpa /= totalCredits;
-    average /= totalCredits;
-    averageQMUL /= totalCreditsQMUL;
+    gpa /= totalCreditsCN;
+    averageCN /= totalCreditsCN;
 
     DecimalFormat df = new DecimalFormat("#.##");
     gpa = Double.parseDouble(df.format(gpa));
-    average = Double.parseDouble(df.format(average));
-    averageQMUL = Double.parseDouble(df.format(averageQMUL));
+    averageCN = Double.parseDouble(df.format(averageCN));
 
-    // TODO: set label content
     labels[0].setText("Semester: " + semester);
     labels[1].setText("Module Count: " + size);
-    labels[2].setText("Total Credits: " + totalCredits);
+    labels[2].setText("Total Credits: " + totalCreditsCN);
     labels[3].setText("GPA: " + gpa);
-    labels[4].setText("Average Mark: " + average);
+    labels[4].setText("Average Mark: " + averageCN);
   }
 
   private void query() {
@@ -91,12 +84,13 @@ public class MarkRecordPageController implements Controller {
     };
     sorter.setRowFilter(filter);
 
+    JTable table = this.page.getTable();
     MarkRecordTableModel tableModel = new MarkRecordTableModel(records);
+    sorter.setModel(tableModel);
     tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
     tableModel.addTableModelListener(e -> this.updateLabels());
-    sorter.setModel(tableModel);
+    table.setModel(tableModel);
 
-    this.page.getTable().setModel(tableModel);
     updateLabels();
   }
 
