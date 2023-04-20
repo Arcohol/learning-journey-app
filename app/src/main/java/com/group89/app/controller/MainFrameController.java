@@ -20,5 +20,6 @@ public class MainFrameController implements Controller {
     buttons[0].addActionListener(e -> layout.show(content, "page1"));
     buttons[1].addActionListener(e -> layout.show(content, "page2"));
     buttons[2].addActionListener(e -> layout.show(content, "page3"));
+    this.frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
   }
 }

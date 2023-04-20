@@ -2,48 +2,62 @@ package com.group89.app.view.comp;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
 public class Sidebar extends JPanel {
-  private static final int NUM_BUTTONS = 3;
+  class IButton extends JButton {
+    public IButton(String text) {
+      super(text);
+      this.setAlignmentX(CENTER_ALIGNMENT);
+      this.setPreferredSize(BUTTON_SIZE);
+      this.setMaximumSize(BUTTON_SIZE);
+      this.setFocusPainted(false);
+      this.setBackground(Color.LIGHT_GRAY);
+    }
+  }
+
+  private static final Dimension RIGID_AREA_SIZE = new Dimension(0, 10);
   private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
+  private static final int NUM_BUTTONS = 3;
 
   private JButton[] buttons;
+  private JButton exitButton;
 
   public Sidebar() {
     super();
+
+    this.setBackground(Color.WHITE);
+
     buttons = new JButton[NUM_BUTTONS];
-    JButton exitButton = new JButton("Exit");
+    exitButton = new IButton("Exit");
 
     this.setPreferredSize(new Dimension(120, 0));
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-    for (int i = 0; i < NUM_BUTTONS; i++) {
-      this.buttons[i] = new JButton("Button " + i);
-      this.buttons[i].setAlignmentX(CENTER_ALIGNMENT);
-      this.buttons[i].setMaximumSize(BUTTON_SIZE);
-      this.add(Box.createRigidArea(new Dimension(0, 10)));
+    this.buttons[0] = new IButton("Marks");
+    this.add(Box.createRigidArea(RIGID_AREA_SIZE));
+    this.add(this.buttons[0]);
+
+    for (int i = 1; i < buttons.length; i++) {
+      this.buttons[i] = new IButton("Button " + i);
+      this.add(Box.createRigidArea(RIGID_AREA_SIZE));
       this.add(this.buttons[i]);
     }
 
     this.add(Box.createVerticalGlue());
-
-    exitButton.setMaximumSize(BUTTON_SIZE);
-    exitButton.setAlignmentX(CENTER_ALIGNMENT);
-    exitButton.addActionListener(e -> System.exit(0));
     this.add(exitButton);
-
-    this.add(Box.createRigidArea(new Dimension(0, 10)));
-
-    this.setVisible(true);
+    this.add(Box.createRigidArea(RIGID_AREA_SIZE));
   }
 
   public JButton[] getButtons() {
     return this.buttons;
+  }
+
+  public JButton getExitButton() {
+    return this.exitButton;
   }
 }

@@ -12,7 +12,6 @@ import com.group89.app.view.comp.Sidebar;
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
   private JPanel content;
-
   private JPanel[] pages = new JPanel[3];
 
   public MainFrame() {
