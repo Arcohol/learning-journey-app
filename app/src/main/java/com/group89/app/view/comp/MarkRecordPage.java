@@ -15,7 +15,38 @@ import com.group89.app.controller.Controller;
 import com.group89.app.controller.MarkRecordPageController;
 
 public class MarkRecordPage extends JPanel {
+  class ILabel extends JLabel {
+    public ILabel(String text) {
+      super(text);
+      this.setPreferredSize(new Dimension(100, 20));
+    }
+  }
+
+  class SemesterBox extends JComboBox<String> {
+    public SemesterBox() {
+      super();
+      this.setPreferredSize(new Dimension(100, 30));
+      this.addItem("all");
+      this.addItem("2020-2021-1");
+      this.addItem("2020-2021-2");
+      this.addItem("2021-2022-1");
+      this.addItem("2021-2022-2");
+      this.addItem("2022-2023-1");
+      this.addItem("2022-2023-2");
+      this.addItem("2023-2024-1");
+      this.addItem("2023-2024-2");
+    }
+  }
+
+  class IButton extends JButton {
+    public IButton(String text) {
+      super(text);
+      this.setPreferredSize(new Dimension(100, 30));
+    }
+  }
+
   private static final int LABEL_COUNT = 5;
+
   private JComboBox<String> semesterBox;
   private JButton queryButton;
   private JButton saveButton;
@@ -28,40 +59,29 @@ public class MarkRecordPage extends JPanel {
   public MarkRecordPage() {
     super(new GridBagLayout());
 
-    this.semesterBox = new JComboBox<String>();
-    this.queryButton = new JButton("Query");
-    this.saveButton = new JButton("Save");
-    this.deleteButton = new JButton("Delete");
-    this.addButton = new JButton("Add");
+    this.semesterBox = new SemesterBox();
+    this.queryButton = new IButton("Query");
+    this.saveButton = new IButton("Save");
+    this.deleteButton = new IButton("Delete");
+    this.addButton = new IButton("Add");
 
     this.labels = new JLabel[LABEL_COUNT];
-    this.labels[0] = new JLabel("Semester:");
-    this.labels[1] = new JLabel("Modules Count: ");
-    this.labels[2] = new JLabel("Total Credits: ");
-    this.labels[3] = new JLabel("GPA: ");
-    this.labels[4] = new JLabel("Average Mark: ");
+    this.labels[0] = new ILabel("Semester:");
+    this.labels[1] = new ILabel("Modules Count: ");
+    this.labels[2] = new ILabel("Total Credits: ");
+    this.labels[3] = new ILabel("GPA: ");
+    this.labels[4] = new ILabel("Average Mark: ");
 
     this.scrollPane = new JScrollPane();
     this.table = new JTable(null);
 
     GridBagConstraints c = new GridBagConstraints();
 
-    // for labels and buttons
     c.weightx = 1;
     c.weighty = 0;
 
     c.insets.set(10, 10, 10, 10);
 
-    this.semesterBox.setPreferredSize(new Dimension(100, 20));
-    this.semesterBox.addItem("all");
-    this.semesterBox.addItem("2020-2021-1");
-    this.semesterBox.addItem("2020-2021-2");
-    this.semesterBox.addItem("2021-2022-1");
-    this.semesterBox.addItem("2021-2022-2");
-    this.semesterBox.addItem("2022-2023-1");
-    this.semesterBox.addItem("2022-2023-2");
-    this.semesterBox.addItem("2023-2024-1");
-    this.semesterBox.addItem("2023-2024-2");
     c.gridx = 0;
     c.gridy = 0;
     c.anchor = GridBagConstraints.WEST;
@@ -70,7 +90,6 @@ public class MarkRecordPage extends JPanel {
 
     c.insets.set(10, 0, 10, 10);
 
-    this.queryButton.setPreferredSize(new Dimension(100, 20));
     c.gridx = 4;
     c.gridy = 0;
     c.anchor = GridBagConstraints.EAST;
@@ -79,46 +98,33 @@ public class MarkRecordPage extends JPanel {
 
     c.insets.set(0, 10, 10, 10);
 
-    for (JLabel label : this.labels) {
-      label.setBorder(BorderFactory.createLineBorder(Color.RED));
-      label.setPreferredSize(new Dimension(100, 20));
-    }
+    c.anchor = GridBagConstraints.WEST;
+    c.fill = GridBagConstraints.HORIZONTAL;
 
     c.gridx = 0;
     c.gridy = 1;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.HORIZONTAL;
     this.add(this.labels[0], c);
 
     c.insets.set(0, 0, 10, 10);
 
     c.gridx = 1;
     c.gridy = 1;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.HORIZONTAL;
     this.add(this.labels[1], c);
 
     c.gridx = 2;
     c.gridy = 1;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.HORIZONTAL;
     this.add(this.labels[2], c);
 
     c.gridx = 3;
     c.gridy = 1;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.HORIZONTAL;
     this.add(this.labels[3], c);
 
     c.gridx = 4;
     c.gridy = 1;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.HORIZONTAL;
     this.add(this.labels[4], c);
 
     c.insets.set(0, 10, 10, 10);
 
-    // for scroll pane
     c.weightx = 1;
     c.weighty = 1;
 
@@ -132,11 +138,9 @@ public class MarkRecordPage extends JPanel {
     c.fill = GridBagConstraints.BOTH;
     this.add(this.scrollPane, c);
 
-    // for save button
     c.weightx = 1;
     c.weighty = 0;
 
-    this.saveButton.setPreferredSize(new Dimension(100, 20));
     this.saveButton.setEnabled(false);
     c.gridx = 2;
     c.gridy = 3;
@@ -146,27 +150,22 @@ public class MarkRecordPage extends JPanel {
     c.fill = GridBagConstraints.NONE;
     this.add(this.saveButton, c);
 
-    this.deleteButton.setPreferredSize(new Dimension(100, 20));
     c.gridx = 4;
     c.gridy = 3;
     c.anchor = GridBagConstraints.EAST;
     c.fill = GridBagConstraints.NONE;
     this.add(this.deleteButton, c);
 
-    this.addButton.setPreferredSize(new Dimension(100, 20));
     c.gridx = 0;
     c.gridy = 3;
     c.anchor = GridBagConstraints.WEST;
     c.fill = GridBagConstraints.NONE;
     this.add(this.addButton, c);
 
-    this.setVisible(true);
-
     Controller markRecordPagController = new MarkRecordPageController(this);
     markRecordPagController.init();
   }
 
-  // getters
   public JComboBox<String> getSemesterBox() {
     return this.semesterBox;
   }
