@@ -44,19 +44,19 @@ public class MarkRecord {
     return title;
   }
 
-  public int getMarkCN() {
+  public Integer getMarkCN() {
     return markCN;
   }
 
-  public int getMarkUK() {
+  public Integer getMarkUK() {
     return markUK;
   }
 
-  public double getCreditsCN() {
+  public Double getCreditsCN() {
     return creditsCN;
   }
 
-  public int getCreditsUK() {
+  public Integer getCreditsUK() {
     return creditsUK;
   }
 

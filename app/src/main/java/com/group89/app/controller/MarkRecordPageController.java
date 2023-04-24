@@ -1,9 +1,15 @@
 package com.group89.app.controller;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.text.DecimalFormat;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.border.LineBorder;
 import javax.swing.table.TableRowSorter;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordList;
@@ -12,6 +18,45 @@ import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.MarkRecordPage;
 
 public class MarkRecordPageController implements Controller {
+  // temporary solution for enforcing number range
+  // subject to change
+  class NumberEditor extends DefaultCellEditor {
+    Integer value;
+
+    public NumberEditor() {
+      super(new JTextField());
+      ((JTextField) getComponent()).setHorizontalAlignment(JTextField.RIGHT);
+    }
+
+    @Override
+    public boolean stopCellEditing() {
+      String s = (String) super.getCellEditorValue();
+      try {
+        value = Integer.parseInt(s);
+        if (value < 0 || value > 100) {
+          throw new NumberFormatException();
+        }
+      } catch (NumberFormatException e) {
+        ((JComponent) getComponent()).setBorder(new LineBorder(Color.red));
+        return false;
+      }
+      return super.stopCellEditing();
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
+        int row, int column) {
+      this.value = null;
+      ((JComponent) getComponent()).setBorder(new LineBorder(Color.black));
+      return super.getTableCellEditorComponent(table, value, isSelected, row, column);
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+      return value;
+    }
+  }
+
   private MarkRecordPage page;
   private JsonConverter<MarkRecord> converter;
   private MarkRecordList records;
@@ -90,6 +135,9 @@ public class MarkRecordPageController implements Controller {
     tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
     tableModel.addTableModelListener(e -> this.updateLabels());
     table.setModel(tableModel);
+    NumberEditor e = new NumberEditor();
+    table.getColumnModel().getColumn(3).setCellEditor(e);
+    table.getColumnModel().getColumn(4).setCellEditor(e);
 
     updateLabels();
   }
