@@ -2,6 +2,7 @@ package com.group89.app.view.comp;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,24 +14,22 @@ public class Sidebar extends JPanel {
     public IButton(String text) {
       super(text);
       this.setAlignmentX(CENTER_ALIGNMENT);
-      this.setPreferredSize(BUTTON_SIZE);
       this.setMaximumSize(BUTTON_SIZE);
       this.setFocusPainted(false);
-      this.setBackground(Color.LIGHT_GRAY);
+      this.setBorderPainted(false);
+      this.setFont(new Font("Segoe UI", Font.PLAIN, 16));
     }
   }
 
-  private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
+  private static final Dimension BUTTON_SIZE = new Dimension(150, 60);
   private static final int NUM_BUTTONS = 3;
-  private static final Dimension RIGID_AREA_SIZE = new Dimension(0, 10);
+  private static final Dimension RIGID_AREA_SIZE = new Dimension(0, 15);
 
   private JButton[] buttons;
   private JButton exitButton;
 
   public Sidebar() {
     super();
-
-    this.setBackground(Color.WHITE);
 
     buttons = new JButton[NUM_BUTTONS];
     exitButton = new IButton("Exit");

@@ -1,6 +1,7 @@
 package com.group89.app.view.comp;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,13 +20,15 @@ public class MarkRecordPage extends JPanel {
     public ILabel(String text) {
       super(text);
       this.setPreferredSize(new Dimension(100, 20));
+      this.setFont(new Font("Segoe UI", Font.PLAIN, 14));
     }
   }
 
   class SemesterBox extends JComboBox<String> {
     public SemesterBox() {
       super();
-      this.setPreferredSize(new Dimension(100, 30));
+      this.setPreferredSize(new Dimension(150, 30));
+      this.setFont(new Font("Segoe UI", Font.PLAIN, 16));
       this.addItem("all");
       this.addItem("2020-2021-1");
       this.addItem("2020-2021-2");
@@ -42,6 +45,8 @@ public class MarkRecordPage extends JPanel {
     public IButton(String text) {
       super(text);
       this.setPreferredSize(new Dimension(100, 30));
+      this.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+      this.setBorderPainted(false);
     }
   }
 
@@ -66,7 +71,7 @@ public class MarkRecordPage extends JPanel {
     this.addButton = new IButton("Add");
 
     this.labels = new JLabel[LABEL_COUNT];
-    this.labels[0] = new ILabel("Semester:");
+    this.labels[0] = new ILabel("Semester: ");
     this.labels[1] = new ILabel("Modules Count: ");
     this.labels[2] = new ILabel("Total Credits: ");
     this.labels[3] = new ILabel("GPA: ");
@@ -74,6 +79,10 @@ public class MarkRecordPage extends JPanel {
 
     this.scrollPane = new JScrollPane();
     this.table = new JTable(null);
+    this.table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+
+
+  
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -105,8 +114,6 @@ public class MarkRecordPage extends JPanel {
     c.gridy = 1;
     this.add(this.labels[0], c);
 
-    c.insets.set(0, 0, 10, 10);
-
     c.gridx = 1;
     c.gridy = 1;
     this.add(this.labels[1], c);
@@ -128,7 +135,7 @@ public class MarkRecordPage extends JPanel {
     c.weightx = 1;
     c.weighty = 1;
 
-    this.scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED));
+    this.scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     this.scrollPane.setViewportView(this.table);
     c.gridx = 0;
     c.gridy = 2;
@@ -142,10 +149,8 @@ public class MarkRecordPage extends JPanel {
     c.weighty = 0;
 
     this.saveButton.setEnabled(false);
-    c.gridx = 2;
+    c.gridx = 0;
     c.gridy = 3;
-    c.gridwidth = 1;
-    c.gridheight = 1;
     c.anchor = GridBagConstraints.CENTER;
     c.fill = GridBagConstraints.NONE;
     this.add(this.saveButton, c);
