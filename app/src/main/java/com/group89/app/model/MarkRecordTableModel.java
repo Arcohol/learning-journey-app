@@ -3,7 +3,9 @@ package com.group89.app.model;
 import javax.swing.table.AbstractTableModel;
 
 public class MarkRecordTableModel extends AbstractTableModel {
-  MarkRecordList records;
+  private static final String[] COLUMN_NAMES =
+      {"Semester", "Module Code", "Title", "Mark CN", "Mark UK", "Credits CN", "Credits UK"};
+  private MarkRecordList records;
 
   public MarkRecordTableModel(MarkRecordList records) {
     this.records = records;
@@ -16,17 +18,17 @@ public class MarkRecordTableModel extends AbstractTableModel {
 
   @Override
   public int getColumnCount() {
-    return MarkRecord.class.getDeclaredFields().length;
+    return COLUMN_NAMES.length;
   }
 
   @Override
   public String getColumnName(int columnIndex) {
-    return MarkRecord.class.getDeclaredFields()[columnIndex].getName();
+    return COLUMN_NAMES[columnIndex];
   }
 
   @Override
   public Class<?> getColumnClass(int columnIndex) {
-    return MarkRecord.class.getDeclaredFields()[columnIndex].getType();
+    return getValueAt(0, columnIndex).getClass();
   }
 
   @Override
