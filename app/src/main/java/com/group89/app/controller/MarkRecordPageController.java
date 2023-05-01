@@ -2,6 +2,7 @@ package com.group89.app.controller;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.text.DecimalFormat;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
@@ -10,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordList;
@@ -20,11 +22,12 @@ import com.group89.app.view.comp.MarkRecordPage;
 public class MarkRecordPageController implements Controller {
   // temporary solution for enforcing number range
   // subject to change
-  class NumberEditor extends DefaultCellEditor {
+  class MarkEditor extends DefaultCellEditor {
     Integer value;
 
-    public NumberEditor() {
+    public MarkEditor() {
       super(new JTextField());
+      this.getComponent().setFont(this.getComponent().getFont().deriveFont(16f));
       ((JTextField) getComponent()).setHorizontalAlignment(JTextField.RIGHT);
     }
 
@@ -54,6 +57,16 @@ public class MarkRecordPageController implements Controller {
     @Override
     public Object getCellEditorValue() {
       return value;
+    }
+  }
+
+  // make a duplicate of the default cell editor from JTable
+  // and change the font size
+  class StringEditor extends DefaultCellEditor {
+    public StringEditor() {
+      super(new JTextField());
+      this.getComponent().setFont(this.getComponent().getFont().deriveFont(16f));
+      ((JTextField) getComponent()).setHorizontalAlignment(JTextField.RIGHT);
     }
   }
 
@@ -135,9 +148,16 @@ public class MarkRecordPageController implements Controller {
     tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
     tableModel.addTableModelListener(e -> this.updateLabels());
     table.setModel(tableModel);
-    NumberEditor e = new NumberEditor();
+
+    MarkEditor e = new MarkEditor();
     table.getColumnModel().getColumn(3).setCellEditor(e);
     table.getColumnModel().getColumn(4).setCellEditor(e);
+
+    table.getColumnModel().getColumn(2).setPreferredWidth(200);
+
+    JTableHeader header = table.getTableHeader();
+    header.setPreferredSize(new Dimension(0, 30));
+    header.setFont(header.getFont().deriveFont(16f));
 
     updateLabels();
   }

@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
   public MainFrame() {
     super("Group 89");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1000, 800);
+    this.setSize(1200, 800);
     this.setLocationRelativeTo(null);
     // this.setResizable(false);
     this.setLayout(new BorderLayout());
@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
     this.add(this.content, BorderLayout.CENTER);
 
     this.pages[0] = new MarkRecordPage();
+    this.pages[0].setBackground(java.awt.Color.WHITE);
 
     this.pages[1] = new JPanel();
     this.pages[1].setBackground(java.awt.Color.GREEN);
