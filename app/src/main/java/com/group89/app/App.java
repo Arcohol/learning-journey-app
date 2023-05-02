@@ -10,7 +10,7 @@ public class App {
   public static void main(String[] args) {
     Configurator.setLevel(LogManager.getRootLogger(), Level.DEBUG);
 
-    System.setProperty("sun.java2d.uiScale.enabled", "false");
+    // System.setProperty("sun.java2d.uiScale.enabled", "false");
     SwingUtilities.invokeLater(MainFrame::new);
   }
 }
