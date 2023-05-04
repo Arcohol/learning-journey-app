@@ -60,16 +60,6 @@ public class MarkRecordPageController implements Controller {
     }
   }
 
-  // make a duplicate of the default cell editor from JTable
-  // and change the font size
-  class StringEditor extends DefaultCellEditor {
-    public StringEditor() {
-      super(new JTextField());
-      this.getComponent().setFont(this.getComponent().getFont().deriveFont(16f));
-      ((JTextField) getComponent()).setHorizontalAlignment(JTextField.RIGHT);
-    }
-  }
-
   private MarkRecordPage page;
   private JsonConverter<MarkRecord> converter;
   private MarkRecordList records;
@@ -140,6 +130,7 @@ public class MarkRecordPageController implements Controller {
         return semester.equals("all") || record.getSemester().equals(semester);
       }
     };
+
     sorter.setRowFilter(filter);
 
     JTable table = this.page.getTable();

@@ -14,10 +14,10 @@ public class MainFrameController implements Controller {
 
   @Override
   public void init() {
+    JButton[] buttons = this.frame.getSidebar().getButtons();
     JPanel content = this.frame.getContent();
     CardLayout layout = (CardLayout) content.getLayout();
-    JButton[] buttons = this.frame.getSidebar().getButtons();
-    this.frame.getSidebar().onClick(0);
+
     buttons[0].addActionListener(e -> {
       this.frame.getSidebar().onClick(0);
       layout.show(content, "page1");
@@ -31,5 +31,7 @@ public class MainFrameController implements Controller {
       layout.show(content, "page3");
     });
     this.frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
+
+    buttons[1].doClick();
   }
 }
