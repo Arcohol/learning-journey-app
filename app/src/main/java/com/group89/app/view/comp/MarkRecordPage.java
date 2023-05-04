@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import com.group89.app.controller.Controller;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.view.AppColor;
 
@@ -189,8 +188,7 @@ public class MarkRecordPage extends JPanel {
     this.add(this.deleteButton, c);
 
 
-    Controller markRecordPagController = new MarkRecordPageController(this);
-    markRecordPagController.init();
+    (new MarkRecordPageController(this)).init();
   }
 
   public JComboBox<String> getSemesterBox() {

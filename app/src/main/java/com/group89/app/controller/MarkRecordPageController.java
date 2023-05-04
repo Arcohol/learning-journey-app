@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -14,7 +15,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import com.group89.app.model.MarkRecord;
-import com.group89.app.model.MarkRecordList;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.MarkRecordPage;
@@ -61,15 +61,14 @@ public class MarkRecordPageController implements Controller {
   }
 
   private MarkRecordPage page;
+  private List<MarkRecord> list;
   private JsonConverter<MarkRecord> converter;
-  private MarkRecordList records;
   private TableRowSorter<MarkRecordTableModel> sorter;
 
   public MarkRecordPageController(MarkRecordPage page) {
     this.page = page;
     this.converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    this.records = new MarkRecordList(converter.toList());
-    this.sorter = new TableRowSorter<MarkRecordTableModel>();
+    this.sorter = new TableRowSorter<>();
   }
 
   @Override
@@ -80,6 +79,7 @@ public class MarkRecordPageController implements Controller {
     this.page.getAddButton().addActionListener(e -> this.add());
     this.page.getTable().setRowSorter(sorter);
 
+    load();
     query();
   }
 
@@ -97,7 +97,7 @@ public class MarkRecordPageController implements Controller {
 
     for (int row = 0; row < size; row++) {
       int modelRow = table.convertRowIndexToModel(row);
-      MarkRecord record = tableModel.getMarkRecord(modelRow);
+      MarkRecord record = tableModel.getItem(modelRow);
       totalCreditsCN += record.getCreditsCN();
       gpa += record.getGradePoint() * record.getCreditsCN();
       averageCN += (double) record.getMarkCN() * record.getCreditsCN();
@@ -126,7 +126,7 @@ public class MarkRecordPageController implements Controller {
       @Override
       public boolean include(Entry<? extends MarkRecordTableModel, ? extends Object> entry) {
         MarkRecordTableModel tableModel = entry.getModel();
-        MarkRecord record = tableModel.getMarkRecord(entry.getIdentifier());
+        MarkRecord record = tableModel.getItem(entry.getIdentifier());
         return semester.equals("all") || record.getSemester().equals(semester);
       }
     };
@@ -134,7 +134,7 @@ public class MarkRecordPageController implements Controller {
     sorter.setRowFilter(filter);
 
     JTable table = this.page.getTable();
-    MarkRecordTableModel tableModel = new MarkRecordTableModel(records);
+    MarkRecordTableModel tableModel = new MarkRecordTableModel(this.list);
     sorter.setModel(tableModel);
     tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
     tableModel.addTableModelListener(e -> this.updateLabels());
@@ -153,26 +153,30 @@ public class MarkRecordPageController implements Controller {
     updateLabels();
   }
 
+  private void load() {
+    this.list = this.converter.toArrayList();
+  }
+
   private void save() {
-    MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
-    converter.toFile(tableModel.getMarkRecordList());
+    this.converter.toFile(this.list);
+
     this.page.getSaveButton().setEnabled(false);
   }
 
   private void delete() {
     JTable table = this.page.getTable();
     MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
-    // maps selected rows to model rows
-    int[] modelRows = table.getSelectedRows();
-    for (int i = 0; i < modelRows.length; i++) {
-      modelRows[i] = table.convertRowIndexToModel(modelRows[i]);
+
+    int[] viewRows = table.getSelectedRows();
+    int[] modelRows = new int[viewRows.length];
+    for (int i = 0; i < viewRows.length; i++) {
+      modelRows[i] = table.convertRowIndexToModel(viewRows[i]);
     }
-    tableModel.removeRows(modelRows);
+
+    tableModel.removeItems(modelRows);
   }
 
   private void add() {
-    // add a blank new row
-    MarkRecordTableModel tableModel = (MarkRecordTableModel) this.page.getTable().getModel();
-    tableModel.addRow(new MarkRecord());
+    ((MarkRecordTableModel) this.page.getTable().getModel()).addItem(new MarkRecord());
   }
 }
