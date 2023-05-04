@@ -6,5 +6,5 @@ A Learning Journey Application for BUPT International School students.
 ## Compile & Run
 
 ```
-$ gradle run
+$ ./gradlew run
 ```
