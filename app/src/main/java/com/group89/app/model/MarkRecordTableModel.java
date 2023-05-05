@@ -38,6 +38,6 @@ public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
       case 6 -> record.setCreditsUK((int) aValue);
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
-    fireTableDataChanged();
+    fireTableRowsUpdated(rowIndex, rowIndex);
   }
 }

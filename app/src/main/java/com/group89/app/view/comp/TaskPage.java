@@ -4,13 +4,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.DefaultCellEditor;
+import com.group89.app.controller.TaskPageController;
+import com.group89.app.view.AppColor;
 
 public class TaskPage extends JPanel {
   class TaskRenderer extends DefaultTableCellRenderer {
@@ -20,7 +23,7 @@ public class TaskPage extends JPanel {
         boolean hasFocus, int row, int column) {
       Component c =
           super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-      if ((boolean) table.getValueAt(row, 2)) {
+      if ((boolean) table.getValueAt(row, table.getColumn("Status").getModelIndex())) {
         c.setBackground(Color.green);
       } else {
         c.setBackground(Color.white);
@@ -32,72 +35,95 @@ public class TaskPage extends JPanel {
   class ITable extends JTable {
     public ITable() {
       super();
-      this.setRowHeight(30);
+      this.setRowHeight(ROW_HEIGHT);
       this.setFont(this.getFont().deriveFont(FONT_SIZE));
       this.setFillsViewportHeight(true);
+      this.setDefaultRenderer(Object.class, new TaskRenderer());
 
-      // this is a suspicious way to change the font size while keeping the same editor
-      // it overrides the default cell editor managed by JTable
       JComponent objectEditor =
           (JComponent) ((DefaultCellEditor) (this.getDefaultEditor(Object.class))).getComponent();
       objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
-
-      JComponent numberEditor =
-          (JComponent) ((DefaultCellEditor) (this.getDefaultEditor(Number.class))).getComponent();
-      numberEditor.setFont(numberEditor.getFont().deriveFont(FONT_SIZE));
-
-      // use the custom renderer
-      this.setDefaultRenderer(Object.class, new TaskRenderer());
     }
   }
 
-  private static final float FONT_SIZE = 20f;
+  class IButton extends JButton {
+    public IButton(String text) {
+      super(text);
+      this.setPreferredSize(new java.awt.Dimension(100, 30));
+      this.setBackground(AppColor.LIGHT_GREY);
+      this.setForeground(AppColor.BLACK);
+      this.setFont(this.getFont().deriveFont(20f));
+    }
+  }
+
+  private static final int ROW_HEIGHT = 30;
+  private static final float FONT_SIZE = 24f;
+
   private JTable tasks;
   private JScrollPane scrollPane;
+  private JButton addButton, deleteButton, saveButton;
 
   public TaskPage() {
     super(new GridBagLayout());
 
-    // make sample data
-    String[] columnNames = {"Task", "Due Date", "Status"};
-    Object[][] data = {{"Task 1", "2023-03-12", false}, {"Task 2", "2023-04-12", false},
-        {"Task 3", "2024-01-21", false},};
+    this.tasks = new ITable();
+    this.scrollPane = new JScrollPane(this.tasks);
+    this.addButton = new IButton("Add");
+    this.deleteButton = new IButton("Delete");
+    this.saveButton = new IButton("Save");
 
-    // set table model
-    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-      @Override
-      public Class<?> getColumnClass(int column) {
-        if (column == 2) {
-          return Boolean.class;
-        }
-        return String.class;
-      }
-      
-      @Override
-      public void setValueAt(Object aValue, int row, int column) {
-        super.setValueAt(aValue, row, column);
-        if (column == 2) {
-          fireTableRowsUpdated(row, row);
-        }
-      }
-    };
-
-    // add table to panel
     GridBagConstraints c = new GridBagConstraints();
-    c.fill = GridBagConstraints.BOTH;
+    c.insets = new Insets(10, 10, 10, 10);
+
     c.gridx = 0;
     c.gridy = 0;
     c.weightx = 1;
+    c.anchor = GridBagConstraints.WEST;
+    this.add(this.addButton, c);
+
+    c.gridx = 1;
+    c.gridy = 0;
+    c.weightx = 1;
+    c.anchor = GridBagConstraints.CENTER;
+    this.add(this.deleteButton, c);
+
+    c.gridx = 2;
+    c.gridy = 0;
+    c.weightx = 1;
+    c.anchor = GridBagConstraints.EAST;
+    this.add(this.saveButton, c);
+
+    c.insets = new Insets(0, 10, 10, 10);
+
+    c.gridx = 0;
+    c.gridy = 1;
+    c.gridwidth = 3;
+    c.weightx = 1;
     c.weighty = 1;
+    c.anchor = GridBagConstraints.CENTER;
+    c.fill = GridBagConstraints.BOTH;
+    this.add(this.scrollPane, c);
 
-    tasks = new ITable();
-    tasks.setModel(model);
-    // enable sort
-    tasks.setAutoCreateRowSorter(true);
+    new TaskPageController(this);
+  }
 
+  public JTable getTable() {
+    return this.tasks;
+  }
 
-    scrollPane = new JScrollPane(tasks);
+  public JScrollPane getScrollPane() {
+    return this.scrollPane;
+  }
 
-    this.add(scrollPane, c);
+  public JButton getAddButton() {
+    return this.addButton;
+  }
+
+  public JButton getDeleteButton() {
+    return this.deleteButton;
+  }
+
+  public JButton getSaveButton() {
+    return this.saveButton;
   }
 }

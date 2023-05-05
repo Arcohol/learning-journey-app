@@ -79,10 +79,7 @@ public class MarkRecordPage extends JPanel {
   private static final float FONT_SIZE = 16f;
 
   private JComboBox<String> semesterBox;
-  private JButton queryButton;
-  private JButton saveButton;
-  private JButton deleteButton;
-  private JButton addButton;
+  private JButton queryButton, saveButton, deleteButton, addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
   private JTable table;

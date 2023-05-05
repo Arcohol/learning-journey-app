@@ -60,13 +60,11 @@ public abstract class ListTableModel<T> extends AbstractTableModel {
 
   public void addItem(T item) {
     this.list.add(item);
-    fireTableDataChanged();
+    fireTableRowsInserted(this.list.size() - 1, this.list.size() - 1);
   }
 
-  public void removeItems(int[] indices) {
-    for (int i = indices.length - 1; i >= 0; i--) {
-      this.list.remove(indices[i]);
-    }
-    fireTableDataChanged();
+  public void removeItem(int index) {
+    this.list.remove(index);
+    fireTableRowsDeleted(index, index);
   }
 }

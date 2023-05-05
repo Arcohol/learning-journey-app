@@ -102,9 +102,9 @@ public class MarkRecordPageController {
 
     JTable table = this.page.getTable();
     table.setModel(model);
-    table.getColumnModel().getColumn(3).setCellEditor(new MarkEditor());
-    table.getColumnModel().getColumn(4).setCellEditor(new MarkEditor());
-    table.getColumnModel().getColumn(2).setPreferredWidth(200);
+    table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
+    table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
+    table.getColumn("Title").setPreferredWidth(200);
 
     JTableHeader header = table.getTableHeader();
     header.setPreferredSize(new Dimension(0, 30));
@@ -143,23 +143,21 @@ public class MarkRecordPageController {
     labels[4].setText("Average Mark: " + averageCN);
   }
 
-  private void save() {
-    this.converter.toFile(this.list);
-    this.page.getSaveButton().setEnabled(false);
+  private void add() {
+    ((MarkRecordTableModel) this.page.getTable().getModel()).addItem(new MarkRecord());
   }
 
   private void delete() {
     JTable table = this.page.getTable();
-
+    MarkRecordTableModel model = (MarkRecordTableModel) table.getModel();
     int[] rows = table.getSelectedRows();
-    for (int i = 0; i < rows.length; i++) {
-      rows[i] = table.convertRowIndexToModel(rows[i]);
+    for (int i = rows.length - 1; i >= 0; i--) {
+      model.removeItem(table.convertRowIndexToModel(rows[i]));
     }
-
-    ((MarkRecordTableModel) table.getModel()).removeItems(rows);
   }
 
-  private void add() {
-    ((MarkRecordTableModel) this.page.getTable().getModel()).addItem(new MarkRecord());
+  private void save() {
+    this.converter.toFile(this.list);
+    this.page.getSaveButton().setEnabled(false);
   }
 }

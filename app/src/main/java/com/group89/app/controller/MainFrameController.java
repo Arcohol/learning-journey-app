@@ -34,6 +34,6 @@ public class MainFrameController {
 
     this.frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
 
-    buttons[0].doClick();
+    buttons[1].doClick();
   }
 }
