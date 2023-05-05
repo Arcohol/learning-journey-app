@@ -29,7 +29,6 @@ public class JsonConverter<T> {
       return new ArrayList<T>(Arrays.asList(gson.fromJson(src, type)));
     } catch (IOException e) {
       if (e instanceof FileNotFoundException) {
-        // file not found, return empty list
         return new ArrayList<T>();
       } else {
         e.printStackTrace();

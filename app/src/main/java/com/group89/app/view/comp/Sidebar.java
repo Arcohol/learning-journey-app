@@ -49,7 +49,6 @@ public class Sidebar extends JPanel {
     this.date.setForeground(AppColor.DARK_GREY);
     this.date.setPreferredSize(DATE_SIZE);
     this.date.setHorizontalAlignment(JLabel.CENTER);
-    // create a border
     this.date.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, AppColor.DARK_GREY));
 
     c.weightx = 1;

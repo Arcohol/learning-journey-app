@@ -19,7 +19,7 @@ import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.MarkRecordPage;
 
-public class MarkRecordPageController implements Controller {
+public class MarkRecordPageController {
   // temporary solution for enforcing number range
   // subject to change
   class MarkEditor extends DefaultCellEditor {
@@ -61,17 +61,19 @@ public class MarkRecordPageController implements Controller {
   }
 
   private MarkRecordPage page;
-  private List<MarkRecord> list;
   private JsonConverter<MarkRecord> converter;
+  private List<MarkRecord> list;
   private TableRowSorter<MarkRecordTableModel> sorter;
 
   public MarkRecordPageController(MarkRecordPage page) {
     this.page = page;
     this.converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+    this.list = this.converter.toArrayList();
     this.sorter = new TableRowSorter<>();
+
+    init();
   }
 
-  @Override
   public void init() {
     this.page.getQueryButton().addActionListener(e -> this.query());
     this.page.getSaveButton().addActionListener(e -> this.save());
@@ -79,71 +81,29 @@ public class MarkRecordPageController implements Controller {
     this.page.getAddButton().addActionListener(e -> this.add());
     this.page.getTable().setRowSorter(sorter);
 
-    load();
     query();
   }
 
-  private void updateLabels() {
-    String semester = (String) this.page.getSemesterBox().getSelectedItem();
-    JLabel[] labels = this.page.getLabels();
-
-    JTable table = this.page.getTable();
-    MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
-
-    int size = table.getRowCount();
-    double totalCreditsCN = 0;
-    double gpa = 0.0;
-    double averageCN = 0.0;
-
-    for (int row = 0; row < size; row++) {
-      int modelRow = table.convertRowIndexToModel(row);
-      MarkRecord record = tableModel.getItem(modelRow);
-      totalCreditsCN += record.getCreditsCN();
-      gpa += record.getGradePoint() * record.getCreditsCN();
-      averageCN += (double) record.getMarkCN() * record.getCreditsCN();
-    }
-
-    gpa /= totalCreditsCN;
-    averageCN /= totalCreditsCN;
-
-    DecimalFormat df = new DecimalFormat("#.##");
-    gpa = Double.parseDouble(df.format(gpa));
-    averageCN = Double.parseDouble(df.format(averageCN));
-
-    labels[0].setText("Semester: " + semester);
-    labels[1].setText("Module Count: " + size);
-    labels[2].setText("Total Credits: " + totalCreditsCN);
-    labels[3].setText("GPA: " + gpa);
-    labels[4].setText("Average Mark: " + averageCN);
-  }
-
   private void query() {
-    // get semester from semesterBox
-    String semester = (String) this.page.getSemesterBox().getSelectedItem();
+    MarkRecordTableModel model = new MarkRecordTableModel(this.list);
+    model.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
+    model.addTableModelListener(e -> updateLabels());
 
-    // filter records
-    RowFilter<MarkRecordTableModel, Object> filter = new RowFilter<MarkRecordTableModel, Object>() {
+    String semester = (String) this.page.getSemesterBox().getSelectedItem();
+    this.sorter.setRowFilter(new RowFilter<MarkRecordTableModel, Object>() {
       @Override
       public boolean include(Entry<? extends MarkRecordTableModel, ? extends Object> entry) {
-        MarkRecordTableModel tableModel = entry.getModel();
-        MarkRecord record = tableModel.getItem(entry.getIdentifier());
+        MarkRecordTableModel model = entry.getModel();
+        MarkRecord record = model.getItem(entry.getIdentifier());
         return semester.equals("all") || record.getSemester().equals(semester);
       }
-    };
-
-    sorter.setRowFilter(filter);
+    });
+    sorter.setModel(model);
 
     JTable table = this.page.getTable();
-    MarkRecordTableModel tableModel = new MarkRecordTableModel(this.list);
-    sorter.setModel(tableModel);
-    tableModel.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
-    tableModel.addTableModelListener(e -> this.updateLabels());
-    table.setModel(tableModel);
-
-    MarkEditor e = new MarkEditor();
-    table.getColumnModel().getColumn(3).setCellEditor(e);
-    table.getColumnModel().getColumn(4).setCellEditor(e);
-
+    table.setModel(model);
+    table.getColumnModel().getColumn(3).setCellEditor(new MarkEditor());
+    table.getColumnModel().getColumn(4).setCellEditor(new MarkEditor());
     table.getColumnModel().getColumn(2).setPreferredWidth(200);
 
     JTableHeader header = table.getTableHeader();
@@ -153,27 +113,50 @@ public class MarkRecordPageController implements Controller {
     updateLabels();
   }
 
-  private void load() {
-    this.list = this.converter.toArrayList();
+  private void updateLabels() {
+    JTable table = this.page.getTable();
+    MarkRecordTableModel model = (MarkRecordTableModel) table.getModel();
+
+    int size = table.getRowCount();
+    double totalCreditsCN = 0;
+    double gpa = 0.0;
+    double averageCN = 0.0;
+    for (int viewRow = 0; viewRow < size; viewRow++) {
+      MarkRecord record = model.getItem(table.convertRowIndexToModel(viewRow));
+
+      totalCreditsCN += record.getCreditsCN();
+      averageCN += (double) record.getMarkCN() * record.getCreditsCN();
+      gpa += record.getGradePoint() * record.getCreditsCN();
+    }
+    averageCN /= totalCreditsCN;
+    gpa /= totalCreditsCN;
+
+    DecimalFormat df = new DecimalFormat("#.##");
+    averageCN = Double.parseDouble(df.format(averageCN));
+    gpa = Double.parseDouble(df.format(gpa));
+
+    JLabel[] labels = this.page.getLabels();
+    labels[0].setText("Semester: " + this.page.getSemesterBox().getSelectedItem());
+    labels[1].setText("Module Count: " + size);
+    labels[2].setText("Total Credits: " + totalCreditsCN);
+    labels[3].setText("GPA: " + gpa);
+    labels[4].setText("Average Mark: " + averageCN);
   }
 
   private void save() {
     this.converter.toFile(this.list);
-
     this.page.getSaveButton().setEnabled(false);
   }
 
   private void delete() {
     JTable table = this.page.getTable();
-    MarkRecordTableModel tableModel = (MarkRecordTableModel) table.getModel();
 
-    int[] viewRows = table.getSelectedRows();
-    int[] modelRows = new int[viewRows.length];
-    for (int i = 0; i < viewRows.length; i++) {
-      modelRows[i] = table.convertRowIndexToModel(viewRows[i]);
+    int[] rows = table.getSelectedRows();
+    for (int i = 0; i < rows.length; i++) {
+      rows[i] = table.convertRowIndexToModel(rows[i]);
     }
 
-    tableModel.removeItems(modelRows);
+    ((MarkRecordTableModel) table.getModel()).removeItems(rows);
   }
 
   private void add() {

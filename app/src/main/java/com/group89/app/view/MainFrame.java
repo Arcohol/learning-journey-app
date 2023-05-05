@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import com.group89.app.controller.Controller;
 import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.Sidebar;
@@ -17,10 +16,10 @@ public class MainFrame extends JFrame {
 
   public MainFrame() {
     super("Group 89");
+
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1200, 800);
     this.setLocationRelativeTo(null);
-    // this.setResizable(false);
     this.setLayout(new BorderLayout());
 
     this.sidebar = new Sidebar();
@@ -44,8 +43,7 @@ public class MainFrame extends JFrame {
 
     this.setVisible(true);
 
-    Controller controller = new MainFrameController(this);
-    controller.init();
+    new MainFrameController(this);
   }
 
   public Sidebar getSidebar() {

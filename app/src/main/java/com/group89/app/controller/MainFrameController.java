@@ -5,15 +5,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import com.group89.app.view.MainFrame;
 
-public class MainFrameController implements Controller {
+public class MainFrameController {
   private MainFrame frame;
 
   public MainFrameController(MainFrame frame) {
     this.frame = frame;
+
+    init();
   }
 
-  @Override
-  public void init() {
+  private void init() {
     JButton[] buttons = this.frame.getSidebar().getButtons();
     JPanel content = this.frame.getContent();
     CardLayout layout = (CardLayout) content.getLayout();
@@ -30,8 +31,9 @@ public class MainFrameController implements Controller {
       this.frame.getSidebar().onClick(2);
       layout.show(content, "page3");
     });
+
     this.frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
 
-    buttons[1].doClick();
+    buttons[0].doClick();
   }
 }

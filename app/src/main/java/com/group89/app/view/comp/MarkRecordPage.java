@@ -58,6 +58,7 @@ public class MarkRecordPage extends JPanel {
   class ITable extends JTable {
     public ITable() {
       super();
+
       this.setRowHeight(30);
       this.setFont(this.getFont().deriveFont(FONT_SIZE));
       this.setFillsViewportHeight(true);
@@ -187,8 +188,7 @@ public class MarkRecordPage extends JPanel {
     c.fill = GridBagConstraints.NONE;
     this.add(this.deleteButton, c);
 
-
-    (new MarkRecordPageController(this)).init();
+    new MarkRecordPageController(this);
   }
 
   public JComboBox<String> getSemesterBox() {
