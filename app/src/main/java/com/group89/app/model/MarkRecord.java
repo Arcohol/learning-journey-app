@@ -99,7 +99,6 @@ public class MarkRecord {
   }
 
   public double getGradePoint() {
-    // for now, gradle point is calculated from markCN
     double gradePoint = 0.0;
     if (this.markCN >= 60) {
       gradePoint = 4.0 - 3.0 * (100.0 - this.markCN) * (100.0 - this.markCN) / 1600.0;

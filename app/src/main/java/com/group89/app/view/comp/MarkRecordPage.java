@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import com.group89.app.controller.Controller;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.view.AppColor;
 
@@ -59,6 +58,7 @@ public class MarkRecordPage extends JPanel {
   class ITable extends JTable {
     public ITable() {
       super();
+
       this.setRowHeight(30);
       this.setFont(this.getFont().deriveFont(FONT_SIZE));
       this.setFillsViewportHeight(true);
@@ -79,10 +79,7 @@ public class MarkRecordPage extends JPanel {
   private static final float FONT_SIZE = 16f;
 
   private JComboBox<String> semesterBox;
-  private JButton queryButton;
-  private JButton saveButton;
-  private JButton deleteButton;
-  private JButton addButton;
+  private JButton queryButton, saveButton, deleteButton, addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
   private JTable table;
@@ -188,9 +185,7 @@ public class MarkRecordPage extends JPanel {
     c.fill = GridBagConstraints.NONE;
     this.add(this.deleteButton, c);
 
-
-    Controller markRecordPagController = new MarkRecordPageController(this);
-    markRecordPagController.init();
+    new MarkRecordPageController(this);
   }
 
   public JComboBox<String> getSemesterBox() {

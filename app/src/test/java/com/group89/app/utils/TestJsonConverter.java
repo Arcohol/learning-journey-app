@@ -10,7 +10,7 @@ public class TestJsonConverter {
   @Test
   public void readMarkRecord() {
     JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    List<MarkRecord> list = converter.toList();
+    List<MarkRecord> list = converter.toArrayList();
     if (list == null) {
       System.out.println("No data");
       return;

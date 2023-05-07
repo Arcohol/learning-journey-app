@@ -22,7 +22,7 @@ public class JsonConverter<T> {
     this.type = type;
   }
 
-  public List<T> toList() {
+  public ArrayList<T> toArrayList() {
     Gson gson = new Gson();
 
     try (Reader src = new BufferedReader(new FileReader(fileUrl))) {

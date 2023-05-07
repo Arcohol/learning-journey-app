@@ -1,44 +1,18 @@
 package com.group89.app.model;
 
-import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
-public class MarkRecordTableModel extends AbstractTableModel {
-  private static final String[] COLUMN_NAMES =
-      {"Semester", "Module Code", "Title", "Mark CN", "Mark UK", "Credits CN", "Credits UK"};
-  private MarkRecordList records;
+public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
+  private static final String[] COLUMN_NAMES = {"Semester", "Module Code", "Title", "Mark (CN)",
+      "Mark (UK)", "Credits (CN)", "Credits (UK)",};
 
-  public MarkRecordTableModel(MarkRecordList records) {
-    this.records = records;
-  }
-
-  @Override
-  public int getRowCount() {
-    return this.records.size();
-  }
-
-  @Override
-  public int getColumnCount() {
-    return COLUMN_NAMES.length;
-  }
-
-  @Override
-  public String getColumnName(int columnIndex) {
-    return COLUMN_NAMES[columnIndex];
-  }
-
-  @Override
-  public Class<?> getColumnClass(int columnIndex) {
-    return getValueAt(0, columnIndex).getClass();
-  }
-
-  @Override
-  public boolean isCellEditable(int rowIndex, int columnIndex) {
-    return true;
+  public MarkRecordTableModel(List<MarkRecord> records) {
+    super(MarkRecord.class, COLUMN_NAMES, records);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    MarkRecord record = this.records.get(rowIndex);
+    MarkRecord record = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> record.getSemester();
       case 1 -> record.getModuleCode();
@@ -53,7 +27,7 @@ public class MarkRecordTableModel extends AbstractTableModel {
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    MarkRecord record = this.records.get(rowIndex);
+    MarkRecord record = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> record.setSemester((String) aValue);
       case 1 -> record.setModuleCode((String) aValue);
@@ -64,26 +38,6 @@ public class MarkRecordTableModel extends AbstractTableModel {
       case 6 -> record.setCreditsUK((int) aValue);
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
-    fireTableDataChanged();
-  }
-
-  public MarkRecordList getMarkRecordList() {
-    return this.records;
-  }
-
-  public MarkRecord getMarkRecord(Object identifier) {
-    return this.records.get((int) identifier);
-  }
-
-  public void removeRows(int[] selectedRows) {
-    for (int i = selectedRows.length - 1; i >= 0; i--) {
-      this.records.remove(selectedRows[i]);
-    }
-    fireTableDataChanged();
-  }
-
-  public void addRow(MarkRecord record) {
-    this.records.add(record);
-    fireTableDataChanged();
+    fireTableRowsUpdated(rowIndex, rowIndex);
   }
 }
