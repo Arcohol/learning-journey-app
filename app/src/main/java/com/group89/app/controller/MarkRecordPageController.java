@@ -14,11 +14,15 @@ import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
+import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordTableModel;
+import com.group89.app.model.MarkRecordTableModelCN;
+import com.group89.app.model.MarkRecordTableModelUK;
 import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.MarkRecordPage;
 
+// controller
 public class MarkRecordPageController {
   // temporary solution for enforcing number range
   // subject to change
@@ -49,7 +53,7 @@ public class MarkRecordPageController {
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
         int row, int column) {
-      this.value = null;
+      value = null;
       ((JComponent) getComponent()).setBorder(new LineBorder(Color.black));
       return super.getTableCellEditorComponent(table, value, isSelected, row, column);
     }
@@ -60,51 +64,73 @@ public class MarkRecordPageController {
     }
   }
 
-  private MarkRecordPage page;
+  // model
+  private ListTableModel<MarkRecord> model;
+  // view
+  private MarkRecordPage view;
+
   private JsonConverter<MarkRecord> converter;
+  private TableRowSorter<ListTableModel<MarkRecord>> sorter;
+  // actual data
   private List<MarkRecord> list;
-  private TableRowSorter<MarkRecordTableModel> sorter;
 
   public MarkRecordPageController(MarkRecordPage page) {
-    this.page = page;
-    this.converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    this.list = this.converter.toArrayList();
-    this.sorter = new TableRowSorter<>();
+    view = page;
+
+    sorter = new TableRowSorter<>();
+    converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+    list = converter.toArrayList();
 
     init();
   }
 
   public void init() {
-    this.page.getQueryButton().addActionListener(e -> this.query());
-    this.page.getSaveButton().addActionListener(e -> this.save());
-    this.page.getDeleteButton().addActionListener(e -> this.delete());
-    this.page.getAddButton().addActionListener(e -> this.add());
-    this.page.getTable().setRowSorter(sorter);
+    view.getQueryButton().addActionListener(e -> query());
+    view.getSaveButton().addActionListener(e -> save());
+    view.getDeleteButton().addActionListener(e -> delete());
+    view.getAddButton().addActionListener(e -> add());
+    view.getTable().setRowSorter(sorter);
 
     query();
   }
 
   private void query() {
-    MarkRecordTableModel model = new MarkRecordTableModel(this.list);
-    model.addTableModelListener(e -> this.page.getSaveButton().setEnabled(true));
-    model.addTableModelListener(e -> updateLabels());
+    String scale = (String) view.getScaleBox().getSelectedItem();
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    JTable table = view.getTable();
 
-    String semester = (String) this.page.getSemesterBox().getSelectedItem();
-    this.sorter.setRowFilter(new RowFilter<MarkRecordTableModel, Object>() {
+    switch (scale) {
+      case "BOTH" -> {
+        model = new MarkRecordTableModel(list);
+        table.setModel(model);
+        table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
+        table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
+      }
+      case "CN" -> {
+        model = new MarkRecordTableModelCN(list);
+        table.setModel(model);
+        table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
+      }
+      case "UK" -> {
+        model = new MarkRecordTableModelUK(list);
+        table.setModel(model);
+        table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
+      }
+      default -> throw new IllegalArgumentException("Unexpected value: " + scale);
+    }
+    model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
+    model.addTableModelListener(e -> updateLabels());
+    table.getColumn("Title").setPreferredWidth(200);
+
+    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Object>() {
       @Override
-      public boolean include(Entry<? extends MarkRecordTableModel, ? extends Object> entry) {
-        MarkRecordTableModel model = entry.getModel();
+      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Object> entry) {
+        ListTableModel<MarkRecord> model = entry.getModel();
         MarkRecord record = model.getItem(entry.getIdentifier());
         return semester.equals("all") || record.getSemester().equals(semester);
       }
     });
     sorter.setModel(model);
-
-    JTable table = this.page.getTable();
-    table.setModel(model);
-    table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
-    table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
-    table.getColumn("Title").setPreferredWidth(200);
 
     JTableHeader header = table.getTableHeader();
     header.setPreferredSize(new Dimension(0, 30));
@@ -114,8 +140,7 @@ public class MarkRecordPageController {
   }
 
   private void updateLabels() {
-    JTable table = this.page.getTable();
-    MarkRecordTableModel model = (MarkRecordTableModel) table.getModel();
+    JTable table = view.getTable();
 
     int size = table.getRowCount();
     double totalCreditsCN = 0;
@@ -135,8 +160,8 @@ public class MarkRecordPageController {
     averageCN = Double.parseDouble(df.format(averageCN));
     gpa = Double.parseDouble(df.format(gpa));
 
-    JLabel[] labels = this.page.getLabels();
-    labels[0].setText("Semester: " + this.page.getSemesterBox().getSelectedItem());
+    JLabel[] labels = view.getLabels();
+    labels[0].setText("Semester: " + view.getSemesterBox().getSelectedItem());
     labels[1].setText("Module Count: " + size);
     labels[2].setText("Total Credits: " + totalCreditsCN);
     labels[3].setText("GPA: " + gpa);
@@ -144,12 +169,11 @@ public class MarkRecordPageController {
   }
 
   private void add() {
-    ((MarkRecordTableModel) this.page.getTable().getModel()).addItem(new MarkRecord());
+    model.addItem(new MarkRecord());
   }
 
   private void delete() {
-    JTable table = this.page.getTable();
-    MarkRecordTableModel model = (MarkRecordTableModel) table.getModel();
+    JTable table = view.getTable();
     int[] rows = table.getSelectedRows();
     for (int i = rows.length - 1; i >= 0; i--) {
       model.removeItem(table.convertRowIndexToModel(rows[i]));
@@ -157,7 +181,7 @@ public class MarkRecordPageController {
   }
 
   private void save() {
-    this.converter.toFile(this.list);
-    this.page.getSaveButton().setEnabled(false);
+    converter.toFile(list);
+    view.getSaveButton().setEnabled(false);
   }
 }

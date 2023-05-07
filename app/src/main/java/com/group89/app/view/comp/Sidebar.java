@@ -15,12 +15,12 @@ public class Sidebar extends JPanel {
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
-      this.setFocusPainted(false);
-      this.setBorder(null);
-      this.setFont(this.getFont().deriveFont(18f));
-      this.setForeground(AppColor.DARK_GREY);
-      this.setBackground(AppColor.LIGHT_GREY);
-      this.setPreferredSize(BUTTON_SIZE);
+      setFocusPainted(false);
+      setBorder(null);
+      setFont(getFont().deriveFont(18f));
+      setForeground(AppColor.DARK_GREY);
+      setBackground(AppColor.LIGHT_GREY);
+      setPreferredSize(BUTTON_SIZE);
     }
   }
 
@@ -36,20 +36,20 @@ public class Sidebar extends JPanel {
 
   public Sidebar() {
     super(new GridBagLayout());
-    this.setBackground(AppColor.LIGHT_GREY);
-    this.setPreferredSize(SIDEBAR_SIZE);
+    setBackground(AppColor.LIGHT_GREY);
+    setPreferredSize(SIDEBAR_SIZE);
 
     GridBagConstraints c = new GridBagConstraints();
 
-    this.date = new JLabel(LocalDate.now().toString());
-    this.buttons = new JButton[NUM_BUTTONS];
-    this.exitButton = new IButton("Exit");
+    date = new JLabel(LocalDate.now().toString());
+    buttons = new JButton[NUM_BUTTONS];
+    exitButton = new IButton("Exit");
 
-    this.date.setFont(date.getFont().deriveFont(18f));
-    this.date.setForeground(AppColor.DARK_GREY);
-    this.date.setPreferredSize(DATE_SIZE);
-    this.date.setHorizontalAlignment(JLabel.CENTER);
-    this.date.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, AppColor.DARK_GREY));
+    date.setFont(date.getFont().deriveFont(18f));
+    date.setForeground(AppColor.DARK_GREY);
+    date.setPreferredSize(DATE_SIZE);
+    date.setHorizontalAlignment(JLabel.CENTER);
+    date.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, AppColor.DARK_GREY));
 
     c.weightx = 1;
     c.anchor = GridBagConstraints.CENTER;
@@ -57,52 +57,52 @@ public class Sidebar extends JPanel {
 
     c.gridx = 0;
     c.gridy = 0;
-    this.add(this.date, c);
+    add(date, c);
 
-    this.buttons[0] = new IButton("Marks");
-    this.buttons[0].setForeground(AppColor.BLACK);
-    this.buttons[0].setBackground(AppColor.WHITE);
+    buttons[0] = new IButton("Marks");
+    buttons[0].setForeground(AppColor.BLACK);
+    buttons[0].setBackground(AppColor.WHITE);
 
     c.gridx = 0;
     c.gridy = 1;
-    this.add(this.buttons[0], c);
+    add(buttons[0], c);
 
-    this.buttons[1] = new IButton("Tasks");
+    buttons[1] = new IButton("Tasks");
 
     c.gridx = 0;
     c.gridy = 2;
-    this.add(this.buttons[1], c);
+    add(buttons[1], c);
 
-    this.buttons[2] = new IButton("Overview");
+    buttons[2] = new IButton("Overview");
 
     c.gridx = 0;
     c.gridy = 3;
-    this.add(this.buttons[2], c);
+    add(buttons[2], c);
 
     c.weighty = 1;
     c.gridx = 0;
     c.gridy = 4;
     c.anchor = GridBagConstraints.SOUTH;
-    this.add(exitButton, c);
+    add(exitButton, c);
   }
 
   public JButton[] getButtons() {
-    return this.buttons;
+    return buttons;
   }
 
   public JButton getExitButton() {
-    return this.exitButton;
+    return exitButton;
   }
 
   public void onClick(int index) {
-    if (index == this.currentButtonIndex) {
+    if (index == currentButtonIndex) {
       return;
     }
 
-    this.buttons[this.currentButtonIndex].setForeground(AppColor.DARK_GREY);
-    this.buttons[this.currentButtonIndex].setBackground(AppColor.LIGHT_GREY);
-    this.currentButtonIndex = index;
-    this.buttons[this.currentButtonIndex].setForeground(AppColor.BLACK);
-    this.buttons[this.currentButtonIndex].setBackground(AppColor.WHITE);
+    buttons[currentButtonIndex].setForeground(AppColor.DARK_GREY);
+    buttons[currentButtonIndex].setBackground(AppColor.LIGHT_GREY);
+    currentButtonIndex = index;
+    buttons[currentButtonIndex].setForeground(AppColor.BLACK);
+    buttons[currentButtonIndex].setBackground(AppColor.WHITE);
   }
 }

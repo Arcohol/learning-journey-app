@@ -19,39 +19,30 @@ public class MarkRecordPage extends JPanel {
   class ILabel extends JLabel {
     public ILabel(String text) {
       super(text);
-      this.setPreferredSize(new Dimension(150, 30));
-      this.setFont(this.getFont().deriveFont(FONT_SIZE));
-      this.setHorizontalAlignment(JLabel.CENTER);
+      setPreferredSize(new Dimension(150, 30));
+      setFont(getFont().deriveFont(FONT_SIZE));
+      setHorizontalAlignment(JLabel.CENTER);
     }
   }
 
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
-      this.setPreferredSize(new Dimension(100, 30));
-      this.setBackground(AppColor.LIGHT_GREY);
-      this.setForeground(AppColor.BLACK);
-      this.setFont(this.getFont().deriveFont(FONT_SIZE));
+      setPreferredSize(new Dimension(100, 30));
+      setBackground(AppColor.LIGHT_GREY);
+      setForeground(AppColor.BLACK);
+      setFont(getFont().deriveFont(FONT_SIZE));
     }
   }
 
-  class SemesterBox extends JComboBox<String> {
-    public SemesterBox() {
-      super();
-      this.addItem("all");
-      this.addItem("2020-2021-1");
-      this.addItem("2020-2021-2");
-      this.addItem("2021-2022-1");
-      this.addItem("2021-2022-2");
-      this.addItem("2022-2023-1");
-      this.addItem("2022-2023-2");
-      this.addItem("2023-2024-1");
-      this.addItem("2023-2024-2");
+  class IBox extends JComboBox<String> {
+    public IBox(String items[]) {
+      super(items);
 
-      this.setBackground(Color.WHITE);
-      this.setForeground(Color.BLACK);
-      this.setFont(this.getFont().deriveFont(FONT_SIZE));
-      this.setPreferredSize(new Dimension(150, 30));
+      setBackground(Color.WHITE);
+      setForeground(Color.BLACK);
+      setFont(getFont().deriveFont(FONT_SIZE));
+      setPreferredSize(new Dimension(150, 30));
     }
   }
 
@@ -59,26 +50,29 @@ public class MarkRecordPage extends JPanel {
     public ITable() {
       super();
 
-      this.setRowHeight(30);
-      this.setFont(this.getFont().deriveFont(FONT_SIZE));
-      this.setFillsViewportHeight(true);
+      setRowHeight(30);
+      setFont(getFont().deriveFont(FONT_SIZE));
+      setFillsViewportHeight(true);
 
       // this is a suspicious way to change the font size while keeping the same editor
       // it overrides the default cell editor managed by JTable
       JComponent objectEditor =
-          (JComponent) ((DefaultCellEditor) (this.getDefaultEditor(Object.class))).getComponent();
+          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
       objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
 
       JComponent numberEditor =
-          (JComponent) ((DefaultCellEditor) (this.getDefaultEditor(Number.class))).getComponent();
+          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Number.class))).getComponent();
       numberEditor.setFont(numberEditor.getFont().deriveFont(FONT_SIZE));
     }
   }
 
+  private static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
+      "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
+  private static final String[] SCALES = {"BOTH", "CN", "UK"};
   private static final int LABEL_COUNT = 5;
   private static final float FONT_SIZE = 16f;
 
-  private JComboBox<String> semesterBox;
+  private JComboBox<String> semesterBox, scaleBox;
   private JButton queryButton, saveButton, deleteButton, addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
@@ -87,21 +81,23 @@ public class MarkRecordPage extends JPanel {
   public MarkRecordPage() {
     super(new GridBagLayout());
 
-    this.semesterBox = new SemesterBox();
-    this.queryButton = new IButton("Query");
-    this.saveButton = new IButton("Save");
-    this.deleteButton = new IButton("Delete");
-    this.addButton = new IButton("Add");
+    semesterBox = new IBox(SEMESTERS);
+    scaleBox = new IBox(SCALES);
 
-    this.labels = new JLabel[LABEL_COUNT];
-    this.labels[0] = new ILabel("Semester:");
-    this.labels[1] = new ILabel("Modules Count: ");
-    this.labels[2] = new ILabel("Total Credits: ");
-    this.labels[3] = new ILabel("GPA: ");
-    this.labels[4] = new ILabel("Average Mark: ");
+    queryButton = new IButton("Query");
+    saveButton = new IButton("Save");
+    deleteButton = new IButton("Delete");
+    addButton = new IButton("Add");
 
-    this.scrollPane = new JScrollPane();
-    this.table = new ITable();
+    labels = new JLabel[LABEL_COUNT];
+    labels[0] = new ILabel("Semester:");
+    labels[1] = new ILabel("Modules Count: ");
+    labels[2] = new ILabel("Total Credits: ");
+    labels[3] = new ILabel("GPA: ");
+    labels[4] = new ILabel("Average Mark: ");
+
+    scrollPane = new JScrollPane();
+    table = new ITable();
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -110,14 +106,19 @@ public class MarkRecordPage extends JPanel {
     c.gridx = 0;
     c.gridy = 0;
     c.anchor = GridBagConstraints.WEST;
-    this.add(this.semesterBox, c);
+    add(semesterBox, c);
+
+    c.gridx = 1;
+    c.gridy = 0;
+    c.anchor = GridBagConstraints.WEST;
+    add(scaleBox, c);
 
     c.insets.set(10, 0, 0, 10);
 
     c.gridx = 4;
     c.gridy = 0;
     c.anchor = GridBagConstraints.EAST;
-    this.add(this.queryButton, c);
+    add(queryButton, c);
 
     c.weightx = 1;
 
@@ -126,39 +127,39 @@ public class MarkRecordPage extends JPanel {
 
     c.gridx = 0;
     c.gridy = 1;
-    this.add(this.labels[0], c);
+    add(labels[0], c);
 
 
     c.gridx = 1;
     c.gridy = 1;
-    this.add(this.labels[1], c);
+    add(labels[1], c);
 
     c.gridx = 2;
     c.gridy = 1;
-    this.add(this.labels[2], c);
+    add(labels[2], c);
 
     c.gridx = 3;
     c.gridy = 1;
-    this.add(this.labels[3], c);
+    add(labels[3], c);
 
     c.insets.set(10, 10, 0, 10);
 
     c.gridx = 4;
     c.gridy = 1;
-    this.add(this.labels[4], c);
+    add(labels[4], c);
 
     c.weightx = 1;
     c.weighty = 1;
 
     c.insets.set(10, 10, 10, 10);
 
-    this.scrollPane.setViewportView(this.table);
+    scrollPane.setViewportView(table);
     c.gridx = 0;
     c.gridy = 2;
     c.gridwidth = 5;
     c.anchor = GridBagConstraints.CENTER;
     c.fill = GridBagConstraints.BOTH;
-    this.add(this.scrollPane, c);
+    add(scrollPane, c);
 
     c.weightx = 1;
     c.weighty = 0;
@@ -170,53 +171,57 @@ public class MarkRecordPage extends JPanel {
     c.gridy = 3;
     c.anchor = GridBagConstraints.WEST;
     c.fill = GridBagConstraints.NONE;
-    this.add(this.addButton, c);
+    add(addButton, c);
 
-    this.saveButton.setEnabled(false);
+    saveButton.setEnabled(false);
     c.gridx = 2;
     c.gridy = 3;
     c.anchor = GridBagConstraints.CENTER;
     c.fill = GridBagConstraints.NONE;
-    this.add(this.saveButton, c);
+    add(saveButton, c);
 
     c.gridx = 4;
     c.gridy = 3;
     c.anchor = GridBagConstraints.EAST;
     c.fill = GridBagConstraints.NONE;
-    this.add(this.deleteButton, c);
+    add(deleteButton, c);
 
     new MarkRecordPageController(this);
   }
 
   public JComboBox<String> getSemesterBox() {
-    return this.semesterBox;
+    return semesterBox;
+  }
+
+  public JComboBox<String> getScaleBox() {
+    return scaleBox;
   }
 
   public JButton getQueryButton() {
-    return this.queryButton;
+    return queryButton;
   }
 
   public JButton getSaveButton() {
-    return this.saveButton;
+    return saveButton;
   }
 
   public JButton getDeleteButton() {
-    return this.deleteButton;
+    return deleteButton;
   }
 
   public JButton getAddButton() {
-    return this.addButton;
+    return addButton;
   }
 
   public JScrollPane getScrollPane() {
-    return this.scrollPane;
+    return scrollPane;
   }
 
   public JLabel[] getLabels() {
-    return this.labels;
+    return labels;
   }
 
   public JTable getTable() {
-    return this.table;
+    return table;
   }
 }

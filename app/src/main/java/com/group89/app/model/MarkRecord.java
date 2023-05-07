@@ -23,13 +23,13 @@ public class MarkRecord {
   }
 
   public MarkRecord() {
-    this.semester = "";
-    this.moduleCode = "";
-    this.title = "";
-    this.markCN = 0;
-    this.markUK = 0;
-    this.creditsCN = 0.0;
-    this.creditsUK = 0;
+    semester = "";
+    moduleCode = "";
+    title = "";
+    markCN = 0;
+    markUK = 0;
+    creditsCN = 0.0;
+    creditsUK = 0;
   }
 
   public String getSemester() {
@@ -76,7 +76,7 @@ public class MarkRecord {
     MarkConverter converter = new MarkConverter();
 
     this.markCN = markCN;
-    if (this.moduleCode.startsWith("BBC")) {
+    if (moduleCode.startsWith("BBC")) {
       this.markUK = converter.getUK(markCN);
     }
   }
@@ -85,7 +85,7 @@ public class MarkRecord {
     MarkConverter converter = new MarkConverter();
 
     this.markUK = markUK;
-    if (this.moduleCode.startsWith("EBU")) {
+    if (moduleCode.startsWith("EBU")) {
       this.markCN = converter.getCN(markUK);
     }
   }
@@ -100,8 +100,8 @@ public class MarkRecord {
 
   public double getGradePoint() {
     double gradePoint = 0.0;
-    if (this.markCN >= 60) {
-      gradePoint = 4.0 - 3.0 * (100.0 - this.markCN) * (100.0 - this.markCN) / 1600.0;
+    if (markCN >= 60) {
+      gradePoint = 4.0 - 3.0 * (100.0 - markCN) * (100.0 - markCN) / 1600.0;
     } else {
       gradePoint = 0.0;
     }
