@@ -3,6 +3,7 @@ package com.group89.app.model;
 import com.group89.app.utils.MarkConverter;
 
 public class MarkRecord {
+
   private String semester;
   private String moduleCode;
   private String title;
@@ -10,9 +11,10 @@ public class MarkRecord {
   private Integer markUK;
   private Double creditsCN;
   private Integer creditsUK;
+  private CourseType type;
 
   public MarkRecord(String semester, String moduleCode, String title, int markCN, int markUK,
-      double creditsCN, int creditsUK) {
+      double creditsCN, int creditsUK, CourseType type) {
     this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
@@ -20,16 +22,18 @@ public class MarkRecord {
     this.markUK = markUK;
     this.creditsCN = creditsCN;
     this.creditsUK = creditsUK;
+    this.type = type;
   }
 
   public MarkRecord() {
-    this.semester = "";
-    this.moduleCode = "";
-    this.title = "";
-    this.markCN = 0;
-    this.markUK = 0;
-    this.creditsCN = 0.0;
-    this.creditsUK = 0;
+    semester = "";
+    moduleCode = "";
+    title = "";
+    markCN = 0;
+    markUK = 0;
+    creditsCN = 0.0;
+    creditsUK = 0;
+    type = CourseType.COMPULSORY;
   }
 
   public String getSemester() {
@@ -60,6 +64,10 @@ public class MarkRecord {
     return creditsUK;
   }
 
+  public CourseType getType() {
+    return type;
+  }
+
   public void setSemester(String semester) {
     this.semester = semester;
   }
@@ -76,7 +84,7 @@ public class MarkRecord {
     MarkConverter converter = new MarkConverter();
 
     this.markCN = markCN;
-    if (this.moduleCode.startsWith("BBC")) {
+    if (moduleCode.startsWith("BBC")) {
       this.markUK = converter.getUK(markCN);
     }
   }
@@ -85,7 +93,7 @@ public class MarkRecord {
     MarkConverter converter = new MarkConverter();
 
     this.markUK = markUK;
-    if (this.moduleCode.startsWith("EBU")) {
+    if (moduleCode.startsWith("EBU")) {
       this.markCN = converter.getCN(markUK);
     }
   }
@@ -98,10 +106,14 @@ public class MarkRecord {
     this.creditsUK = creditsUK;
   }
 
+  public void setType(CourseType type) {
+    this.type = type;
+  }
+
   public double getGradePoint() {
     double gradePoint = 0.0;
-    if (this.markCN >= 60) {
-      gradePoint = 4.0 - 3.0 * (100.0 - this.markCN) * (100.0 - this.markCN) / 1600.0;
+    if (markCN >= 60) {
+      gradePoint = 4.0 - 3.0 * (100.0 - markCN) * (100.0 - markCN) / 1600.0;
     } else {
       gradePoint = 0.0;
     }

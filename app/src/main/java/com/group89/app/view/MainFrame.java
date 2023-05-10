@@ -17,40 +17,40 @@ public class MainFrame extends JFrame {
   public MainFrame() {
     super("Group 89");
 
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1200, 800);
-    this.setLocationRelativeTo(null);
-    this.setLayout(new BorderLayout());
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(1200, 800);
+    setLocationRelativeTo(null);
+    setLayout(new BorderLayout());
 
-    this.sidebar = new Sidebar();
-    this.add(this.sidebar, BorderLayout.WEST);
+    sidebar = new Sidebar();
+    add(sidebar, BorderLayout.WEST);
 
-    this.content = new JPanel(new CardLayout());
-    this.add(this.content, BorderLayout.CENTER);
+    content = new JPanel(new CardLayout());
+    add(content, BorderLayout.CENTER);
 
-    this.pages[0] = new MarkRecordPage();
-    this.pages[0].setBackground(java.awt.Color.WHITE);
+    pages[0] = new MarkRecordPage();
+    pages[0].setBackground(java.awt.Color.WHITE);
 
-    this.pages[1] = new TaskPage();
-    this.pages[1].setBackground(java.awt.Color.WHITE);
+    pages[1] = new TaskPage();
+    pages[1].setBackground(java.awt.Color.WHITE);
 
-    this.pages[2] = new JPanel();
-    this.pages[2].setBackground(java.awt.Color.BLUE);
+    pages[2] = new JPanel();
+    pages[2].setBackground(java.awt.Color.BLUE);
 
-    this.content.add(this.pages[0], "page1");
-    this.content.add(this.pages[1], "page2");
-    this.content.add(this.pages[2], "page3");
+    content.add(pages[0], "page1");
+    content.add(pages[1], "page2");
+    content.add(pages[2], "page3");
 
-    this.setVisible(true);
+    setVisible(true);
 
     new MainFrameController(this);
   }
 
   public Sidebar getSidebar() {
-    return this.sidebar;
+    return sidebar;
   }
 
   public JPanel getContent() {
-    return this.content;
+    return content;
   }
 }

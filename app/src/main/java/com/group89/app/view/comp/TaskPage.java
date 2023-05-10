@@ -35,13 +35,13 @@ public class TaskPage extends JPanel {
   class ITable extends JTable {
     public ITable() {
       super();
-      this.setRowHeight(ROW_HEIGHT);
-      this.setFont(this.getFont().deriveFont(FONT_SIZE));
-      this.setFillsViewportHeight(true);
-      this.setDefaultRenderer(Object.class, new TaskRenderer());
+      setRowHeight(ROW_HEIGHT);
+      setFont(getFont().deriveFont(FONT_SIZE));
+      setFillsViewportHeight(true);
+      setDefaultRenderer(Object.class, new TaskRenderer());
 
       JComponent objectEditor =
-          (JComponent) ((DefaultCellEditor) (this.getDefaultEditor(Object.class))).getComponent();
+          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
       objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
     }
   }
@@ -49,10 +49,10 @@ public class TaskPage extends JPanel {
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
-      this.setPreferredSize(new java.awt.Dimension(100, 30));
-      this.setBackground(AppColor.LIGHT_GREY);
-      this.setForeground(AppColor.BLACK);
-      this.setFont(this.getFont().deriveFont(20f));
+      setPreferredSize(new java.awt.Dimension(100, 30));
+      setBackground(AppColor.LIGHT_GREY);
+      setForeground(AppColor.BLACK);
+      setFont(getFont().deriveFont(20f));
     }
   }
 
@@ -66,11 +66,11 @@ public class TaskPage extends JPanel {
   public TaskPage() {
     super(new GridBagLayout());
 
-    this.tasks = new ITable();
-    this.scrollPane = new JScrollPane(this.tasks);
-    this.addButton = new IButton("Add");
-    this.deleteButton = new IButton("Delete");
-    this.saveButton = new IButton("Save");
+    tasks = new ITable();
+    scrollPane = new JScrollPane(tasks);
+    addButton = new IButton("Add");
+    deleteButton = new IButton("Delete");
+    saveButton = new IButton("Save");
 
     GridBagConstraints c = new GridBagConstraints();
     c.insets = new Insets(10, 10, 10, 10);
@@ -79,19 +79,19 @@ public class TaskPage extends JPanel {
     c.gridy = 0;
     c.weightx = 1;
     c.anchor = GridBagConstraints.WEST;
-    this.add(this.addButton, c);
+    add(addButton, c);
 
     c.gridx = 1;
     c.gridy = 0;
     c.weightx = 1;
     c.anchor = GridBagConstraints.CENTER;
-    this.add(this.deleteButton, c);
+    add(deleteButton, c);
 
     c.gridx = 2;
     c.gridy = 0;
     c.weightx = 1;
     c.anchor = GridBagConstraints.EAST;
-    this.add(this.saveButton, c);
+    add(saveButton, c);
 
     c.insets = new Insets(0, 10, 10, 10);
 
@@ -102,28 +102,28 @@ public class TaskPage extends JPanel {
     c.weighty = 1;
     c.anchor = GridBagConstraints.CENTER;
     c.fill = GridBagConstraints.BOTH;
-    this.add(this.scrollPane, c);
+    add(scrollPane, c);
 
     new TaskPageController(this);
   }
 
   public JTable getTable() {
-    return this.tasks;
+    return tasks;
   }
 
   public JScrollPane getScrollPane() {
-    return this.scrollPane;
+    return scrollPane;
   }
 
   public JButton getAddButton() {
-    return this.addButton;
+    return addButton;
   }
 
   public JButton getDeleteButton() {
-    return this.deleteButton;
+    return deleteButton;
   }
 
   public JButton getSaveButton() {
-    return this.saveButton;
+    return saveButton;
   }
 }

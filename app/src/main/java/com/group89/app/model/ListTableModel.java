@@ -27,22 +27,22 @@ public abstract class ListTableModel<T> extends AbstractTableModel {
 
   @Override
   public int getRowCount() {
-    return this.list.size();
+    return list.size();
   }
 
   @Override
   public int getColumnCount() {
-    return this.columnNames.length;
+    return columnNames.length;
   }
 
   @Override
   public String getColumnName(int columnIndex) {
-    return this.columnNames[columnIndex];
+    return columnNames[columnIndex];
   }
 
   @Override
   public Class<?> getColumnClass(int columnIndex) {
-    return this.clazz.getDeclaredFields()[columnIndex].getType();
+    return clazz.getDeclaredFields()[columnIndex].getType();
   }
 
   @Override
@@ -51,20 +51,20 @@ public abstract class ListTableModel<T> extends AbstractTableModel {
   }
 
   public List<T> getList() {
-    return this.list;
+    return list;
   }
 
   public T getItem(Object identifier) {
-    return this.list.get((int) identifier);
+    return list.get((int) identifier);
   }
 
   public void addItem(T item) {
-    this.list.add(item);
-    fireTableRowsInserted(this.list.size() - 1, this.list.size() - 1);
+    list.add(item);
+    fireTableRowsInserted(list.size() - 1, list.size() - 1);
   }
 
   public void removeItem(int index) {
-    this.list.remove(index);
+    list.remove(index);
     fireTableRowsDeleted(index, index);
   }
 }
