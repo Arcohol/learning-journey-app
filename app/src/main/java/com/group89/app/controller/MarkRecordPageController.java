@@ -125,6 +125,8 @@ public class MarkRecordPageController {
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
     model.addTableModelListener(e -> updateLabels());
     table.getColumn("Title").setPreferredWidth(200);
+    table.getColumn("Semester")
+        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(MarkRecordPage.SEMESTERS)));
     table.getColumn("Type").setCellEditor(new DefaultCellEditor(new MyComboBox<>(
         new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
 

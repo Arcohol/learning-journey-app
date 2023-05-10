@@ -55,9 +55,9 @@ public class MarkRecordPage extends JPanel {
     }
   }
 
-  private static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
+  public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
       "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
-  private static final String[] SCALES = {"BOTH", "CN", "UK"};
+  public static final String[] SCALES = {"BOTH", "CN", "UK"};
   private static final int LABEL_COUNT = 5;
   private static final float FONT_SIZE = 16f;
 
