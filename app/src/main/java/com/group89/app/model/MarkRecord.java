@@ -3,6 +3,7 @@ package com.group89.app.model;
 import com.group89.app.utils.MarkConverter;
 
 public class MarkRecord {
+
   private String semester;
   private String moduleCode;
   private String title;
@@ -10,9 +11,10 @@ public class MarkRecord {
   private Integer markUK;
   private Double creditsCN;
   private Integer creditsUK;
+  private CourseType type;
 
   public MarkRecord(String semester, String moduleCode, String title, int markCN, int markUK,
-      double creditsCN, int creditsUK) {
+      double creditsCN, int creditsUK, CourseType type) {
     this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
@@ -20,6 +22,7 @@ public class MarkRecord {
     this.markUK = markUK;
     this.creditsCN = creditsCN;
     this.creditsUK = creditsUK;
+    this.type = type;
   }
 
   public MarkRecord() {
@@ -30,6 +33,7 @@ public class MarkRecord {
     markUK = 0;
     creditsCN = 0.0;
     creditsUK = 0;
+    type = CourseType.COMPULSORY;
   }
 
   public String getSemester() {
@@ -58,6 +62,10 @@ public class MarkRecord {
 
   public Integer getCreditsUK() {
     return creditsUK;
+  }
+
+  public CourseType getType() {
+    return type;
   }
 
   public void setSemester(String semester) {
@@ -96,6 +104,10 @@ public class MarkRecord {
 
   public void setCreditsUK(int creditsUK) {
     this.creditsUK = creditsUK;
+  }
+
+  public void setType(CourseType type) {
+    this.type = type;
   }
 
   public double getGradePoint() {

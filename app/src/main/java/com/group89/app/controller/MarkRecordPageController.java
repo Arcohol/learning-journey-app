@@ -14,6 +14,7 @@ import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
+import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordTableModel;
@@ -21,6 +22,7 @@ import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
 import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.MarkRecordPage;
+import com.group89.app.view.comp.MyComboBox;
 
 // controller
 public class MarkRecordPageController {
@@ -97,6 +99,8 @@ public class MarkRecordPageController {
   private void query() {
     String scale = (String) view.getScaleBox().getSelectedItem();
     String semester = (String) view.getSemesterBox().getSelectedItem();
+    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
+
     JTable table = view.getTable();
 
     switch (scale) {
@@ -121,13 +125,17 @@ public class MarkRecordPageController {
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
     model.addTableModelListener(e -> updateLabels());
     table.getColumn("Title").setPreferredWidth(200);
+    table.getColumn("Type").setCellEditor(new DefaultCellEditor(new MyComboBox<>(
+        new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
+
 
     sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Object>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Object> entry) {
         ListTableModel<MarkRecord> model = entry.getModel();
         MarkRecord record = model.getItem(entry.getIdentifier());
-        return semester.equals("all") || record.getSemester().equals(semester);
+        return (semester.equals("all") || record.getSemester().equals(semester))
+            && (type == CourseType.ALL || record.getType() == type);
       }
     });
     sorter.setModel(model);

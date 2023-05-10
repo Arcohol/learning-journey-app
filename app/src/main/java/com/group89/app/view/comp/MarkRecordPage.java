@@ -1,6 +1,5 @@
 package com.group89.app.view.comp;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import com.group89.app.controller.MarkRecordPageController;
+import com.group89.app.model.CourseType;
 import com.group89.app.view.AppColor;
 
 public class MarkRecordPage extends JPanel {
@@ -32,17 +32,6 @@ public class MarkRecordPage extends JPanel {
       setBackground(AppColor.LIGHT_GREY);
       setForeground(AppColor.BLACK);
       setFont(getFont().deriveFont(FONT_SIZE));
-    }
-  }
-
-  class IBox extends JComboBox<String> {
-    public IBox(String items[]) {
-      super(items);
-
-      setBackground(Color.WHITE);
-      setForeground(Color.BLACK);
-      setFont(getFont().deriveFont(FONT_SIZE));
-      setPreferredSize(new Dimension(150, 30));
     }
   }
 
@@ -73,6 +62,7 @@ public class MarkRecordPage extends JPanel {
   private static final float FONT_SIZE = 16f;
 
   private JComboBox<String> semesterBox, scaleBox;
+  private JComboBox<CourseType> typeBox;
   private JButton queryButton, saveButton, deleteButton, addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
@@ -81,8 +71,9 @@ public class MarkRecordPage extends JPanel {
   public MarkRecordPage() {
     super(new GridBagLayout());
 
-    semesterBox = new IBox(SEMESTERS);
-    scaleBox = new IBox(SCALES);
+    semesterBox = new MyComboBox<>(SEMESTERS);
+    scaleBox = new MyComboBox<>(SCALES);
+    typeBox = new MyComboBox<>(CourseType.values());
 
     queryButton = new IButton("Query");
     saveButton = new IButton("Save");
@@ -112,6 +103,11 @@ public class MarkRecordPage extends JPanel {
     c.gridy = 0;
     c.anchor = GridBagConstraints.WEST;
     add(scaleBox, c);
+
+    c.gridx = 2;
+    c.gridy = 0;
+    c.anchor = GridBagConstraints.WEST;
+    add(typeBox, c);
 
     c.insets.set(10, 0, 0, 10);
 
@@ -195,6 +191,10 @@ public class MarkRecordPage extends JPanel {
 
   public JComboBox<String> getScaleBox() {
     return scaleBox;
+  }
+
+  public JComboBox<CourseType> getTypeBox() {
+    return typeBox;
   }
 
   public JButton getQueryButton() {

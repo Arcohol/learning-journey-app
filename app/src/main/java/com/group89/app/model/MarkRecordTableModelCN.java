@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
   private static final String[] COLUMN_NAMES =
-      {"Semester", "Module Code", "Title", "Mark (CN)", "Credits (CN)"};
+      {"Semester", "Module Code", "Title", "Mark (CN)", "Credits (CN)", "Type"};
 
   public MarkRecordTableModelCN(List<MarkRecord> records) {
     super(MarkRecord.class, COLUMN_NAMES, records);
@@ -19,6 +19,7 @@ public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
       case 2 -> record.getTitle();
       case 3 -> record.getMarkCN();
       case 4 -> record.getCreditsCN();
+      case 5 -> record.getType();
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     };
   }
@@ -32,6 +33,7 @@ public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
       case 2 -> record.setTitle((String) aValue);
       case 3 -> record.setMarkCN((Integer) aValue);
       case 4 -> record.setCreditsCN((Double) aValue);
+      case 5 -> record.setType((CourseType) aValue);
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     }
     fireTableRowsUpdated(rowIndex, rowIndex);
@@ -45,6 +47,7 @@ public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
       case 2 -> String.class;
       case 3 -> Integer.class;
       case 4 -> Double.class;
+      case 5 -> CourseType.class;
       default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
     };
   }
