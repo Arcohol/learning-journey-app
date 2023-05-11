@@ -30,13 +30,5 @@
     "rank": "4",
     "country": "USA",
     "cost": "$90,000"
-  },
-  {
-    "name": "University of Cambridge",
-    "project": "Biomedical Science",
-    "type": "MSc",
-    "rank": "5",
-    "country": "UK",
-    "cost": "$70,000"
   }
 ]
