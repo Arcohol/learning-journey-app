@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Massachusetts Institute of Technology",
+    "project": "Computer Science",
+    "type": "MSc",
+    "rank": "1",
+    "country": "USA",
+    "cost": "$70,000"
+  },
+  {
+    "name": "Stanford University",
+    "project": "Engineering",
+    "type": "MEng",
+    "rank": "2",
+    "country": "USA",
+    "cost": "$80,000"
+  },
+  {
+    "name": "University of Oxford",
+    "project": "Artificial Intelligence",
+    "type": "MSc",
+    "rank": "3",
+    "country": "UK",
+    "cost": "$60,000"
+  },
+  {
+    "name": "California Institute of Technology",
+    "project": "Robotics",
+    "type": "MEng",
+    "rank": "4",
+    "country": "USA",
+    "cost": "$90,000"
+  },
+  {
+    "name": "University of Cambridge",
+    "project": "Biomedical Science",
+    "type": "MSc",
+    "rank": "5",
+    "country": "UK",
+    "cost": "$70,000"
+  }
+]

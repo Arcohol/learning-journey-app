@@ -8,11 +8,12 @@ import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.TaskPage;
+import com.group89.app.view.comp.OutlookPage;
 
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
   private JPanel content;
-  private JPanel[] pages = new JPanel[3];
+  private JPanel[] pages = new JPanel[4];
 
   public MainFrame() {
     super("Group 89");
@@ -37,9 +38,13 @@ public class MainFrame extends JFrame {
     pages[2] = new JPanel();
     pages[2].setBackground(java.awt.Color.BLUE);
 
+    pages[3] = new OutlookPage();
+    pages[3].setBackground(java.awt.Color.WHITE);
+
     content.add(pages[0], "page1");
     content.add(pages[1], "page2");
     content.add(pages[2], "page3");
+    content.add(pages[3], "page4");
 
     setVisible(true);
 
