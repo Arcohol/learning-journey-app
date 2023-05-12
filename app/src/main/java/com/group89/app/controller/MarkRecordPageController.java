@@ -31,6 +31,7 @@ public class MarkRecordPageController {
 
     public MarkEditor() {
       super(new JTextField());
+
       this.getComponent().setFont(this.getComponent().getFont().deriveFont(16f));
       ((JTextField) getComponent()).setHorizontalAlignment(JTextField.RIGHT);
     }

@@ -15,9 +15,10 @@ public class Sidebar extends JPanel {
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
+
       setFocusPainted(false);
       setBorder(null);
-      setFont(getFont().deriveFont(18f));
+      setFont(getFont().deriveFont(BUTTON_FONT_SIZE));
       setForeground(AppColor.DARK_GREY);
       setBackground(AppColor.LIGHT_GREY);
       setPreferredSize(BUTTON_SIZE);
@@ -27,6 +28,7 @@ public class Sidebar extends JPanel {
   private static final Dimension BUTTON_SIZE = new Dimension(0, 50);
   private static final Dimension DATE_SIZE = new Dimension(0, 80);
   private static final Dimension SIDEBAR_SIZE = new Dimension(150, 0);
+  private static final float BUTTON_FONT_SIZE = 18f;
   private static final int NUM_BUTTONS = 3;
 
   private JLabel date;
@@ -36,6 +38,7 @@ public class Sidebar extends JPanel {
 
   public Sidebar() {
     super(new GridBagLayout());
+
     setBackground(AppColor.LIGHT_GREY);
     setPreferredSize(SIDEBAR_SIZE);
 
@@ -45,7 +48,7 @@ public class Sidebar extends JPanel {
     buttons = new JButton[NUM_BUTTONS];
     exitButton = new IButton("Exit");
 
-    date.setFont(date.getFont().deriveFont(18f));
+    date.setFont(date.getFont().deriveFont(BUTTON_FONT_SIZE));
     date.setForeground(AppColor.DARK_GREY);
     date.setPreferredSize(DATE_SIZE);
     date.setHorizontalAlignment(JLabel.CENTER);

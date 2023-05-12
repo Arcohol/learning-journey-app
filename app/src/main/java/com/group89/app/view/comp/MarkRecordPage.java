@@ -19,7 +19,8 @@ public class MarkRecordPage extends JPanel {
   class ILabel extends JLabel {
     public ILabel(String text) {
       super(text);
-      setPreferredSize(new Dimension(150, 30));
+
+      setPreferredSize(LABEL_SIZE);
       setFont(getFont().deriveFont(FONT_SIZE));
       setHorizontalAlignment(JLabel.CENTER);
     }
@@ -28,7 +29,8 @@ public class MarkRecordPage extends JPanel {
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
-      setPreferredSize(new Dimension(100, 30));
+
+      setPreferredSize(BUTTON_SIZE);
       setBackground(AppColor.LIGHT_GREY);
       setForeground(AppColor.BLACK);
       setFont(getFont().deriveFont(FONT_SIZE));
@@ -39,12 +41,12 @@ public class MarkRecordPage extends JPanel {
     public ITable() {
       super();
 
-      setRowHeight(30);
+      setRowHeight(ROW_HEIGHT);
       setFont(getFont().deriveFont(FONT_SIZE));
       setFillsViewportHeight(true);
 
-      getTableHeader().setFont(getFont().deriveFont(18f));
-      getTableHeader().setPreferredSize(new Dimension(0, 40));
+      getTableHeader().setFont(getFont().deriveFont(HEADER_FONT_SIZE));
+      getTableHeader().setPreferredSize(HEADER_SIZE);
 
       // this is a suspicious way to change the font size while keeping the same editor
       // it overrides the default cell editor managed by JTable
@@ -61,8 +63,14 @@ public class MarkRecordPage extends JPanel {
   public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
       "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
+
   private static final int LABEL_COUNT = 5;
   private static final float FONT_SIZE = 16f;
+  private static final float HEADER_FONT_SIZE = 18f;
+  private static final Dimension LABEL_SIZE = new Dimension(150, 30);
+  private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
+  private static final Dimension HEADER_SIZE = new Dimension(0, 40);
+  private static final int ROW_HEIGHT = 30;
 
   private JComboBox<String> semesterBox, scaleBox;
   private JComboBox<CourseType> typeBox;

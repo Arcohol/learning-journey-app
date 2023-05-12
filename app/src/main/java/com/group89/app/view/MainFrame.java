@@ -2,6 +2,7 @@ package com.group89.app.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
@@ -14,11 +15,13 @@ public class MainFrame extends JFrame {
   private JPanel content;
   private JPanel[] pages = new JPanel[3];
 
+  private static final Dimension FRAME_SIZE = new Dimension(1200, 800);
+
   public MainFrame() {
     super("Group 89");
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(1200, 800);
+    setSize(FRAME_SIZE);
     setLocationRelativeTo(null);
     setLayout(new BorderLayout());
 
