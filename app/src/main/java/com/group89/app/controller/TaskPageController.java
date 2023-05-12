@@ -34,8 +34,9 @@ public class TaskPageController {
     view.getSaveButton().addActionListener(e -> save());
 
     model = new TaskTableModel(list);
-    view.getTable().setModel(model);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
+
+    view.getTable().setModel(model);
   }
 
   private void add() {

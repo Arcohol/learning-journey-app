@@ -43,6 +43,9 @@ public class MarkRecordPage extends JPanel {
       setFont(getFont().deriveFont(FONT_SIZE));
       setFillsViewportHeight(true);
 
+      getTableHeader().setFont(getFont().deriveFont(18f));
+      getTableHeader().setPreferredSize(new Dimension(0, 40));
+
       // this is a suspicious way to change the font size while keeping the same editor
       // it overrides the default cell editor managed by JTable
       JComponent objectEditor =

@@ -2,7 +2,6 @@ package com.group89.app.controller;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
@@ -12,7 +11,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
@@ -141,10 +139,6 @@ public class MarkRecordPageController {
       }
     });
     sorter.setModel(model);
-
-    JTableHeader header = table.getTableHeader();
-    header.setPreferredSize(new Dimension(0, 30));
-    header.setFont(header.getFont().deriveFont(16f));
 
     updateLabels();
   }

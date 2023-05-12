@@ -39,6 +39,9 @@ public class TaskPage extends JPanel {
       setFont(getFont().deriveFont(FONT_SIZE));
       setFillsViewportHeight(true);
       setDefaultRenderer(Object.class, new TaskRenderer());
+      
+      getTableHeader().setFont(getFont().deriveFont(18f));
+      getTableHeader().setPreferredSize(new java.awt.Dimension(0, 40));
 
       JComponent objectEditor =
           (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
