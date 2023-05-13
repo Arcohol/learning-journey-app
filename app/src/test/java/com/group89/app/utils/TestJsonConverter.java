@@ -2,6 +2,8 @@ package com.group89.app.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.group89.app.model.Role;
 import org.junit.jupiter.api.Test;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.MarkRecord;
@@ -48,5 +50,28 @@ public class TestJsonConverter {
         CourseType.ELECTIVE));
 
     converter.toFile(list);
+  }
+
+  @Test
+  public void generateSampleRole(){
+    JsonConverter<Role> converter = new JsonConverter<>("roles.json", Role[].class);
+    List<Role> list = new ArrayList<>();
+
+    list.add(new Role("2020-2021-2", "Class monitor","Class monitor of Class 2020215119"));
+
+    converter.toFile(list);
+  }
+
+  @Test
+  public void readRoles() {
+    JsonConverter<Role> converter = new JsonConverter<>("roles.json", Role[].class);
+    List<Role> list = converter.toArrayList();
+    if (list == null) {
+      System.out.println("No data");
+      return;
+    }
+    for (Role role: list) {
+      System.out.println(role);
+    }
   }
 }

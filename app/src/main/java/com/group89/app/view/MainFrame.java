@@ -1,19 +1,18 @@
 package com.group89.app.view;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.MarkRecordPage;
+import com.group89.app.view.comp.RolePage;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.TaskPage;
 
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
   private JPanel content;
-  private JPanel[] pages = new JPanel[3];
+  private JPanel[] pages = new JPanel[4];
 
   private static final Dimension FRAME_SIZE = new Dimension(1200, 800);
 
@@ -40,9 +39,13 @@ public class MainFrame extends JFrame {
     pages[2] = new JPanel();
     pages[2].setBackground(java.awt.Color.BLUE);
 
+    pages[3] = new RolePage();
+    pages[3].setBackground(Color.WHITE);
+
     content.add(pages[0], "page1");
     content.add(pages[1], "page2");
     content.add(pages[2], "page3");
+    content.add(pages[3], "page4");
 
     setVisible(true);
 
