@@ -4,9 +4,9 @@ import javax.swing.JPanel;
 import com.group89.app.controller.ChartPageController;
 
 public class ChartPage extends JPanel {
-    public ChartPage() {
-        super();
+  public ChartPage() {
+    super();
 
-        new ChartPageController(this);
-    }
+    new ChartPageController(this);
+  }
 }
