@@ -1,8 +1,6 @@
 package com.group89.app.view;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
@@ -33,13 +31,13 @@ public class MainFrame extends JFrame {
     add(content, BorderLayout.CENTER);
 
     pages[0] = new MarkRecordPage();
-    pages[0].setBackground(java.awt.Color.WHITE);
+    pages[0].setBackground(Color.WHITE);
 
     pages[1] = new TaskPage();
-    pages[1].setBackground(java.awt.Color.WHITE);
+    pages[1].setBackground(Color.WHITE);
 
     pages[2] = new ChartPage();
-    pages[2].setBackground(java.awt.Color.WHITE);
+    pages[2].setBackground(Color.WHITE);
 
     content.add(pages[0], "page1");
     content.add(pages[1], "page2");
