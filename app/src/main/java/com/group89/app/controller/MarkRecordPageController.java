@@ -54,9 +54,11 @@ public class MarkRecordPageController {
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
         int row, int column) {
-      value = null;
-      ((JComponent) getComponent()).setBorder(new LineBorder(Color.black));
-      return super.getTableCellEditorComponent(table, value, isSelected, row, column);
+      JTextField comp =
+          (JTextField) super.getTableCellEditorComponent(table, value, isSelected, row, column);
+      comp.setBorder(new LineBorder(Color.black));
+      comp.selectAll();
+      return comp;
     }
 
     @Override
@@ -90,6 +92,9 @@ public class MarkRecordPageController {
     view.getSaveButton().addActionListener(e -> save());
     view.getDeleteButton().addActionListener(e -> delete());
     view.getAddButton().addActionListener(e -> add());
+    view.getScaleBox().addActionListener(e -> query());
+    view.getSemesterBox().addActionListener(e -> query());
+    view.getTypeBox().addActionListener(e -> query());
     view.getTable().setRowSorter(sorter);
 
     query();
@@ -142,6 +147,7 @@ public class MarkRecordPageController {
     sorter.setModel(model);
 
     updateLabels();
+    view.getSaveButton().setEnabled(false);
   }
 
   private void updateLabels() {
