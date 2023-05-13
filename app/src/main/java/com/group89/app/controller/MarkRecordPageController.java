@@ -88,7 +88,6 @@ public class MarkRecordPageController {
   }
 
   public void init() {
-    view.getQueryButton().addActionListener(e -> query());
     view.getSaveButton().addActionListener(e -> save());
     view.getDeleteButton().addActionListener(e -> delete());
     view.getAddButton().addActionListener(e -> add());
