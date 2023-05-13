@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
+import com.group89.app.view.comp.ChartPage;
 import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.TaskPage;
@@ -37,8 +38,8 @@ public class MainFrame extends JFrame {
     pages[1] = new TaskPage();
     pages[1].setBackground(java.awt.Color.WHITE);
 
-    pages[2] = new JPanel();
-    pages[2].setBackground(java.awt.Color.BLUE);
+    pages[2] = new ChartPage();
+    pages[2].setBackground(java.awt.Color.WHITE);
 
     content.add(pages[0], "page1");
     content.add(pages[1], "page2");
