@@ -1,195 +1,139 @@
 package com.group89.app.view.comp;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.controller.RolePageController;
-import com.group89.app.model.CourseType;
-import com.group89.app.view.AppColor;
+import javax.swing.*;
+import java.awt.*;
 
 public class RolePage extends JPanel {
-    class ILabel extends JLabel {
-        public ILabel(String text) {
-            super(text);
-
-            setPreferredSize(LABEL_SIZE);
-            setFont(getFont().deriveFont(FONT_SIZE));
-            setHorizontalAlignment(JLabel.CENTER);
-        }
-    }
-
-    class IButton extends JButton {
-        public IButton(String text) {
-            super(text);
-
-            setPreferredSize(BUTTON_SIZE);
-            setBackground(AppColor.LIGHT_GREY);
-            setForeground(AppColor.BLACK);
-            setFont(getFont().deriveFont(FONT_SIZE));
-        }
-    }
-
-    class ITable extends JTable {
-        public ITable() {
-            super();
-
-            setRowHeight(ROW_HEIGHT);
-            setFont(getFont().deriveFont(FONT_SIZE));
-            setFillsViewportHeight(true);
-
-            getTableHeader().setFont(getFont().deriveFont(HEADER_FONT_SIZE));
-            getTableHeader().setPreferredSize(HEADER_SIZE);
-
-            // this is a suspicious way to change the font size while keeping the same editor
-            // it overrides the default cell editor managed by JTable
-            JComponent objectEditor =
-                    (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
-            objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
-
-            JComponent numberEditor =
-                    (JComponent) ((DefaultCellEditor) (getDefaultEditor(Number.class))).getComponent();
-            numberEditor.setFont(numberEditor.getFont().deriveFont(FONT_SIZE));
-        }
-    }
-
     public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
             "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
-
-    private static final int LABEL_COUNT = 1;
-    private static final float FONT_SIZE = 16f;
-    private static final float HEADER_FONT_SIZE = 18f;
-    private static final Dimension LABEL_SIZE = new Dimension(150, 30);
-    private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
+    private static final Dimension LABEL_SIZE = new Dimension(200, 40);
+    private static final Dimension BUTTON_SIZE = new Dimension(150, 40);
     private static final Dimension HEADER_SIZE = new Dimension(0, 40);
-    private static final int ROW_HEIGHT = 30;
+    private static final int FONT_SIZE = 20;
+    private static final int HEADER_FONT_SIZE = 25;
+    private static final int Height = 40;
+    private static final int LABEL_NUM = 2;
 
-    private JComboBox<String> semesterBox;
-    private JButton queryButton, saveButton, deleteButton, addButton;
     private JLabel[] labels;
+    private JComboBox<String> semesterBox;
     private JScrollPane scrollPane;
     private JTable table;
+    private JButton queryButton;
+
+
+    class myLabel extends JLabel {
+        public myLabel(String text) {
+            super(text);
+            setHorizontalAlignment(JLabel.CENTER);
+            setPreferredSize(LABEL_SIZE);
+            setFont(getFont().deriveFont(FONT_SIZE));
+        }
+    }
+
+    class myButton extends JButton {
+        public myButton(String text) {
+            super(text);
+            setPreferredSize(BUTTON_SIZE);
+            setFont(getFont().deriveFont(FONT_SIZE));
+        }
+    }
+
+    class myTable extends JTable {
+        public myTable() {
+            super();
+            setFont(getFont().deriveFont(FONT_SIZE));
+            setRowHeight(Height);
+            getTableHeader().setFont(getFont().deriveFont(HEADER_FONT_SIZE));
+            getTableHeader().setPreferredSize(HEADER_SIZE);
+            setFillsViewportHeight(true);
+        }
+    }
 
     public RolePage() {
         super(new GridBagLayout());
+        labels = new JLabel[LABEL_NUM];
+        labels[0] = new myLabel("Please choose the semester");
+        labels[1] = new myLabel("Semester:");
 
+        queryButton = new myButton("Query");
         semesterBox = new MyComboBox<>(SEMESTERS);
-
-        queryButton = new IButton("Query");
-        saveButton = new IButton("Save");
-        deleteButton = new IButton("Delete");
-        addButton = new IButton("Add");
-
-        labels = new JLabel[LABEL_COUNT];
-        labels[0] = new ILabel("Semester:");
-
-        scrollPane = new JScrollPane();
-        table = new ITable();
-
-        GridBagConstraints c = new GridBagConstraints();
-
-        c.insets.set(10, 10, 0, 0);
-
-        c.gridx = 0;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.WEST;
-        add(semesterBox, c);
+        table = new myTable();
+        scrollPane= new JScrollPane(table);
 
 
-        c.insets.set(10, 0, 0, 10);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(5,5,5,5);
+        gbc.anchor = GridBagConstraints.WEST;
+        add(labels[0], gbc);
 
-        c.gridx = 4;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.EAST;
-        add(queryButton, c);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(semesterBox, gbc);
 
-        c.weightx = 1;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(queryButton, gbc);
 
-        c.anchor = GridBagConstraints.CENTER;
-        c.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        add(scrollPane, gbc);
 
-        c.gridx = 0;
-        c.gridy = 1;
-        add(labels[0], c);
+        gbc.weightx = 1;
+        gbc.weighty = 0;
+        gbc.gridwidth = 1;
+        gbc.insets.set(0, 10, 10, 10);
 
-        c.weightx = 1;
-        c.weighty = 1;
-
-        c.insets.set(10, 10, 10, 10);
-
-        scrollPane.setViewportView(table);
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 5;
-        c.anchor = GridBagConstraints.CENTER;
-        c.fill = GridBagConstraints.BOTH;
-        add(scrollPane, c);
-
-        c.weightx = 1;
-        c.weighty = 0;
-        c.gridwidth = 1;
-
-        c.insets.set(0, 10, 10, 10);
-
-        c.gridx = 0;
-        c.gridy = 3;
-        c.anchor = GridBagConstraints.WEST;
-        c.fill = GridBagConstraints.NONE;
-        add(addButton, c);
-
-        saveButton.setEnabled(false);
-        c.gridx = 2;
-        c.gridy = 3;
-        c.anchor = GridBagConstraints.CENTER;
-        c.fill = GridBagConstraints.NONE;
-        add(saveButton, c);
-
-        c.gridx = 4;
-        c.gridy = 3;
-        c.anchor = GridBagConstraints.EAST;
-        c.fill = GridBagConstraints.NONE;
-        add(deleteButton, c);
+        setVisible(true);
 
         new RolePageController(this);
-    }
-
-    public JComboBox<String> getSemesterBox() {
-        return semesterBox;
-    }
-
-    public JButton getQueryButton() {
-        return queryButton;
-    }
-
-    public JButton getSaveButton() {
-        return saveButton;
-    }
-
-    public JButton getDeleteButton() {
-        return deleteButton;
-    }
-
-    public JButton getAddButton() {
-        return addButton;
-    }
-
-    public JScrollPane getScrollPane() {
-        return scrollPane;
     }
 
     public JLabel[] getLabels() {
         return labels;
     }
 
+    public void setLabels(JLabel[] labels) {
+        this.labels = labels;
+    }
+
+    public JComboBox<String> getSemesterBox() {
+        return semesterBox;
+    }
+
+    public void setSemesterBox(JComboBox<String> semesterBox) {
+        this.semesterBox = semesterBox;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
     public JTable getTable() {
         return table;
+    }
+
+    public void setTable(JTable table) {
+        this.table = table;
+    }
+
+    public JButton getQueryButton() {
+        return queryButton;
+    }
+
+    public void setQueryButton(JButton queryButton) {
+        this.queryButton = queryButton;
     }
 }

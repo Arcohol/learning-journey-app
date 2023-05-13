@@ -1,38 +1,35 @@
 package com.group89.app.model;
 
-import com.group89.app.controller.RolePageController;
-import com.group89.app.utils.JsonConverter;
-
-import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class RoleTableModel extends ListTableModel<Role> {
     private static final String[] COLUMN_NAMES = {"Semester", "Type", "Details"};
 
-    public RoleTableModel(List<Role> records) {
-        super(Role.class, COLUMN_NAMES, records);
-//        System.out.println(records);
+    public RoleTableModel(List<Role> roles) {
+        super(Role.class, COLUMN_NAMES, roles);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Role record = getItem(rowIndex);
-        return switch (columnIndex) {
-            case 0 -> record.getSemester();
-            case 1 -> record.getType();
-            case 2 -> record.getDetails();
-            default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
-        };
+        Role role = getItem(rowIndex);
+        if (columnIndex == 0) {
+            return role.getSemester();
+        } else if (columnIndex == 1) {
+            return role.getType();
+        } else {
+            return role.getDetails();
+        }
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Role record = getItem(rowIndex);
-        switch (columnIndex) {
-            case 0 -> record.setSemester((String) aValue);
-            case 1 -> record.setType((String) aValue);
-            case 2 -> record.setDetails((String) aValue);
-            default -> throw new IllegalArgumentException("Unexpected value: " + columnIndex);
+        Role role = getItem(rowIndex);
+        if (columnIndex == 0) {
+            role.setSemester((String) aValue);
+        } else if (columnIndex == 1) {
+            role.setType((String) aValue);
+        } else {
+            role.setDetails((String) aValue);
         }
         fireTableRowsUpdated(rowIndex, rowIndex);
     }
