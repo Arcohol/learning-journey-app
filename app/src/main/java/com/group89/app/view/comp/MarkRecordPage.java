@@ -1,76 +1,23 @@
 package com.group89.app.view.comp;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
-import com.group89.app.view.AppColor;
 
 public class MarkRecordPage extends JPanel {
-  class ILabel extends JLabel {
-    public ILabel(String text) {
-      super(text);
-
-      setPreferredSize(LABEL_SIZE);
-      setFont(getFont().deriveFont(FONT_SIZE));
-      setHorizontalAlignment(JLabel.CENTER);
-    }
-  }
-
-  class IButton extends JButton {
-    public IButton(String text) {
-      super(text);
-
-      setPreferredSize(BUTTON_SIZE);
-      setBackground(AppColor.LIGHT_GREY);
-      setForeground(AppColor.BLACK);
-      setFont(getFont().deriveFont(FONT_SIZE));
-    }
-  }
-
-  class ITable extends JTable {
-    public ITable() {
-      super();
-
-      setRowHeight(ROW_HEIGHT);
-      setFont(getFont().deriveFont(FONT_SIZE));
-      setFillsViewportHeight(true);
-
-      getTableHeader().setFont(getFont().deriveFont(HEADER_FONT_SIZE));
-      getTableHeader().setPreferredSize(HEADER_SIZE);
-
-      // this is a suspicious way to change the font size while keeping the same editor
-      // it overrides the default cell editor managed by JTable
-      JComponent objectEditor =
-          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
-      objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
-
-      JComponent numberEditor =
-          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Number.class))).getComponent();
-      numberEditor.setFont(numberEditor.getFont().deriveFont(FONT_SIZE));
-    }
-  }
 
   public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
       "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
-  private static final float FONT_SIZE = 16f;
-  private static final float HEADER_FONT_SIZE = 18f;
-  private static final Dimension LABEL_SIZE = new Dimension(150, 30);
-  private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
-  private static final Dimension HEADER_SIZE = new Dimension(0, 40);
-  private static final int ROW_HEIGHT = 30;
 
   private JComboBox<String> semesterBox, scaleBox;
   private JComboBox<CourseType> typeBox;

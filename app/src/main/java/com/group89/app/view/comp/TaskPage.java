@@ -2,19 +2,15 @@ package com.group89.app.view.comp;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
-import com.group89.app.view.AppColor;
 
 public class TaskPage extends JPanel {
   class TaskRenderer extends DefaultTableCellRenderer {
@@ -33,40 +29,6 @@ public class TaskPage extends JPanel {
     }
   }
 
-  class ITable extends JTable {
-    public ITable() {
-      super();
-
-      setRowHeight(ROW_HEIGHT);
-      setFont(getFont().deriveFont(FONT_SIZE));
-      setFillsViewportHeight(true);
-      setDefaultRenderer(Object.class, new TaskRenderer());
-
-      getTableHeader().setFont(getFont().deriveFont(HEADER_FONT_SIZE));
-      getTableHeader().setPreferredSize(HEADER_SIZE);
-
-      JComponent objectEditor =
-          (JComponent) ((DefaultCellEditor) (getDefaultEditor(Object.class))).getComponent();
-      objectEditor.setFont(objectEditor.getFont().deriveFont(FONT_SIZE));
-    }
-  }
-
-  class IButton extends JButton {
-    public IButton(String text) {
-      super(text);
-
-      setPreferredSize(new java.awt.Dimension(100, 30));
-      setBackground(AppColor.LIGHT_GREY);
-      setForeground(AppColor.BLACK);
-      setFont(getFont().deriveFont(20f));
-    }
-  }
-
-  private static final int ROW_HEIGHT = 30;
-  private static final float FONT_SIZE = 24f;
-  private static final float HEADER_FONT_SIZE = 18f;
-  private static final Dimension HEADER_SIZE = new Dimension(0, 40);
-
   private JTable tasks;
   private JScrollPane scrollPane;
   private JButton addButton, deleteButton, saveButton;
@@ -79,6 +41,8 @@ public class TaskPage extends JPanel {
     addButton = new IButton("Add");
     deleteButton = new IButton("Delete");
     saveButton = new IButton("Save");
+
+    tasks.setDefaultRenderer(Object.class, new TaskRenderer());
 
     GridBagConstraints c = new GridBagConstraints();
     c.insets = new Insets(10, 10, 10, 10);
