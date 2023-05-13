@@ -1,18 +1,28 @@
 package com.group89.app.controller;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.StandardXYBarPainter;
+import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.statistics.HistogramDataset;
+import com.group89.app.model.MarkRecord;
+import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.ChartPage;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,8 +94,8 @@ public class ChartPageController {
             LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
             renderer.setSeriesPaint(0, new Color(122, 144, 167));
             renderer.setSeriesStroke(0, new java.awt.BasicStroke(2.0f));
-            renderer.setSeriesShapesVisible(0, true); // 显示黑点
-            renderer.setSeriesShape(0, new java.awt.geom.Ellipse2D.Double(-2.0, -2.0, 4.0, 4.0)); // 设置黑点大小
+            renderer.setSeriesShapesVisible(0, true);
+            renderer.setSeriesShape(0, new java.awt.geom.Ellipse2D.Double(-2.0, -2.0, 4.0, 4.0));
 
             plot.getRangeAxis().setLowerBound(50);
 
@@ -102,26 +112,35 @@ public class ChartPageController {
     converter = new JsonConverter<>("marks.json", MarkRecord[].class);
     list = converter.toArrayList();
 
-    int[] num = new int[101];
-    for (MarkRecord record : list) {
-      num[record.getMarkCN()]++;
+    HistogramDataset dataset = new HistogramDataset();
+    double[] values = new double[list.size()];
+    double max = 0, min = 0;
+    for (int i = 0; i < list.size(); i++) {
+      values[i] = list.get(i).getMarkCN();
+      if (i == 0) {
+        max = values[i];
+        min = values[i];
+      } else {
+        if (values[i] > max) {
+          max = values[i];
+        }
+        if (values[i] < min) {
+          min = values[i];
+        }
+      }
     }
+    dataset.addSeries("Marks", values, (int) (max - min + 1), min, max + 1);
 
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    // draw chart illustrating the distribution of marks
-    for (int i = 0; i < 101; i++) {
-      dataset.addValue(num[i], "Marks", String.valueOf(i));
-    }
-
-    JFreeChart chart = ChartFactory.createBarChart("Demo", // chart title
-        "Category", // domain axis label
-        "Value", // range axis label
-        dataset, // data
-        PlotOrientation.VERTICAL, // orientation
-        true, // include legend
-        true, // tooltips?
-        false // URLs?
-    );
+    JFreeChart chart = ChartFactory.createHistogram("Distribution of Marks", "Mark Range",
+        "Number of Courses", dataset, PlotOrientation.VERTICAL, false, false, false);
+    XYPlot plot = (XYPlot) chart.getPlot();
+    plot.setBackgroundPaint(Color.white);
+    plot.setRangeGridlinePaint(Color.black);
+    NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+    rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+    XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
+    // renderer.setDrawBarOutline(false);
+    renderer.setBarPainter(new StandardXYBarPainter());
 
     ChartPanel chartPanel = new ChartPanel(chart, false);
     view.add(chartPanel);
