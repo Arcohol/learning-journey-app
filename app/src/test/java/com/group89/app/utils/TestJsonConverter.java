@@ -2,9 +2,9 @@ package com.group89.app.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.group89.app.model.*;
 import org.junit.jupiter.api.Test;
-import com.group89.app.model.CourseType;
-import com.group89.app.model.MarkRecord;
 
 public class TestJsonConverter {
   // These tests are actually useless. Don't know how to test them.
@@ -48,5 +48,52 @@ public class TestJsonConverter {
         CourseType.ELECTIVE));
 
     converter.toFile(list);
+  }
+
+  @Test
+  public void generateSampleAchievementRecord() {
+    // JsonConverter<AchievementRecord> converter = new JsonConverter<>("achievement.json",
+    // MarkRecord[].class);
+    List<AchievementRecord> list = new ArrayList<>();
+
+    list.add(new AchievementRecord("National first prize", 2018,
+        "China \"Internet Plus\" College Student Innovation and Entrepreneurship Competition",
+        AchievementType.Award));
+    list.add(new AchievementRecord("National third prize", 2019,
+        "Challenge Cup\" National College students extracurricular academic science and technology works competition",
+        AchievementType.Award));
+    list.add(new AchievementRecord("Municipal third prize", 2022,
+        "Challenge Cup\" Business Plan Competition for Chinese College students ACM-ICPC International College Student Programming Competition",
+        AchievementType.Award));
+    list.add(new AchievementRecord("University-level first prize", 2021,
+        "National Electronic Design Competition for College students", AchievementType.Award));
+    list.add(new AchievementRecord("Outstanding student leaders", 2020,
+        "School Youth League committee assessment", AchievementType.Honour));
+    list.add(new AchievementRecord("Excellent Communist Youth League member", 2018,
+        "School Youth League committee assessment", AchievementType.Honour));
+    list.add(new AchievementRecord("Advanced individual in volunteer service", 2020,
+        "Assessed by the Youth League Committee of the College", AchievementType.Honour));
+    list.add(new AchievementRecord("Advanced individual in social practice", 2022,
+        "Assessed by the Youth League Committee of the College", AchievementType.Honour));
+
+    // converter.toFile(list);
+  }
+
+  @Test
+  public void generateSamplePortfolioRecord() {
+    // JsonConverter<AchievementRecord> converter = new JsonConverter<>("achievement.json",
+    // MarkRecord[].class);
+    List<PortfolioRecord> list = new ArrayList<>();
+
+    list.add(
+        new PortfolioRecord("Canvas: How we crafted Facebook's new immersive ads", "2020-2021-1",
+            PortfolioType.Posters, "https://pan.baidu.com/open/platform?_at_=1683963428751"));
+    list.add(new PortfolioRecord("Reaction: Not everything in life is likable", "2020-2021-1",
+        PortfolioType.Design, "https://pan.baidu.com/open/platform?_at_=1683963428752"));
+    list.add(
+        new PortfolioRecord("I visualized a parking kiosk for people in wheelchair.", "2020-2021-2",
+            PortfolioType.Videos, "https://pan.baidu.com/open/platform?_at_=1683963428753"));
+
+    // converter.toFile(list);
   }
 }
