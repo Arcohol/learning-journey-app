@@ -1,4 +1,6 @@
-package com.group89.app.model;
+package com.group89.app.model.entity;
+
+import com.group89.app.model.AchievementType;
 
 public class AchievementRecord {
   private Integer year;

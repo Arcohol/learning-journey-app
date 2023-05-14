@@ -1,6 +1,7 @@
 package com.group89.app.model;
 
 import java.util.List;
+import com.group89.app.model.entity.Task;
 
 public class TaskTableModel extends ListTableModel<Task> {
   private static final String[] COLUMN_NAMES = {"Content", "Due", "Status"};

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.group89.app.model.*;
+import com.group89.app.model.entity.AchievementRecord;
+import com.group89.app.model.entity.MarkRecord;
+import com.group89.app.model.entity.PortfolioRecord;
 import org.junit.jupiter.api.Test;
 
 public class TestJsonConverter {

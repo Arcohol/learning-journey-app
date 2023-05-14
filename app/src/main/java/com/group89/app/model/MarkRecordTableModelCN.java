@@ -1,6 +1,7 @@
 package com.group89.app.model;
 
 import java.util.List;
+import com.group89.app.model.entity.MarkRecord;
 
 public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
   private static final String[] COLUMN_NAMES =

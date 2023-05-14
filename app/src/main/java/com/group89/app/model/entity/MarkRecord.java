@@ -1,9 +1,9 @@
-package com.group89.app.model;
+package com.group89.app.model.entity;
 
+import com.group89.app.model.CourseType;
 import com.group89.app.utils.MarkConverter;
 
 public class MarkRecord {
-
   private String semester;
   private String moduleCode;
   private String title;

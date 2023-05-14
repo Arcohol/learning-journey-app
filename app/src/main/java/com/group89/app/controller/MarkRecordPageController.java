@@ -13,10 +13,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableRowSorter;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
+import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.view.comp.MyComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 

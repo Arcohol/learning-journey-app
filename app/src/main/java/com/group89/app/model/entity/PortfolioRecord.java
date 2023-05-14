@@ -1,4 +1,6 @@
-package com.group89.app.model;
+package com.group89.app.model.entity;
+
+import com.group89.app.model.PortfolioType;
 
 public class PortfolioRecord {
   private String semester;
