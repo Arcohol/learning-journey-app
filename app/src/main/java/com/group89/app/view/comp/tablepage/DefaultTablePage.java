@@ -1,9 +1,11 @@
-package com.group89.app.view.comp;
+package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JScrollPane;
+import com.group89.app.view.comp.IButton;
+import com.group89.app.view.comp.ITable;
 
 public class DefaultTablePage extends AbstractTablePage {
   public DefaultTablePage() {

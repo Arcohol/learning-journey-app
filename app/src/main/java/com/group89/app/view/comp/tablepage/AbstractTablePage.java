@@ -1,4 +1,4 @@
-package com.group89.app.view.comp;
+package com.group89.app.view.comp.tablepage;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

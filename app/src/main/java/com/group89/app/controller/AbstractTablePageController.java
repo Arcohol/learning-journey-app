@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.JTable;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.utils.JsonConverter;
-import com.group89.app.view.comp.AbstractTablePage;
+import com.group89.app.view.comp.tablepage.AbstractTablePage;
 
 public abstract class AbstractTablePageController<T, S extends AbstractTablePage> {
   protected ListTableModel<T> model;

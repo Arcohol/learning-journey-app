@@ -6,12 +6,12 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
-import com.group89.app.view.comp.AchievementPage;
-import com.group89.app.view.comp.MarkRecordPage;
-import com.group89.app.view.comp.PortfolioPage;
-import com.group89.app.view.comp.RolePage;
 import com.group89.app.view.comp.Sidebar;
-import com.group89.app.view.comp.TaskPage;
+import com.group89.app.view.comp.tablepage.AchievementPage;
+import com.group89.app.view.comp.tablepage.MarkRecordPage;
+import com.group89.app.view.comp.tablepage.PortfolioPage;
+import com.group89.app.view.comp.tablepage.RolePage;
+import com.group89.app.view.comp.tablepage.TaskPage;
 
 public class MainFrame extends JFrame {
   private Sidebar sidebar;

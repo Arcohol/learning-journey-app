@@ -1,7 +1,8 @@
-package com.group89.app.view.comp;
+package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
+import com.group89.app.view.comp.MyComboBox;
 
 public class RolePage extends DefaultTablePage {
   public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",

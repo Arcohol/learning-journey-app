@@ -1,4 +1,4 @@
-package com.group89.app.view.comp;
+package com.group89.app.view.comp.tablepage;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
+import com.group89.app.view.comp.IButton;
+import com.group89.app.view.comp.ITable;
 
 public class TaskPage extends AbstractTablePage {
   class TaskRenderer extends DefaultTableCellRenderer {

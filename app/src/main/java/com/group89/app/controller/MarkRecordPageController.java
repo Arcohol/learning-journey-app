@@ -17,8 +17,8 @@ import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
-import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
 public class MarkRecordPageController
     extends AbstractTablePageController<MarkRecord, MarkRecordPage> {

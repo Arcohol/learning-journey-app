@@ -2,7 +2,7 @@ package com.group89.app.controller;
 
 import com.group89.app.model.Task;
 import com.group89.app.model.TaskTableModel;
-import com.group89.app.view.comp.TaskPage;
+import com.group89.app.view.comp.tablepage.TaskPage;
 
 public class TaskPageController extends AbstractTablePageController<Task, TaskPage>{
   public TaskPageController(TaskPage page) {

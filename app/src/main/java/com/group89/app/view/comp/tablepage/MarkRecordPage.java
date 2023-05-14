@@ -1,4 +1,4 @@
-package com.group89.app.view.comp;
+package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,6 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
+import com.group89.app.view.comp.IButton;
+import com.group89.app.view.comp.ILabel;
+import com.group89.app.view.comp.ITable;
+import com.group89.app.view.comp.MyComboBox;
 
 public class MarkRecordPage extends AbstractTablePage {
   public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
