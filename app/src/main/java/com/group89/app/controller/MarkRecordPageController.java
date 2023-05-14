@@ -105,24 +105,26 @@ public class MarkRecordPageController {
     switch (scale) {
       case "BOTH" -> {
         model = new MarkRecordTableModel(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
       }
       case "CN" -> {
         model = new MarkRecordTableModelCN(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
       }
       case "UK" -> {
         model = new MarkRecordTableModelUK(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
       }
       default -> throw new IllegalArgumentException("Unexpected value: " + scale);
     }
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
-    model.addTableModelListener(e -> updateLabels());
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new MyComboBox<>(MarkRecordPage.SEMESTERS)));
