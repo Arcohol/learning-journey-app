@@ -16,32 +16,36 @@ public class PortfolioRecord {
     this.semester = semester;
   }
 
-  public PortfolioType getType() {
-    return type;
+  public PortfolioRecord() {
+    this("", "", PortfolioType.OTHER, "");
   }
 
-  public void setType(PortfolioType type) {
-    this.type = type;
+  public PortfolioType getType() {
+    return type;
   }
 
   public String getSemester() {
     return semester;
   }
 
-  public void setSemester(String semester) {
-    this.semester = semester;
-  }
-
   public String getExhibition() {
     return exhibition;
   }
 
-  public void setExhibition(String exhibition) {
-    this.exhibition = exhibition;
-  }
-
   public String getDetails() {
     return details;
+  }
+
+  public void setType(PortfolioType type) {
+    this.type = type;
+  }
+
+  public void setSemester(String semester) {
+    this.semester = semester;
+  }
+
+  public void setExhibition(String exhibition) {
+    this.exhibition = exhibition;
   }
 
   public void setDetails(String details) {
