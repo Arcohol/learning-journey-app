@@ -74,7 +74,7 @@ public class MarkRecordPage extends JPanel {
 
   private JComboBox<String> semesterBox, scaleBox;
   private JComboBox<CourseType> typeBox;
-  private JButton queryButton, saveButton, deleteButton, addButton;
+  private JButton saveButton, deleteButton, addButton;
   private JLabel[] labels;
   private JScrollPane scrollPane;
   private JTable table;
@@ -86,7 +86,6 @@ public class MarkRecordPage extends JPanel {
     scaleBox = new MyComboBox<>(SCALES);
     typeBox = new MyComboBox<>(CourseType.values());
 
-    queryButton = new IButton("Query");
     saveButton = new IButton("Save");
     deleteButton = new IButton("Delete");
     addButton = new IButton("Add");
@@ -121,11 +120,6 @@ public class MarkRecordPage extends JPanel {
     add(typeBox, c);
 
     c.insets.set(10, 0, 0, 10);
-
-    c.gridx = 4;
-    c.gridy = 0;
-    c.anchor = GridBagConstraints.EAST;
-    add(queryButton, c);
 
     c.weightx = 1;
 
@@ -206,10 +200,6 @@ public class MarkRecordPage extends JPanel {
 
   public JComboBox<CourseType> getTypeBox() {
     return typeBox;
-  }
-
-  public JButton getQueryButton() {
-    return queryButton;
   }
 
   public JButton getSaveButton() {
