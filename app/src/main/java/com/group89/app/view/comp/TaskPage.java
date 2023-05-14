@@ -5,14 +5,12 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
 
-public class TaskPage extends JPanel {
+public class TaskPage extends AbstractTablePage {
   class TaskRenderer extends DefaultTableCellRenderer {
     // make the entire row green if the task is done
     @Override
@@ -29,20 +27,18 @@ public class TaskPage extends JPanel {
     }
   }
 
-  private JTable tasks;
-  private JScrollPane scrollPane;
-  private JButton addButton, deleteButton, saveButton;
-
   public TaskPage() {
-    super(new GridBagLayout());
+    super();
 
-    tasks = new ITable();
-    scrollPane = new JScrollPane(tasks);
+    setLayout(new GridBagLayout());
+
+    table = new ITable();
+    scrollPane = new JScrollPane(table);
     addButton = new IButton("Add");
     deleteButton = new IButton("Delete");
     saveButton = new IButton("Save");
 
-    tasks.setDefaultRenderer(Object.class, new TaskRenderer());
+    table.setDefaultRenderer(Object.class, new TaskRenderer());
 
     GridBagConstraints c = new GridBagConstraints();
     c.insets = new Insets(10, 10, 10, 10);
@@ -77,25 +73,5 @@ public class TaskPage extends JPanel {
     add(scrollPane, c);
 
     new TaskPageController(this);
-  }
-
-  public JTable getTable() {
-    return tasks;
-  }
-
-  public JScrollPane getScrollPane() {
-    return scrollPane;
-  }
-
-  public JButton getAddButton() {
-    return addButton;
-  }
-
-  public JButton getDeleteButton() {
-    return deleteButton;
-  }
-
-  public JButton getSaveButton() {
-    return saveButton;
   }
 }

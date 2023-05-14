@@ -1,5 +1,6 @@
 package com.group89.app.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import javax.swing.JTable;
 import com.group89.app.model.ListTableModel;
@@ -7,25 +8,44 @@ import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.AbstractTablePage;
 
 public abstract class AbstractTablePageController<T, S extends AbstractTablePage> {
-  protected JsonConverter<T> converter;
-  protected List<T> list;
   protected ListTableModel<T> model;
   protected S view;
 
-  public AbstractTablePageController(S page, String filename, Class<T[]> clazz) {
+  protected JsonConverter<T> converter;
+  protected List<T> list;
+
+  protected Class<T> itemClazz;
+
+  public AbstractTablePageController(S page, String filename, Class<T[]> listClazz,
+      Class<T> itemClazz) {
     view = page;
-    converter = new JsonConverter<T>(filename, clazz);
+    this.itemClazz = itemClazz;
+
+    converter = new JsonConverter<T>(filename, listClazz);
     list = converter.toArrayList();
-    init();
   }
 
-  protected abstract void init();
+  protected void init() {
+    view.getAddButton().addActionListener(e -> add());
+    view.getDeleteButton().addActionListener(e -> delete());
+    view.getSaveButton().addActionListener(e -> save());
+  }
 
-  public void add(T item) {
+  protected abstract void query();
+
+  protected void add() {
+    T item;
+    try {
+      item = itemClazz.getDeclaredConstructor().newInstance();
+    } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+      e.printStackTrace();
+      return;
+    }
     model.addItem(item);
   }
 
-  public void delete() {
+  protected void delete() {
     JTable table = view.getTable();
     int[] rows = table.getSelectedRows();
     for (int i = rows.length - 1; i >= 0; i--) {
@@ -33,7 +53,7 @@ public abstract class AbstractTablePageController<T, S extends AbstractTablePage
     }
   }
 
-  public void save() {
+  protected void save() {
     converter.toFile(list);
   }
 }

@@ -5,13 +5,11 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
 
-public class MarkRecordPage extends JPanel {
+public class MarkRecordPage extends AbstractTablePage {
 
   public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
       "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
@@ -21,13 +19,13 @@ public class MarkRecordPage extends JPanel {
 
   private JComboBox<String> semesterBox, scaleBox;
   private JComboBox<CourseType> typeBox;
-  private JButton queryButton, saveButton, deleteButton, addButton;
+  private JButton queryButton;
   private JLabel[] labels;
-  private JScrollPane scrollPane;
-  private JTable table;
 
   public MarkRecordPage() {
-    super(new GridBagLayout());
+    super();
+
+    setLayout(new GridBagLayout());
 
     semesterBox = new MyComboBox<>(SEMESTERS);
     scaleBox = new MyComboBox<>(SCALES);
@@ -159,27 +157,7 @@ public class MarkRecordPage extends JPanel {
     return queryButton;
   }
 
-  public JButton getSaveButton() {
-    return saveButton;
-  }
-
-  public JButton getDeleteButton() {
-    return deleteButton;
-  }
-
-  public JButton getAddButton() {
-    return addButton;
-  }
-
-  public JScrollPane getScrollPane() {
-    return scrollPane;
-  }
-
   public JLabel[] getLabels() {
     return labels;
-  }
-
-  public JTable getTable() {
-    return table;
   }
 }
