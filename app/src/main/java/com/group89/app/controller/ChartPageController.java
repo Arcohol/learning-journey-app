@@ -1,6 +1,8 @@
 package com.group89.app.controller;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,15 +33,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.swing.*;
+
 public class ChartPageController {
     private ChartPage view;
+    private JPanel chartPanel;
 
     public ChartPageController(ChartPage page) {
         view = page;
-
-        queryPieChart();
-//        queryAverageTrend();
-//        query();
+        init();
     }
 
     private void queryAverageTrend() {
@@ -110,75 +112,112 @@ public class ChartPageController {
         }
     }
 
-
-   private void queryPieChart(){
-       JsonConverter<MarkRecord> converter;
-       ArrayList<MarkRecord> list;
-       converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-       list = converter.toArrayList();
-       DefaultPieDataset dataset = new DefaultPieDataset();
-       int v1 = 0;
-       int v2 = 0;
-       int v3 = 0;
-       int v4 = 0;
-       for (int i = 0; i < list.size(); i++){
-           CourseType type = list.get(i).getType();
-           System.out.println(type);
-           switch (type){
-               case ALL -> v1++;
-               case COMPULSORY -> v2++;
-               case ELECTIVE -> v3++;
-               case OPTIONAL -> v4++;
-           }
-       }
-       dataset.setValue("ALL", v1);
-       dataset.setValue("COMPULSORY", v2);
-       dataset.setValue("ELECTIVE", v3);
-       dataset.setValue("OPTIONAL", v4);
-
-       // 创建JFreeChart对象
-       JFreeChart chart = ChartFactory.createPieChart3D("Example", dataset, false, true, true);
-
-       ChartPanel chartPanel = new ChartPanel(chart, false);
-       view.add(chartPanel);
-   }
-  private void query() {
-    JsonConverter<MarkRecord> converter;
-    ArrayList<MarkRecord> list;
-    converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    list = converter.toArrayList();
-
-    HistogramDataset dataset = new HistogramDataset();
-    double[] values = new double[list.size()];
-    double max = 0, min = 0;
-    for (int i = 0; i < list.size(); i++) {
-      values[i] = list.get(i).getMarkCN();
-      if (i == 0) {
-        max = values[i];
-        min = values[i];
-      } else {
-        if (values[i] > max) {
-          max = values[i];
+    private void queryPieChart() {
+        JsonConverter<MarkRecord> converter;
+        ArrayList<MarkRecord> list;
+        converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+        list = converter.toArrayList();
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        int v1 = 0;
+        int v2 = 0;
+        int v3 = 0;
+        int v4 = 0;
+        for (int i = 0; i < list.size(); i++) {
+            CourseType type = list.get(i).getType();
+            System.out.println(type);
+            switch (type) {
+                case ALL -> v1++;
+                case COMPULSORY -> v2++;
+                case ELECTIVE -> v3++;
+                case OPTIONAL -> v4++;
+            }
         }
-        if (values[i] < min) {
-          min = values[i];
-        }
-      }
+        dataset.setValue("ALL", v1);
+        dataset.setValue("COMPULSORY", v2);
+        dataset.setValue("ELECTIVE", v3);
+        dataset.setValue("OPTIONAL", v4);
+
+        // 创建JFreeChart对象
+        JFreeChart chart = ChartFactory.createPieChart3D("Course Type Composition", dataset, false, true, true);
+
+        ChartPanel chartPanel = new ChartPanel(chart, false);
+        view.add(chartPanel);
     }
-    dataset.addSeries("Marks", values, (int) (max - min + 1), min, max + 1);
 
-    JFreeChart chart = ChartFactory.createHistogram("Distribution of Marks", "Mark Range",
-        "Number of Courses", dataset, PlotOrientation.VERTICAL, false, false, false);
-    XYPlot plot = (XYPlot) chart.getPlot();
-    plot.setBackgroundPaint(Color.white);
-    plot.setRangeGridlinePaint(Color.black);
-    NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-    rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-    XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
-    // renderer.setDrawBarOutline(false);
-    renderer.setBarPainter(new StandardXYBarPainter());
+    private void query() {
+        JsonConverter<MarkRecord> converter;
+        ArrayList<MarkRecord> list;
+        converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+        list = converter.toArrayList();
 
-    ChartPanel chartPanel = new ChartPanel(chart, false);
-    view.add(chartPanel);
-  }
+        HistogramDataset dataset = new HistogramDataset();
+        double[] values = new double[list.size()];
+        double max = 0, min = 0;
+        for (int i = 0; i < list.size(); i++) {
+            values[i] = list.get(i).getMarkCN();
+            if (i == 0) {
+                max = values[i];
+                min = values[i];
+            } else {
+                if (values[i] > max) {
+                    max = values[i];
+                }
+                if (values[i] < min) {
+                    min = values[i];
+                }
+            }
+        }
+        dataset.addSeries("Marks", values, (int) (max - min + 1), min, max + 1);
+
+        JFreeChart chart = ChartFactory.createHistogram("Distribution of Marks", "Mark Range",
+                "Number of Courses", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.white);
+        plot.setRangeGridlinePaint(Color.black);
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
+        // renderer.setDrawBarOutline(false);
+        renderer.setBarPainter(new StandardXYBarPainter());
+
+        ChartPanel chartPanel = new ChartPanel(chart, false);
+        view.add(chartPanel);
+    }
+
+    // Method to update the chartPanel based on the selected chart
+    private void updateChartPanel(String selectedChart) {
+        // Clear the chartPanel
+        chartPanel = view.getChartPanel();
+
+        chartPanel.removeAll();
+        JLabel chartLabel = new JLabel("Chart: " + selectedChart);
+        chartPanel.add(chartLabel);
+        // Repaint the chartPanel to reflect the changes
+        chartPanel.revalidate();
+        chartPanel.repaint();
+    }
+
+    private void init() {
+        JButton queryButton = view.getQueryButton();
+        JComboBox<String> chartComboBox = view.getChartComboBox();
+        JLabel selectedChartLabel = view.getSelectedChartLabel();
+        // Attach an ActionListener to the query button
+        queryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the selected chart option
+                String selectedChart = (String) chartComboBox.getSelectedItem();
+                // Update the selected chart label
+                selectedChartLabel.setText("Selected Chart: " + selectedChart);
+                // Update the chartPanel based on the selected chart
+                switch (chartComboBox.getSelectedIndex()) {
+                    case 0 -> query();
+                    case 1 -> queryPieChart();
+                    case 2 -> queryAverageTrend();
+                }
+                updateChartPanel(selectedChart);
+                chartComboBox.setPopupVisible(false);
+            }
+        });
+    }
 }
