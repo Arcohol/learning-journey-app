@@ -3,7 +3,6 @@ package com.group89.app.controller;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
-import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -18,12 +17,11 @@ import com.group89.app.model.MarkRecord;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
-import com.group89.app.utils.JsonConverter;
-import com.group89.app.view.comp.MarkRecordPage;
 import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
-// controller
-public class MarkRecordPageController {
+public class MarkRecordPageController
+    extends AbstractTablePageController<MarkRecord, MarkRecordPage> {
   // temporary solution for enforcing number range
   // subject to change
   class MarkEditor extends DefaultCellEditor {
@@ -67,30 +65,19 @@ public class MarkRecordPageController {
     }
   }
 
-  // model
-  private ListTableModel<MarkRecord> model;
-  // view
-  private MarkRecordPage view;
-
-  private JsonConverter<MarkRecord> converter;
   private TableRowSorter<ListTableModel<MarkRecord>> sorter;
-  // actual data
-  private List<MarkRecord> list;
 
   public MarkRecordPageController(MarkRecordPage page) {
-    view = page;
+    super(page, "marks.json", MarkRecord[].class, MarkRecord.class);
 
-    sorter = new TableRowSorter<>();
-    converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    list = converter.toArrayList();
+    sorter = new TableRowSorter<>(model);
 
     init();
   }
 
-  public void init() {
-    view.getSaveButton().addActionListener(e -> save());
-    view.getDeleteButton().addActionListener(e -> delete());
-    view.getAddButton().addActionListener(e -> add());
+  protected void init() {
+    super.init();
+
     view.getScaleBox().addActionListener(e -> query());
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
@@ -99,7 +86,8 @@ public class MarkRecordPageController {
     query();
   }
 
-  private void query() {
+  @Override
+  protected void query() {
     String scale = (String) view.getScaleBox().getSelectedItem();
     String semester = (String) view.getSemesterBox().getSelectedItem();
     CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
@@ -109,24 +97,26 @@ public class MarkRecordPageController {
     switch (scale) {
       case "BOTH" -> {
         model = new MarkRecordTableModel(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
       }
       case "CN" -> {
         model = new MarkRecordTableModelCN(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
       }
       case "UK" -> {
         model = new MarkRecordTableModelUK(list);
+        model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
       }
       default -> throw new IllegalArgumentException("Unexpected value: " + scale);
     }
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
-    model.addTableModelListener(e -> updateLabels());
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new MyComboBox<>(MarkRecordPage.SEMESTERS)));
@@ -176,22 +166,5 @@ public class MarkRecordPageController {
     labels[2].setText("Total Credits: " + totalCreditsCN);
     labels[3].setText("GPA: " + gpa);
     labels[4].setText("Average Mark: " + averageCN);
-  }
-
-  private void add() {
-    model.addItem(new MarkRecord());
-  }
-
-  private void delete() {
-    JTable table = view.getTable();
-    int[] rows = table.getSelectedRows();
-    for (int i = rows.length - 1; i >= 0; i--) {
-      model.removeItem(table.convertRowIndexToModel(rows[i]));
-    }
-  }
-
-  private void save() {
-    converter.toFile(list);
-    view.getSaveButton().setEnabled(false);
   }
 }
