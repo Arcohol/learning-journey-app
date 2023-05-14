@@ -1,4 +1,4 @@
-package com.group89.app.model;
+package com.group89.app.model.entity;
 
 public class Task {
   private String content;

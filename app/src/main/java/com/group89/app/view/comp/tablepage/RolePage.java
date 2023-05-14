@@ -2,6 +2,7 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
+import com.group89.app.controller.RolePageController;
 import com.group89.app.view.comp.MyComboBox;
 
 public class RolePage extends DefaultTablePage {
@@ -22,5 +23,7 @@ public class RolePage extends DefaultTablePage {
     c.gridy = 0;
     c.anchor = GridBagConstraints.WEST;
     add(semesterBox, c);
+
+    new RolePageController(this);
   }
 }
