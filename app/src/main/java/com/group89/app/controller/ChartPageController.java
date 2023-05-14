@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.group89.app.model.CourseType;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,6 +22,7 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.StandardXYBarPainter;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.statistics.HistogramDataset;
 import com.group89.app.model.MarkRecord;
 import com.group89.app.utils.JsonConverter;
@@ -34,8 +37,9 @@ public class ChartPageController {
     public ChartPageController(ChartPage page) {
         view = page;
 
-        queryAverageTrend();
-        query();
+        queryPieChart();
+//        queryAverageTrend();
+//        query();
     }
 
     private void queryAverageTrend() {
@@ -106,6 +110,38 @@ public class ChartPageController {
         }
     }
 
+
+   private void queryPieChart(){
+       JsonConverter<MarkRecord> converter;
+       ArrayList<MarkRecord> list;
+       converter = new JsonConverter<>("marks.json", MarkRecord[].class);
+       list = converter.toArrayList();
+       DefaultPieDataset dataset = new DefaultPieDataset();
+       int v1 = 0;
+       int v2 = 0;
+       int v3 = 0;
+       int v4 = 0;
+       for (int i = 0; i < list.size(); i++){
+           CourseType type = list.get(i).getType();
+           System.out.println(type);
+           switch (type){
+               case ALL -> v1++;
+               case COMPULSORY -> v2++;
+               case ELECTIVE -> v3++;
+               case OPTIONAL -> v4++;
+           }
+       }
+       dataset.setValue("ALL", v1);
+       dataset.setValue("COMPULSORY", v2);
+       dataset.setValue("ELECTIVE", v3);
+       dataset.setValue("OPTIONAL", v4);
+
+       // 创建JFreeChart对象
+       JFreeChart chart = ChartFactory.createPieChart3D("Example", dataset, false, true, true);
+
+       ChartPanel chartPanel = new ChartPanel(chart, false);
+       view.add(chartPanel);
+   }
   private void query() {
     JsonConverter<MarkRecord> converter;
     ArrayList<MarkRecord> list;
