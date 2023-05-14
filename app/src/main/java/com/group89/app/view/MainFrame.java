@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.tablepage.AchievementPage;
+import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 import com.group89.app.view.comp.tablepage.RolePage;
@@ -16,7 +17,7 @@ import com.group89.app.view.comp.tablepage.TaskPage;
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
   private JPanel content;
-  private JPanel[] pages = new JPanel[5];
+  private JPanel[] pages = new JPanel[6];
 
   private static final Dimension FRAME_SIZE = new Dimension(1200, 800);
 
@@ -49,12 +50,16 @@ public class MainFrame extends JFrame {
     pages[4] = new PortfolioPage();
     pages[4].setBackground(java.awt.Color.WHITE);
 
+    pages[5] = new ApplicationRecordPage();
+    pages[5].setBackground(java.awt.Color.WHITE);
+
 
     content.add(pages[0], "page1");
     content.add(pages[1], "page2");
     content.add(pages[2], "page3");
     content.add(pages[3], "page4");
     content.add(pages[4], "page5");
+    content.add(pages[5], "page6");
 
     setVisible(true);
 
