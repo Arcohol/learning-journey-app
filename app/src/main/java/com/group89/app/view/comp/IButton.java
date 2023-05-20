@@ -11,6 +11,7 @@ public class IButton extends JButton {
   public IButton(String text) {
     super(text);
 
+    setFocusPainted(false);
     setPreferredSize(BUTTON_SIZE);
     setBackground(AppColor.LIGHT_GREY);
     setForeground(AppColor.BLACK);

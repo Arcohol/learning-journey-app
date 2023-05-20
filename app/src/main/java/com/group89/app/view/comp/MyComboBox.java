@@ -8,7 +8,7 @@ public class MyComboBox<E> extends JComboBox<E> {
   private static final float FONT_SIZE = 16f;
   private static final Dimension SIZE = new Dimension(150, 30);
 
-  public MyComboBox(E items[]) {
+  public MyComboBox(E[] items) {
     super(items);
 
     setBackground(AppColor.WHITE);
