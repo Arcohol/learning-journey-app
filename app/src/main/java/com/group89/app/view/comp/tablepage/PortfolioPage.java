@@ -6,7 +6,7 @@ import com.group89.app.controller.PortfolioPageController;
 import com.group89.app.view.comp.MyComboBox;
 
 public class PortfolioPage extends DefaultTablePage {
-  public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
+  public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
       "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   private JComboBox<String> semesterBox;
 

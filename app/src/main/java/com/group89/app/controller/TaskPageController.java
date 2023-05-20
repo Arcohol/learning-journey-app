@@ -39,7 +39,5 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
       }
     });
     sorter.setModel(model);
-
-    view.getSaveButton().setEnabled(false);
   }
 }

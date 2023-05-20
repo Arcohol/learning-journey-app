@@ -2,19 +2,21 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
+import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
 import com.group89.app.view.comp.MyComboBox;
 
 public class MarkRecordPage extends AbstractTablePage {
-  public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-      "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
+  // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
+  //     "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
@@ -28,7 +30,9 @@ public class MarkRecordPage extends AbstractTablePage {
 
     setLayout(new GridBagLayout());
 
-    semesterBox = new MyComboBox<>(SEMESTERS);
+    ArrayList<String> semesters = SemesterGenerator.generate();
+    semesters.add(0, "All");
+    semesterBox = new MyComboBox<>(semesters.toArray(new String[0]));
     scaleBox = new MyComboBox<>(SCALES);
     typeBox = new MyComboBox<>(CourseType.values());
 
