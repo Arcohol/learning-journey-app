@@ -89,13 +89,13 @@ public class Sidebar extends JPanel {
     add(buttons[3], c);
 
     buttons[4] = new IButton("Portfolio");
-    
+
     c.gridx = 0;
     c.gridy = 5;
     add(buttons[4], c);
 
     buttons[5] = new IButton("Application");
-    
+
     c.gridx = 0;
     c.gridy = 6;
     add(buttons[5], c);

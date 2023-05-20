@@ -7,7 +7,7 @@ import com.group89.app.view.AppColor;
 public class IButton extends JButton {
   private static final float FONT_SIZE = 16f;
   private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
-  
+
   public IButton(String text) {
     super(text);
 

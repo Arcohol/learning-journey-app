@@ -16,7 +16,7 @@ public class RolePage extends DefaultTablePage {
     semesterBox = new MyComboBox<>(SEMESTERS);
 
     GridBagConstraints c = new GridBagConstraints();
-    
+
     c.insets.set(10, 10, 0, 0);
 
     c.gridx = 0;

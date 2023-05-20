@@ -5,7 +5,7 @@ import com.group89.app.model.entity.AchievementRecord;
 
 public class AchievementRecordTableModel extends ListTableModel<AchievementRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Detail", "Type"};
-  
+
   public AchievementRecordTableModel(List<AchievementRecord> achievementRecords) {
     super(AchievementRecord.class, COLUMN_NAMES, achievementRecords);
   }

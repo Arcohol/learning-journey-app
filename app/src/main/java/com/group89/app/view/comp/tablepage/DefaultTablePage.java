@@ -21,7 +21,7 @@ public class DefaultTablePage extends AbstractTablePage {
 
 
     GridBagConstraints c = new GridBagConstraints();
-  
+
     c.insets = new Insets(10, 10, 10, 10);
 
     c.gridx = 0;
@@ -31,7 +31,7 @@ public class DefaultTablePage extends AbstractTablePage {
     c.gridwidth = 3;
     c.fill = GridBagConstraints.BOTH;
     add(scrollPane, c);
-    
+
     c.gridwidth = 1;
     c.weightx = 1;
     c.weighty = 0;

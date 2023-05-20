@@ -10,7 +10,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
-import javax.swing.table.TableRowSorter;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecordTableModel;
@@ -65,12 +64,8 @@ public class MarkRecordPageController
     }
   }
 
-  private TableRowSorter<ListTableModel<MarkRecord>> sorter;
-
   public MarkRecordPageController(MarkRecordPage page) {
     super(page, "marks.json", MarkRecord[].class, MarkRecord.class);
-
-    sorter = new TableRowSorter<>(model);
 
     init();
   }
@@ -81,7 +76,6 @@ public class MarkRecordPageController
     view.getScaleBox().addActionListener(e -> query());
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
-    view.getTable().setRowSorter(sorter);
 
     query();
   }
@@ -124,9 +118,9 @@ public class MarkRecordPageController
         new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
 
 
-    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Object>() {
+    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Integer>() {
       @Override
-      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Object> entry) {
+      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Integer> entry) {
         ListTableModel<MarkRecord> model = entry.getModel();
         MarkRecord record = model.getItem(entry.getIdentifier());
         return (semester.equals("all") || record.getSemester().equals(semester))

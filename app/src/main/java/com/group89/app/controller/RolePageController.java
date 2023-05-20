@@ -4,7 +4,7 @@ import com.group89.app.model.RoleRecordTableModel;
 import com.group89.app.model.entity.RoleRecord;
 import com.group89.app.view.comp.tablepage.RolePage;
 
-public class RolePageController extends AbstractTablePageController<RoleRecord, RolePage>{
+public class RolePageController extends AbstractTablePageController<RoleRecord, RolePage> {
   public RolePageController(RolePage page) {
     super(page, "roles.json", RoleRecord[].class, RoleRecord.class);
     init();

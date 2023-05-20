@@ -23,6 +23,7 @@ public class AchievementPageController
   protected void query() {
     model = new AchievementRecordTableModel(list);
     view.getTable().setModel(model);
-    view.getTable().getColumn("Type").setCellEditor(new DefaultCellEditor(new MyComboBox<>(AchievementType.values())));
+    view.getTable().getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(AchievementType.values())));
   }
 }
