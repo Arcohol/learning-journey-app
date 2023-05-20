@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 
 public class TaskPage extends DefaultTablePage {
   class TaskRenderer extends DefaultTableCellRenderer {
@@ -32,7 +32,7 @@ public class TaskPage extends DefaultTablePage {
   public TaskPage() {
     super();
 
-    statusBox = new MyComboBox<>(STATUSES);
+    statusBox = new IComboBox<>(STATUSES);
 
     GridBagConstraints c = new GridBagConstraints();
 

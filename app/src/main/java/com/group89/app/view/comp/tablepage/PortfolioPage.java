@@ -3,7 +3,7 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.PortfolioPageController;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 
 public class PortfolioPage extends DefaultTablePage {
   public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
@@ -13,7 +13,7 @@ public class PortfolioPage extends DefaultTablePage {
   public PortfolioPage() {
     super();
 
-    semesterBox = new MyComboBox<>(SEMESTERS);
+    semesterBox = new IComboBox<>(SEMESTERS);
 
     GridBagConstraints c = new GridBagConstraints();
 

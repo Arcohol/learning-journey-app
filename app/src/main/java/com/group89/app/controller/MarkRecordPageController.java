@@ -17,7 +17,7 @@ import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
 import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.utils.SemesterGenerator;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
 public class MarkRecordPageController
@@ -114,8 +114,8 @@ public class MarkRecordPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
-    table.getColumn("Type").setCellEditor(new DefaultCellEditor(new MyComboBox<>(
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
+    table.getColumn("Type").setCellEditor(new DefaultCellEditor(new IComboBox<>(
         new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
 
 

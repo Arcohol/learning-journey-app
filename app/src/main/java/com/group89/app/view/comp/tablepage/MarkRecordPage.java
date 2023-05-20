@@ -12,7 +12,7 @@ import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 
 public class MarkRecordPage extends AbstractTablePage {
   // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
@@ -32,9 +32,9 @@ public class MarkRecordPage extends AbstractTablePage {
 
     ArrayList<String> semesters = SemesterGenerator.generate();
     semesters.add(0, "All");
-    semesterBox = new MyComboBox<>(semesters.toArray(new String[0]));
-    scaleBox = new MyComboBox<>(SCALES);
-    typeBox = new MyComboBox<>(CourseType.values());
+    semesterBox = new IComboBox<>(semesters.toArray(new String[0]));
+    scaleBox = new IComboBox<>(SCALES);
+    typeBox = new IComboBox<>(CourseType.values());
 
     saveButton = new IButton("Save");
     deleteButton = new IButton("Delete");

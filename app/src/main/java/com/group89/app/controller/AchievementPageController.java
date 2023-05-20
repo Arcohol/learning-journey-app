@@ -4,7 +4,7 @@ import javax.swing.DefaultCellEditor;
 import com.group89.app.model.AchievementRecordTableModel;
 import com.group89.app.model.AchievementType;
 import com.group89.app.model.entity.AchievementRecord;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
 public class AchievementPageController
@@ -24,6 +24,6 @@ public class AchievementPageController
     model = new AchievementRecordTableModel(list);
     view.getTable().setModel(model);
     view.getTable().getColumn("Type")
-        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(AchievementType.values())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(AchievementType.values())));
   }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import com.group89.app.controller.RolePageController;
 import com.group89.app.utils.SemesterGenerator;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 
 public class RolePage extends DefaultTablePage {
   // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
@@ -17,7 +17,7 @@ public class RolePage extends DefaultTablePage {
 
     ArrayList<String> semesters = SemesterGenerator.generate();
     semesters.add(0, "All");
-    semesterBox = new MyComboBox<>((String[]) semesters.toArray(new String[0]));
+    semesterBox = new IComboBox<>((String[]) semesters.toArray(new String[0]));
 
     GridBagConstraints c = new GridBagConstraints();
 

@@ -4,7 +4,7 @@ import javax.swing.DefaultCellEditor;
 import com.group89.app.model.PortfolioRecordTableModel;
 import com.group89.app.model.PortfolioType;
 import com.group89.app.model.entity.PortfolioRecord;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
 public class PortfolioPageController
@@ -24,6 +24,6 @@ public class PortfolioPageController
     model = new PortfolioRecordTableModel(list);
     view.getTable().setModel(model);
     view.getTable().getColumn("Type")
-        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(PortfolioType.values())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(PortfolioType.values())));
   }
 }

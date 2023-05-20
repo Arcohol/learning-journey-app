@@ -6,7 +6,7 @@ import com.group89.app.model.ListTableModel;
 import com.group89.app.model.RoleRecordTableModel;
 import com.group89.app.model.entity.RoleRecord;
 import com.group89.app.utils.SemesterGenerator;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.RolePage;
 
 public class RolePageController extends AbstractTablePageController<RoleRecord, RolePage> {
@@ -32,7 +32,7 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
     view.getTable().setModel(model);
     view.getTable().getColumn("Semester").setCellEditor(
-        new DefaultCellEditor(new MyComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
+        new DefaultCellEditor(new IComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
 
     sorter.setRowFilter(new RowFilter<ListTableModel<RoleRecord>, Integer>() {
       @Override

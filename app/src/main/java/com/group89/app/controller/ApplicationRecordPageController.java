@@ -4,7 +4,7 @@ import javax.swing.DefaultCellEditor;
 import com.group89.app.model.ApplicationRecordTableModel;
 import com.group89.app.model.ApplicationStatus;
 import com.group89.app.model.entity.ApplicationRecord;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
 
 public class ApplicationRecordPageController
@@ -24,6 +24,6 @@ public class ApplicationRecordPageController
     model = new ApplicationRecordTableModel(list);
     view.getTable().setModel(model);
     view.getTable().getColumn("Status")
-        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(ApplicationStatus.values())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(ApplicationStatus.values())));
   }
 }
