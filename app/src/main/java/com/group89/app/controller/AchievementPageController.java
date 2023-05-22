@@ -57,4 +57,13 @@ public class AchievementPageController
     });
     sorter.setModel(model);
   }
+
+  @Override
+  protected void add() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
+    AchievementRecord record = new AchievementRecord(!semester.equals("All") ? semester : "", "",
+        "", type != AchievementType.ALL ? type : AchievementType.OTHER);
+    model.addItem(record);
+  }
 }

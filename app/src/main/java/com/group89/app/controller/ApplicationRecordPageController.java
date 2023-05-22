@@ -50,4 +50,13 @@ public class ApplicationRecordPageController
     });
     sorter.setModel(model);
   }
+
+  @Override
+  protected void add() {
+    ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
+    ApplicationRecord record =
+        new ApplicationRecord(status != ApplicationStatus.ALL ? status : ApplicationStatus.PENDING,
+            "", "", "", 0.0, 0.0, 0, "");
+    model.addItem(record);
+  }
 }

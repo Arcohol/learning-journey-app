@@ -56,4 +56,13 @@ public class PortfolioPageController
     });
     sorter.setModel(model);
   }
+
+  @Override
+  protected void add() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    PortfolioType type = (PortfolioType) view.getTypeBox().getSelectedItem();
+    PortfolioRecord record = new PortfolioRecord(!semester.equals("All") ? semester : "",
+        type != PortfolioType.ALL ? type : PortfolioType.OTHER, "", "");
+    model.addItem(record);
+  }
 }

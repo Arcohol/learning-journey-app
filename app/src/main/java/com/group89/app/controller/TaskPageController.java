@@ -39,4 +39,16 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
     });
     sorter.setModel(model);
   }
+
+  @Override
+  protected void add() {
+    String status = (String) view.getStatusBox().getSelectedItem();
+    TaskRecord record = new TaskRecord("", "", switch (status) {
+      case "All" -> false;
+      case "Completed" -> true;
+      case "In progress" -> false;
+      default -> throw new IllegalStateException("Unexpected value: " + status);
+    });
+    model.addItem(record);
+  }
 }

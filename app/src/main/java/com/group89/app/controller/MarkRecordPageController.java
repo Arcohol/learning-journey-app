@@ -138,6 +138,15 @@ public class MarkRecordPageController
     updateLabels();
   }
 
+  @Override
+  protected void add() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
+    MarkRecord record = new MarkRecord(!semester.equals("All") ? semester : "", "", "", 0, 0, 0.0,
+        0, type != CourseType.ALL ? type : CourseType.COMPULSORY);
+    model.addItem(record);
+  }
+
   private void updateLabels() {
     JTable table = view.getTable();
 

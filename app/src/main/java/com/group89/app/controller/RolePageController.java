@@ -30,8 +30,8 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
-    view.getTable().getColumn("Semester").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
+    view.getTable().getColumn("Semester")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<RoleRecord>, Integer>() {
@@ -43,5 +43,12 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
       }
     });
     sorter.setModel(model);
+  }
+
+  @Override
+  protected void add() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    RoleRecord record = new RoleRecord(!semester.equals("All") ? semester : "", "", "", "");
+    model.addItem(record);
   }
 }
