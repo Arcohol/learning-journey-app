@@ -5,8 +5,9 @@ import javax.swing.RowFilter;
 import com.group89.app.model.AchievementRecordTableModel;
 import com.group89.app.model.AchievementType;
 import com.group89.app.model.ListTableModel;
+import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.AchievementRecord;
-import com.group89.app.utils.SemesterGenerator;
+// import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
@@ -36,7 +37,7 @@ public class AchievementPageController
 
     view.getTable().setModel(model);
     view.getTable().getColumn("Semester").setCellEditor(new DefaultCellEditor(
-        new IComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
+        new IComboBox<>(new SemesterList(false).toArray())));
     view.getTable().getColumn("Type")
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(AchievementType.values())));
 

@@ -2,13 +2,13 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
-import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.SemesterList;
+// import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
@@ -30,9 +30,7 @@ public class MarkRecordPage extends AbstractTablePage {
 
     setLayout(new GridBagLayout());
 
-    ArrayList<String> semesters = SemesterGenerator.generate();
-    semesters.add(0, "All");
-    semesterBox = new IComboBox<>(semesters.toArray(new String[0]));
+    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
     scaleBox = new IComboBox<>(SCALES);
     typeBox = new IComboBox<>(CourseType.values());
 

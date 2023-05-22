@@ -2,6 +2,7 @@ package com.group89.app.utils;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class SemesterGenerator {
   public static ArrayList<String> generate() {
     ArrayList<String> semesters = new ArrayList<>();

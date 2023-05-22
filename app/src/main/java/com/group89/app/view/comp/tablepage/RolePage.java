@@ -1,10 +1,10 @@
 package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import com.group89.app.controller.RolePageController;
-import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.SemesterList;
+// import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 
 public class RolePage extends DefaultTablePage {
@@ -15,9 +15,7 @@ public class RolePage extends DefaultTablePage {
   public RolePage() {
     super();
 
-    ArrayList<String> semesters = SemesterGenerator.generate();
-    semesters.add(0, "All");
-    semesterBox = new IComboBox<>(semesters.toArray(new String[0]));
+    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
 
     GridBagConstraints c = new GridBagConstraints();
 
