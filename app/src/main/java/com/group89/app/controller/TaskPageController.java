@@ -22,13 +22,12 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
 
   @Override
   protected void query() {
-    String status = (String) view.getStatusBox().getSelectedItem();
-
     model = new TaskRecordTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
 
+    String status = (String) view.getStatusBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<TaskRecord>, Integer>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<TaskRecord>, ? extends Integer> entry) {

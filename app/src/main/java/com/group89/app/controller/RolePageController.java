@@ -26,8 +26,6 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
   @Override
   protected void query() {
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-
     model = new RoleRecordTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
@@ -35,6 +33,7 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
     view.getTable().getColumn("Semester").setCellEditor(
         new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
+    String semester = (String) view.getSemesterBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<RoleRecord>, Integer>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<RoleRecord>, ? extends Integer> entry) {

@@ -1,5 +1,7 @@
 package com.group89.app.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.AchievementRecordTableModel;
@@ -29,18 +31,20 @@ public class AchievementPageController
 
   @Override
   protected void query() {
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
-
     model = new AchievementRecordTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
-    view.getTable().getColumn("Semester").setCellEditor(new DefaultCellEditor(
-        new IComboBox<>(new SemesterList(false).toArray())));
-    view.getTable().getColumn("Type")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(AchievementType.values())));
+    view.getTable().getColumn("Semester")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
+    ArrayList<AchievementType> types = new ArrayList<>(Arrays.asList(AchievementType.values()));
+    types.remove(AchievementType.ALL);
+    view.getTable().getColumn("Type").setCellEditor(
+        new DefaultCellEditor(new IComboBox<>(types.toArray(new AchievementType[0]))));
+
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<AchievementRecord>, Integer>() {
       @Override
       public boolean include(

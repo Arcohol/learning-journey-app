@@ -3,6 +3,8 @@ package com.group89.app.controller;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -85,8 +87,6 @@ public class MarkRecordPageController
   @Override
   protected void query() {
     String scale = (String) view.getScaleBox().getSelectedItem();
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
 
     JTable table = view.getTable();
 
@@ -116,10 +116,14 @@ public class MarkRecordPageController
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
-    table.getColumn("Type").setCellEditor(new DefaultCellEditor(new IComboBox<>(
-        new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
 
+    ArrayList<CourseType> types = new ArrayList<>(Arrays.asList(CourseType.values()));
+    types.remove(CourseType.ALL);
+    table.getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(types.toArray(new CourseType[0]))));
 
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Integer>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Integer> entry) {
