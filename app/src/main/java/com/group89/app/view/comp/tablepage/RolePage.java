@@ -17,7 +17,7 @@ public class RolePage extends DefaultTablePage {
 
     ArrayList<String> semesters = SemesterGenerator.generate();
     semesters.add(0, "All");
-    semesterBox = new IComboBox<>((String[]) semesters.toArray(new String[0]));
+    semesterBox = new IComboBox<>(semesters.toArray(new String[0]));
 
     GridBagConstraints c = new GridBagConstraints();
 

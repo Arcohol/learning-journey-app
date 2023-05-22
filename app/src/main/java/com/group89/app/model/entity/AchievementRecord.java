@@ -6,14 +6,14 @@ public class AchievementRecord {
   private String semester;
   private String title;
   private String details;
-  private AchievementType achievementType;
+  private AchievementType type;
 
   public AchievementRecord(String details, String semester, String title,
-      AchievementType achievementType) {
+      AchievementType type) {
     this.details = details;
     this.semester = semester;
     this.title = title;
-    this.achievementType = achievementType;
+    this.type = type;
   }
 
   public AchievementRecord() {
@@ -32,8 +32,8 @@ public class AchievementRecord {
     return semester;
   }
 
-  public AchievementType getAchievementType() {
-    return achievementType;
+  public AchievementType getType() {
+    return type;
   }
 
   public void setDetails(String details) {
@@ -48,7 +48,7 @@ public class AchievementRecord {
     this.semester = semester;
   }
 
-  public void setAchievementType(AchievementType achievementType) {
-    this.achievementType = achievementType;
+  public void setType(AchievementType type) {
+    this.type = type;
   }
 }
