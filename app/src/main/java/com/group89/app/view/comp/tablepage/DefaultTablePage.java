@@ -49,6 +49,7 @@ public class DefaultTablePage extends AbstractTablePage {
     c.anchor = GridBagConstraints.CENTER;
     add(deleteButton, c);
 
+    saveButton.setEnabled(false);
     c.gridx = 2;
     c.gridy = 2;
     c.anchor = GridBagConstraints.EAST;

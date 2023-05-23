@@ -39,7 +39,8 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
       public boolean include(Entry<? extends ListTableModel<TaskRecord>, ? extends Integer> entry) {
         ListTableModel<TaskRecord> model = entry.getModel();
         TaskRecord record = model.getItem(entry.getIdentifier());
-        return status.equals(statusType.getItemAll()) || (record.getStatus() && status.equals("Completed"))
+        return status.equals(statusType.getItemAll())
+            || (record.getStatus() && status.equals("Completed"))
             || (!record.getStatus() && status.equals("In progress"));
       }
     });
