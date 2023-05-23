@@ -8,15 +8,12 @@ import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.SemesterList;
-// import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
 import com.group89.app.view.comp.IComboBox;
 
 public class MarkRecordPage extends AbstractTablePage {
-  // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-  //     "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;

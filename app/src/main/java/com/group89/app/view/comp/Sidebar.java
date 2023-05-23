@@ -29,7 +29,7 @@ public class Sidebar extends JPanel {
   private static final Dimension DATE_SIZE = new Dimension(0, 80);
   private static final Dimension SIDEBAR_SIZE = new Dimension(150, 0);
   private static final float BUTTON_FONT_SIZE = 18f;
-  private static final int NUM_BUTTONS = 6;
+  private static final int NUM_BUTTONS = 7;
 
   private JLabel date;
   private JButton[] buttons;
@@ -100,9 +100,15 @@ public class Sidebar extends JPanel {
     c.gridy = 6;
     add(buttons[5], c);
 
-    c.weighty = 1;
+    buttons[6] = new IButton("Chart");
+
     c.gridx = 0;
     c.gridy = 7;
+    add(buttons[6], c);
+
+    c.weighty = 1;
+    c.gridx = 0;
+    c.gridy = 8;
     c.anchor = GridBagConstraints.SOUTH;
     add(exitButton, c);
   }

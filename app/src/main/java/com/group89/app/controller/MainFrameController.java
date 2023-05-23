@@ -43,9 +43,13 @@ public class MainFrameController {
       frame.getSidebar().onClick(5);
       layout.show(content, "page6");
     });
+    buttons[6].addActionListener(e -> {
+      frame.getSidebar().onClick(6);
+      layout.show(content, "page7");
+    });
 
     frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
 
-    buttons[0].doClick();
+    buttons[6].doClick();
   }
 }
