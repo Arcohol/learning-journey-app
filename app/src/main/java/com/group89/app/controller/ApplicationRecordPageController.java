@@ -5,6 +5,7 @@ import javax.swing.RowFilter;
 import com.group89.app.model.ApplicationRecordTableModel;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.entity.ApplicationRecord;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.ApplicationStatus;
 import com.group89.app.model.enumeration.ApplicationStatusComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
@@ -12,6 +13,8 @@ import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
 
 public class ApplicationRecordPageController
     extends AbstractTablePageController<ApplicationRecord, ApplicationRecordPage> {
+  private AbstractComboBoxItemType<ApplicationStatus> statusType;
+
   public ApplicationRecordPageController(ApplicationRecordPage page) {
     super(page, "applications.json", ApplicationRecord[].class, ApplicationRecord.class);
     init();
@@ -22,6 +25,8 @@ public class ApplicationRecordPageController
 
     view.getStatusBox().addActionListener(e -> query());
 
+    statusType = new ApplicationStatusComboBoxItemType();
+
     query();
   }
 
@@ -31,9 +36,8 @@ public class ApplicationRecordPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
-
-    view.getTable().getColumn("Status").setCellEditor(new DefaultCellEditor(
-        new IComboBox<>(new ApplicationStatusComboBoxItemType().valuesWithoutAll())));
+    view.getTable().getColumn("Status")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(statusType.valuesWithoutAll())));
 
     ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<ApplicationRecord>, Integer>() {
@@ -42,7 +46,7 @@ public class ApplicationRecordPageController
           Entry<? extends ListTableModel<ApplicationRecord>, ? extends Integer> entry) {
         ListTableModel<ApplicationRecord> model = entry.getModel();
         ApplicationRecord record = model.getItem(entry.getIdentifier());
-        return status == ApplicationStatus.ALL || record.getStatus() == status;
+        return status == statusType.getItemAll() || record.getStatus() == status;
       }
     });
     sorter.setModel(model);
@@ -51,9 +55,9 @@ public class ApplicationRecordPageController
   @Override
   protected void add() {
     ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
-    ApplicationRecord record =
-        new ApplicationRecord(status != ApplicationStatus.ALL ? status : ApplicationStatus.PENDING,
-            "", "", "", 0.0, 0.0, 0, "");
+    ApplicationRecord record = new ApplicationRecord(
+        status != statusType.getItemAll() ? status : ApplicationStatus.PENDING, "", "", "", 0.0,
+        0.0, 0, "");
     model.addItem(record);
   }
 }

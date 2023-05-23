@@ -5,4 +5,9 @@ public class ApplicationStatusComboBoxItemType extends AbstractComboBoxItemType<
   public ApplicationStatus[] values() {
     return ApplicationStatus.values();
   }
+
+  @Override
+  public ApplicationStatus getItemAll() {
+    return ApplicationStatus.ALL;
+  }
 }

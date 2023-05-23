@@ -5,4 +5,9 @@ public class PortfolioTypeComboBoxItemType extends AbstractComboBoxItemType<Port
   public PortfolioType[] values() {
     return PortfolioType.values();
   }
+
+  @Override
+  public PortfolioType getItemAll() {
+    return PortfolioType.ALL;
+  }
 }

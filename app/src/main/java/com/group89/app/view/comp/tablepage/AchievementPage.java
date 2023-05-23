@@ -4,21 +4,23 @@ import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.AchievementPageController;
 import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.AchievementType;
-// import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.enumeration.AchievementTypeComboBoxItemType;
+import com.group89.app.model.enumeration.SemesterComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class AchievementPage extends DefaultTablePage {
-  // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-  // "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   private JComboBox<String> semesterBox;
   private JComboBox<AchievementType> typeBox;
 
   public AchievementPage() {
     super();
 
-    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
-    typeBox = new IComboBox<>(AchievementType.values());
+    AbstractComboBoxItemType<String> semesterType = new SemesterComboBoxItemType();
+    AbstractComboBoxItemType<AchievementType> achievementType = new AchievementTypeComboBoxItemType();
+    semesterBox = new IComboBox<>(semesterType.values());
+    typeBox = new IComboBox<>(achievementType.values());
 
     GridBagConstraints c = new GridBagConstraints();
 

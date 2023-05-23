@@ -4,9 +4,13 @@ import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.TaskRecordTableModel;
 import com.group89.app.model.entity.TaskRecord;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
+import com.group89.app.model.enumeration.TaskStatusComboBoxItemType;
 import com.group89.app.view.comp.tablepage.TaskPage;
 
 public class TaskPageController extends AbstractTablePageController<TaskRecord, TaskPage> {
+  private AbstractComboBoxItemType<String> statusType;
+
   public TaskPageController(TaskPage page) {
     super(page, "tasks.json", TaskRecord[].class, TaskRecord.class);
     init();
@@ -16,6 +20,8 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
     super.init();
 
     view.getStatusBox().addActionListener(e -> query());
+
+    statusType = new TaskStatusComboBoxItemType();
 
     query();
   }
@@ -33,7 +39,7 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
       public boolean include(Entry<? extends ListTableModel<TaskRecord>, ? extends Integer> entry) {
         ListTableModel<TaskRecord> model = entry.getModel();
         TaskRecord record = model.getItem(entry.getIdentifier());
-        return status.equals("All") || (record.getStatus() && status.equals("Completed"))
+        return status.equals(statusType.getItemAll()) || (record.getStatus() && status.equals("Completed"))
             || (!record.getStatus() && status.equals("In progress"));
       }
     });

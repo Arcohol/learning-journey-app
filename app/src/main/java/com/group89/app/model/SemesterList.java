@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.LinkedList;
 
+@Deprecated
 public class SemesterList extends LinkedList<String> {
   public SemesterList(boolean withAll) {
     super();

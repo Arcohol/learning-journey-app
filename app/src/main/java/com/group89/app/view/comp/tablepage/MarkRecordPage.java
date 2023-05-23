@@ -7,16 +7,16 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.CourseType;
-// import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.enumeration.CourseTypeComboBoxItemType;
+import com.group89.app.model.enumeration.SemesterComboBoxItemType;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
 import com.group89.app.view.comp.IComboBox;
 
 public class MarkRecordPage extends AbstractTablePage {
-  // public static final String[] SEMESTERS = {"All", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-  //     "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
@@ -30,9 +30,11 @@ public class MarkRecordPage extends AbstractTablePage {
 
     setLayout(new GridBagLayout());
 
-    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
+    AbstractComboBoxItemType<String> semesterType = new SemesterComboBoxItemType();
+    semesterBox = new IComboBox<>(semesterType.values());
     scaleBox = new IComboBox<>(SCALES);
-    typeBox = new IComboBox<>(CourseType.values());
+    AbstractComboBoxItemType<CourseType> courseType = new CourseTypeComboBoxItemType();
+    typeBox = new IComboBox<>(courseType.values());
 
     saveButton = new IButton("Save");
     deleteButton = new IButton("Delete");

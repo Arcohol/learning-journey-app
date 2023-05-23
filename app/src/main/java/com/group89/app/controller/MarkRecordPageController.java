@@ -16,9 +16,10 @@ import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
 import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.MarkRecord;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.CourseTypeComboBoxItemType;
-// import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.enumeration.SemesterComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
@@ -67,6 +68,9 @@ public class MarkRecordPageController
     }
   }
 
+  private AbstractComboBoxItemType<String> semesterType;
+  private AbstractComboBoxItemType<CourseType> courseType;
+
   public MarkRecordPageController(MarkRecordPage page) {
     super(page, "marks.json", MarkRecord[].class, MarkRecord.class);
 
@@ -79,6 +83,9 @@ public class MarkRecordPageController
     view.getScaleBox().addActionListener(e -> query());
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
+
+    semesterType = new SemesterComboBoxItemType();
+    courseType = new CourseTypeComboBoxItemType();
 
     query();
   }
@@ -114,10 +121,9 @@ public class MarkRecordPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
-
-    table.getColumn("Type").setCellEditor(new DefaultCellEditor(
-        new IComboBox<>(new CourseTypeComboBoxItemType().valuesWithoutAll())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(semesterType.valuesWithoutAll())));
+    table.getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(courseType.valuesWithoutAll())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
@@ -126,8 +132,8 @@ public class MarkRecordPageController
       public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Integer> entry) {
         ListTableModel<MarkRecord> model = entry.getModel();
         MarkRecord record = model.getItem(entry.getIdentifier());
-        return (semester.equals("All") || record.getSemester().equals(semester))
-            && (type == CourseType.ALL || record.getType() == type);
+        return (semester.equals(semesterType.getItemAll()) || record.getSemester().equals(semester))
+            && (type == courseType.getItemAll() || record.getType() == type);
       }
     });
     sorter.setModel(model);
@@ -139,8 +145,8 @@ public class MarkRecordPageController
   protected void add() {
     String semester = (String) view.getSemesterBox().getSelectedItem();
     CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
-    MarkRecord record = new MarkRecord(!semester.equals("All") ? semester : "", "", "", 0, 0, 0.0,
-        0, type != CourseType.ALL ? type : CourseType.COMPULSORY);
+    MarkRecord record = new MarkRecord(!semester.equals(semesterType.getItemAll()) ? semester : "",
+        "", "", 0, 0, 0.0, 0, type != courseType.getItemAll() ? type : CourseType.COMPULSORY);
     model.addItem(record);
   }
 

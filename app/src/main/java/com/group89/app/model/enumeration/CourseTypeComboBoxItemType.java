@@ -5,4 +5,9 @@ public class CourseTypeComboBoxItemType extends AbstractComboBoxItemType<CourseT
   public CourseType[] values() {
     return CourseType.values();
   }
+
+  @Override
+  public CourseType getItemAll() {
+    return CourseType.ALL;
+  }
 }

@@ -6,14 +6,18 @@ import com.group89.app.model.AchievementRecordTableModel;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.AchievementRecord;
+import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.AchievementType;
 import com.group89.app.model.enumeration.AchievementTypeComboBoxItemType;
-// import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.model.enumeration.SemesterComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
 public class AchievementPageController
     extends AbstractTablePageController<AchievementRecord, AchievementPage> {
+  private AbstractComboBoxItemType<String> semesterType;
+  private AbstractComboBoxItemType<AchievementType> achievementType;
+
   public AchievementPageController(AchievementPage page) {
     super(page, "achievements.json", AchievementRecord[].class, AchievementRecord.class);
     init();
@@ -25,6 +29,9 @@ public class AchievementPageController
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
 
+    semesterType = new SemesterComboBoxItemType();
+    achievementType = new AchievementTypeComboBoxItemType();
+
     query();
   }
 
@@ -35,10 +42,10 @@ public class AchievementPageController
 
     view.getTable().setModel(model);
     view.getTable().getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(semesterType.valuesWithoutAll())));
 
-    view.getTable().getColumn("Type").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(new AchievementTypeComboBoxItemType().valuesWithoutAll())));
+    view.getTable().getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(achievementType.valuesWithoutAll())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
@@ -48,8 +55,8 @@ public class AchievementPageController
           Entry<? extends ListTableModel<AchievementRecord>, ? extends Integer> entry) {
         ListTableModel<AchievementRecord> model = entry.getModel();
         AchievementRecord record = model.getItem(entry.getIdentifier());
-        return (semester.equals("All") || record.getSemester().equals(semester))
-            && (type == AchievementType.ALL || record.getType() == type);
+        return (semester.equals(semesterType.getItemAll()) || record.getSemester().equals(semester))
+            && (type == achievementType.getItemAll() || record.getType() == type);
       }
     });
     sorter.setModel(model);
@@ -59,8 +66,9 @@ public class AchievementPageController
   protected void add() {
     String semester = (String) view.getSemesterBox().getSelectedItem();
     AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
-    AchievementRecord record = new AchievementRecord(!semester.equals("All") ? semester : "", "",
-        "", type != AchievementType.ALL ? type : AchievementType.OTHER);
+    AchievementRecord record =
+        new AchievementRecord(!semester.equals(semesterType.getItemAll()) ? semester : "", "", "",
+            type != achievementType.getItemAll() ? type : AchievementType.OTHER);
     model.addItem(record);
   }
 }

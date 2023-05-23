@@ -5,4 +5,9 @@ public class AchievementTypeComboBoxItemType extends AbstractComboBoxItemType<Ac
   public AchievementType[] values() {
     return AchievementType.values();
   }
+
+  @Override
+  public AchievementType getItemAll() {
+    return AchievementType.ALL;
+  }
 }

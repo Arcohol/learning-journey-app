@@ -5,6 +5,8 @@ import java.lang.reflect.Array;
 public abstract class AbstractComboBoxItemType<T> {
   public abstract T[] values();
 
+  public abstract T getItemAll();
+
   public T[] valuesWithoutAll() {
     T[] values = values();
     @SuppressWarnings("unchecked")
