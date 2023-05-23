@@ -7,8 +7,8 @@ import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.PortfolioRecordTableModel;
 import com.group89.app.model.PortfolioType;
+import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.PortfolioRecord;
-import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
@@ -34,8 +34,8 @@ public class PortfolioPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
-    view.getTable().getColumn("Semester").setCellEditor(new DefaultCellEditor(
-        new IComboBox<>(SemesterGenerator.generate().toArray(new String[0]))));
+    view.getTable().getColumn("Semester")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
     ArrayList<PortfolioType> types = new ArrayList<>(Arrays.asList(PortfolioType.values()));
     types.remove(PortfolioType.ALL);
