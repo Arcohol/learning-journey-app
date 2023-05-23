@@ -7,7 +7,7 @@ import com.group89.app.model.ListTableModel;
 import com.group89.app.model.entity.ApplicationRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.ApplicationStatus;
-import com.group89.app.model.enumeration.ApplicationStatusComboBoxItemType;
+import com.group89.app.model.enumeration.ApplicationStatusItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
 
@@ -25,7 +25,7 @@ public class ApplicationRecordPageController
 
     view.getStatusBox().addActionListener(e -> query());
 
-    statusType = new ApplicationStatusComboBoxItemType();
+    statusType = new ApplicationStatusItemType();
 
     query();
   }

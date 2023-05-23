@@ -4,12 +4,11 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.PortfolioRecordTableModel;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.PortfolioRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.PortfolioType;
-import com.group89.app.model.enumeration.PortfolioTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.PortfolioItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
@@ -29,8 +28,8 @@ public class PortfolioPageController
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
 
-    semesterType = new SemesterComboBoxItemType();
-    portfolioType = new PortfolioTypeComboBoxItemType();
+    semesterType = new SemesterItemType();
+    portfolioType = new PortfolioItemType();
 
     query();
   }

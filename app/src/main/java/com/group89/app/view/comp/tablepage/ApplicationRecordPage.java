@@ -5,7 +5,7 @@ import javax.swing.JComboBox;
 import com.group89.app.controller.ApplicationRecordPageController;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.ApplicationStatus;
-import com.group89.app.model.enumeration.ApplicationStatusComboBoxItemType;
+import com.group89.app.model.enumeration.ApplicationStatusItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class ApplicationRecordPage extends DefaultTablePage {
@@ -14,7 +14,7 @@ public class ApplicationRecordPage extends DefaultTablePage {
   public ApplicationRecordPage() {
     super();
 
-    AbstractComboBoxItemType<ApplicationStatus> achievementType = new ApplicationStatusComboBoxItemType();
+    AbstractComboBoxItemType<ApplicationStatus> achievementType = new ApplicationStatusItemType();
     statusBox = new IComboBox<>(achievementType.values());
 
     GridBagConstraints c = new GridBagConstraints();

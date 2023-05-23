@@ -6,7 +6,7 @@ import com.group89.app.model.ListTableModel;
 import com.group89.app.model.RoleRecordTableModel;
 import com.group89.app.model.entity.RoleRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.RolePage;
 
@@ -23,7 +23,7 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
     view.getSemesterBox().addActionListener(e -> query());
 
-    semesterType = new SemesterComboBoxItemType();
+    semesterType = new SemesterItemType();
 
     query();
   }

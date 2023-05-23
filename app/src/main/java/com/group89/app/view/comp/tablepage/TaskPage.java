@@ -8,7 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.TaskStatusComboBoxItemType;
+import com.group89.app.model.enumeration.TaskStatusItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class TaskPage extends DefaultTablePage {
@@ -33,7 +33,7 @@ public class TaskPage extends DefaultTablePage {
   public TaskPage() {
     super();
 
-    AbstractComboBoxItemType<String> statusType = new TaskStatusComboBoxItemType();
+    AbstractComboBoxItemType<String> statusType = new TaskStatusItemType();
     statusBox = new IComboBox<>(statusType.values());
 
     GridBagConstraints c = new GridBagConstraints();

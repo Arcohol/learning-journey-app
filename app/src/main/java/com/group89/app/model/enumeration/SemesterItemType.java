@@ -1,6 +1,6 @@
 package com.group89.app.model.enumeration;
 
-public class SemesterComboBoxItemType extends AbstractComboBoxItemType<String> {
+public class SemesterItemType extends AbstractComboBoxItemType<String> {
   @Override
   public String[] values() {
     int year = java.time.LocalDate.now().getYear() + 4;

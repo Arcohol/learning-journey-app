@@ -6,11 +6,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.CourseType;
-import com.group89.app.model.enumeration.CourseTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.CourseItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
 import com.group89.app.view.comp.ITable;
@@ -30,10 +29,10 @@ public class MarkRecordPage extends AbstractTablePage {
 
     setLayout(new GridBagLayout());
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterComboBoxItemType();
+    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
     semesterBox = new IComboBox<>(semesterType.values());
     scaleBox = new IComboBox<>(SCALES);
-    AbstractComboBoxItemType<CourseType> courseType = new CourseTypeComboBoxItemType();
+    AbstractComboBoxItemType<CourseType> courseType = new CourseItemType();
     typeBox = new IComboBox<>(courseType.values());
 
     saveButton = new IButton("Save");

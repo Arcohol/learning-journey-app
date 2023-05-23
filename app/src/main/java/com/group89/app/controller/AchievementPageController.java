@@ -4,12 +4,11 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.AchievementRecordTableModel;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.AchievementRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.AchievementType;
-import com.group89.app.model.enumeration.AchievementTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.AchievementItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
@@ -29,8 +28,8 @@ public class AchievementPageController
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
 
-    semesterType = new SemesterComboBoxItemType();
-    achievementType = new AchievementTypeComboBoxItemType();
+    semesterType = new SemesterItemType();
+    achievementType = new AchievementItemType();
 
     query();
   }

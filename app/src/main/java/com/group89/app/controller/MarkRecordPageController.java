@@ -14,12 +14,11 @@ import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.CourseType;
-import com.group89.app.model.enumeration.CourseTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.CourseItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
@@ -84,8 +83,8 @@ public class MarkRecordPageController
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
 
-    semesterType = new SemesterComboBoxItemType();
-    courseType = new CourseTypeComboBoxItemType();
+    semesterType = new SemesterItemType();
+    courseType = new CourseItemType();
 
     query();
   }

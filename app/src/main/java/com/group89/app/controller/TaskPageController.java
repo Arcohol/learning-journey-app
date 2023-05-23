@@ -5,7 +5,7 @@ import com.group89.app.model.ListTableModel;
 import com.group89.app.model.TaskRecordTableModel;
 import com.group89.app.model.entity.TaskRecord;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.TaskStatusComboBoxItemType;
+import com.group89.app.model.enumeration.TaskStatusItemType;
 import com.group89.app.view.comp.tablepage.TaskPage;
 
 public class TaskPageController extends AbstractTablePageController<TaskRecord, TaskPage> {
@@ -21,7 +21,7 @@ public class TaskPageController extends AbstractTablePageController<TaskRecord, 
 
     view.getStatusBox().addActionListener(e -> query());
 
-    statusType = new TaskStatusComboBoxItemType();
+    statusType = new TaskStatusItemType();
 
     query();
   }

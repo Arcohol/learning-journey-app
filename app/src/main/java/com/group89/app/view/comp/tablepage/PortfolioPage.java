@@ -3,11 +3,10 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.PortfolioPageController;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.PortfolioType;
-import com.group89.app.model.enumeration.PortfolioTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.PortfolioItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class PortfolioPage extends DefaultTablePage {
@@ -17,8 +16,8 @@ public class PortfolioPage extends DefaultTablePage {
   public PortfolioPage() {
     super();
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterComboBoxItemType();
-    AbstractComboBoxItemType<PortfolioType> portfolioType = new PortfolioTypeComboBoxItemType();
+    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
+    AbstractComboBoxItemType<PortfolioType> portfolioType = new PortfolioItemType();
     semesterBox = new IComboBox<>(semesterType.values());
     typeBox = new IComboBox<>(portfolioType.values());
 

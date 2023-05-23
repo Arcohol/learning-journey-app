@@ -3,11 +3,10 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.AchievementPageController;
-import com.group89.app.model.SemesterList;
 import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.AchievementType;
-import com.group89.app.model.enumeration.AchievementTypeComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterComboBoxItemType;
+import com.group89.app.model.enumeration.AchievementItemType;
+import com.group89.app.model.enumeration.SemesterItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class AchievementPage extends DefaultTablePage {
@@ -17,8 +16,8 @@ public class AchievementPage extends DefaultTablePage {
   public AchievementPage() {
     super();
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterComboBoxItemType();
-    AbstractComboBoxItemType<AchievementType> achievementType = new AchievementTypeComboBoxItemType();
+    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
+    AbstractComboBoxItemType<AchievementType> achievementType = new AchievementItemType();
     semesterBox = new IComboBox<>(semesterType.values());
     typeBox = new IComboBox<>(achievementType.values());
 
