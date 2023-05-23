@@ -3,8 +3,8 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.PortfolioPageController;
-import com.group89.app.model.PortfolioType;
 import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.PortfolioType;
 import com.group89.app.view.comp.IComboBox;
 
 public class PortfolioPage extends DefaultTablePage {

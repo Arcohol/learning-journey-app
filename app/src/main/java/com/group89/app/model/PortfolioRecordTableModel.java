@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.List;
 import com.group89.app.model.entity.PortfolioRecord;
+import com.group89.app.model.enumeration.PortfolioType;
 
 public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Type", "Exhibition", "Detail"};

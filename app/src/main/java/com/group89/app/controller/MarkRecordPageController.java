@@ -3,8 +3,6 @@ package com.group89.app.controller;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -12,13 +10,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
-import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
 import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.MarkRecord;
+import com.group89.app.model.enumeration.CourseType;
+import com.group89.app.model.enumeration.CourseTypeComboBoxItemType;
 // import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
@@ -117,10 +116,8 @@ public class MarkRecordPageController
     table.getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
-    ArrayList<CourseType> types = new ArrayList<>(Arrays.asList(CourseType.values()));
-    types.remove(CourseType.ALL);
-    table.getColumn("Type")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(types.toArray(new CourseType[0]))));
+    table.getColumn("Type").setCellEditor(new DefaultCellEditor(
+        new IComboBox<>(new CourseTypeComboBoxItemType().valuesWithoutAll())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     CourseType type = (CourseType) view.getTypeBox().getSelectedItem();

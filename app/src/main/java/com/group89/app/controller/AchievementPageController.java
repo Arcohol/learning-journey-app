@@ -1,14 +1,13 @@
 package com.group89.app.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.AchievementRecordTableModel;
-import com.group89.app.model.AchievementType;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.AchievementRecord;
+import com.group89.app.model.enumeration.AchievementType;
+import com.group89.app.model.enumeration.AchievementTypeComboBoxItemType;
 // import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
@@ -38,10 +37,8 @@ public class AchievementPageController
     view.getTable().getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
-    ArrayList<AchievementType> types = new ArrayList<>(Arrays.asList(AchievementType.values()));
-    types.remove(AchievementType.ALL);
     view.getTable().getColumn("Type").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(types.toArray(new AchievementType[0]))));
+        new DefaultCellEditor(new IComboBox<>(new AchievementTypeComboBoxItemType().valuesWithoutAll())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();

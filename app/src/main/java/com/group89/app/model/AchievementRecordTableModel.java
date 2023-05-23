@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.List;
 import com.group89.app.model.entity.AchievementRecord;
+import com.group89.app.model.enumeration.AchievementType;
 
 public class AchievementRecordTableModel extends ListTableModel<AchievementRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Detail", "Type"};

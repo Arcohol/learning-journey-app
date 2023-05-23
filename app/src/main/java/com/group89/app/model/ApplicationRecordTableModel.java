@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.List;
 import com.group89.app.model.entity.ApplicationRecord;
+import com.group89.app.model.enumeration.ApplicationStatus;
 
 public class ApplicationRecordTableModel extends ListTableModel<ApplicationRecord> {
   private static final String[] COLUMN_NAMES =

@@ -1,14 +1,13 @@
 package com.group89.app.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.PortfolioRecordTableModel;
-import com.group89.app.model.PortfolioType;
 import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.PortfolioRecord;
+import com.group89.app.model.enumeration.PortfolioType;
+import com.group89.app.model.enumeration.PortfolioTypeComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
@@ -37,10 +36,8 @@ public class PortfolioPageController
     view.getTable().getColumn("Semester")
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
-    ArrayList<PortfolioType> types = new ArrayList<>(Arrays.asList(PortfolioType.values()));
-    types.remove(PortfolioType.ALL);
-    view.getTable().getColumn("Type")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(types.toArray(new PortfolioType[0]))));
+    view.getTable().getColumn("Type").setCellEditor(new DefaultCellEditor(
+        new IComboBox<>(new PortfolioTypeComboBoxItemType().valuesWithoutAll())));
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     PortfolioType type = (PortfolioType) view.getTypeBox().getSelectedItem();

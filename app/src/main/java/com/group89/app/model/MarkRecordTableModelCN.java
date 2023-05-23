@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.List;
 import com.group89.app.model.entity.MarkRecord;
+import com.group89.app.model.enumeration.CourseType;
 
 public class MarkRecordTableModelCN extends ListTableModel<MarkRecord> {
   private static final String[] COLUMN_NAMES =

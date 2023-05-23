@@ -3,8 +3,8 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.AchievementPageController;
-import com.group89.app.model.AchievementType;
 import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.AchievementType;
 // import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 

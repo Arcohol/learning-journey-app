@@ -1,13 +1,12 @@
 package com.group89.app.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.ApplicationRecordTableModel;
-import com.group89.app.model.ApplicationStatus;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.entity.ApplicationRecord;
+import com.group89.app.model.enumeration.ApplicationStatus;
+import com.group89.app.model.enumeration.ApplicationStatusComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
 
@@ -33,10 +32,8 @@ public class ApplicationRecordPageController
 
     view.getTable().setModel(model);
 
-    ArrayList<ApplicationStatus> types = new ArrayList<>(Arrays.asList(ApplicationStatus.values()));
-    types.remove(ApplicationStatus.ALL);
-    view.getTable().getColumn("Status").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(types.toArray(new ApplicationStatus[0]))));
+    view.getTable().getColumn("Status").setCellEditor(new DefaultCellEditor(
+        new IComboBox<>(new ApplicationStatusComboBoxItemType().valuesWithoutAll())));
 
     ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<ApplicationRecord>, Integer>() {

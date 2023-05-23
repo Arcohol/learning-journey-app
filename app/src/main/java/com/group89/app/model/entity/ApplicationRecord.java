@@ -1,6 +1,6 @@
 package com.group89.app.model.entity;
 
-import com.group89.app.model.ApplicationStatus;
+import com.group89.app.model.enumeration.ApplicationStatus;
 
 public class ApplicationRecord {
   private ApplicationStatus status;

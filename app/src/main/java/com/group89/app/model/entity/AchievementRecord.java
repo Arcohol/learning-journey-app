@@ -1,6 +1,6 @@
 package com.group89.app.model.entity;
 
-import com.group89.app.model.AchievementType;
+import com.group89.app.model.enumeration.AchievementType;
 
 public class AchievementRecord {
   private String semester;

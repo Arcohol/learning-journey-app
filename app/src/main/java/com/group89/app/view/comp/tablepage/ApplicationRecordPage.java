@@ -3,7 +3,8 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.ApplicationRecordPageController;
-import com.group89.app.model.ApplicationStatus;
+import com.group89.app.model.enumeration.ApplicationStatus;
+import com.group89.app.model.enumeration.ApplicationStatusComboBoxItemType;
 import com.group89.app.view.comp.IComboBox;
 
 public class ApplicationRecordPage extends DefaultTablePage {
@@ -12,7 +13,7 @@ public class ApplicationRecordPage extends DefaultTablePage {
   public ApplicationRecordPage() {
     super();
 
-    statusBox = new IComboBox<>(ApplicationStatus.values());
+    statusBox = new IComboBox<>(new ApplicationStatusComboBoxItemType().values());
 
     GridBagConstraints c = new GridBagConstraints();
 

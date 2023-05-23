@@ -1,6 +1,6 @@
 package com.group89.app.model.entity;
 
-import com.group89.app.model.CourseType;
+import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.utils.MarkConverter;
 
 public class MarkRecord {
