@@ -30,18 +30,18 @@ public class ChartPage extends JPanel {
     controlPanel = new JPanel();
     controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
     controlPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-    controlPanel.setPreferredSize(new Dimension(150, 0));
+    controlPanel.setPreferredSize(new Dimension(200, 0));
     controlPanel.setBorder(BorderFactory.createTitledBorder("Control"));
     controlPanel.setBackground(Color.WHITE);
 
     buttons = new JButton[3];
-    buttons[0] = new IButton("Button 1");
-    buttons[1] = new IButton("Button 2");
-    buttons[2] = new IButton("Button 3");
+    buttons[0] = new IButton("Trend");
+    buttons[1] = new IButton("Composition");
+    buttons[2] = new IButton("Distribution");
     for (JButton button : buttons) {
+      button.setMaximumSize(new Dimension(150, 30));
       button.setAlignmentX(JButton.CENTER_ALIGNMENT);
     }
-
 
     controlPanel.add(Box.createVerticalGlue());
 

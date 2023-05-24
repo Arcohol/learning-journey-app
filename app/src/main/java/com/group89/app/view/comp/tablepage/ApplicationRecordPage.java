@@ -15,13 +15,12 @@ public class ApplicationRecordPage extends DefaultTablePage {
     statusBox = new IComboBox<>(ApplicationStatus.values());
 
     GridBagConstraints c = new GridBagConstraints();
-
-    c.insets.set(10, 10, 0, 0);
+    c.anchor = GridBagConstraints.WEST;
 
     c.gridx = 0;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(statusBox, c);
+    c.weightx = 1;
+    getHeader().add(statusBox, c);
 
     new ApplicationRecordPageController(this);
   }

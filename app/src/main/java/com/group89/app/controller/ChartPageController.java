@@ -18,5 +18,11 @@ public class ChartPageController {
     buttons[0].addActionListener(e -> {
       view.setChart(ChartPanelFactory.getAverageTrend());
     });
+    buttons[1].addActionListener(e -> {
+      view.setChart(ChartPanelFactory.getCourseComposition());
+    });
+    buttons[2].addActionListener(e -> {
+      view.setChart(ChartPanelFactory.getMarkDistribution());
+    });
   }
 }

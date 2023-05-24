@@ -2,56 +2,62 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import javax.swing.JScrollPane;
-import com.group89.app.view.comp.IButton;
+import com.group89.app.view.comp.Footer;
+import com.group89.app.view.comp.Header;
 import com.group89.app.view.comp.ITable;
 
 public class DefaultTablePage extends AbstractTablePage {
+  private Header header;
+  private Footer footer;
+
   public DefaultTablePage() {
     super();
 
     setLayout(new GridBagLayout());
 
+    header = new Header();
+    footer = new Footer();
+
     table = new ITable();
     scrollPane = new JScrollPane(table);
-    addButton = new IButton("Add");
-    deleteButton = new IButton("Delete");
-    saveButton = new IButton("Save");
+
+    addButton = footer.getAddButton();
+    deleteButton = footer.getDeleteButton();
+    saveButton = footer.getSaveButton();
 
 
     GridBagConstraints c = new GridBagConstraints();
+    c.fill = GridBagConstraints.BOTH;
 
-    c.insets = new Insets(10, 10, 10, 10);
+    c.insets.set(10, 10, 10, 10);
+
+    c.gridx = 0;
+    c.gridy = 0;
+    c.weightx = 1;
+    c.weighty = 0;
+    add(header, c);
+
+    c.insets.set(0, 10, 10, 10);
 
     c.gridx = 0;
     c.gridy = 1;
     c.weightx = 1;
     c.weighty = 1;
-    c.gridwidth = 3;
-    c.fill = GridBagConstraints.BOTH;
     add(scrollPane, c);
-
-    c.gridwidth = 1;
-    c.weightx = 1;
-    c.weighty = 0;
-    c.fill = GridBagConstraints.NONE;
-
-    c.insets.set(0, 10, 10, 10);
 
     c.gridx = 0;
     c.gridy = 2;
-    c.anchor = GridBagConstraints.WEST;
-    add(addButton, c);
+    c.weightx = 1;
+    c.weighty = 0;
+    add(footer, c);
+  }
 
-    c.gridx = 1;
-    c.gridy = 2;
-    c.anchor = GridBagConstraints.CENTER;
-    add(deleteButton, c);
+  public Header getHeader() {
+    return header;
+  }
 
-    c.gridx = 2;
-    c.gridy = 2;
-    c.anchor = GridBagConstraints.EAST;
-    add(saveButton, c);
+  public Footer getFooter() {
+    return footer;
   }
 }

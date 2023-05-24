@@ -36,12 +36,12 @@ public class TaskPage extends DefaultTablePage {
 
     GridBagConstraints c = new GridBagConstraints();
 
-    c.insets.set(10, 10, 0, 0);
-
     c.gridx = 0;
     c.gridy = 0;
+    c.weightx = 1;
     c.anchor = GridBagConstraints.WEST;
-    add(statusBox, c);
+
+    getHeader().add(statusBox, c);
 
     table.setDefaultRenderer(Object.class, new TaskRenderer());
 

@@ -50,6 +50,6 @@ public class MainFrameController {
 
     frame.getSidebar().getExitButton().addActionListener(e -> System.exit(0));
 
-    buttons[6].doClick();
+    buttons[0].doClick();
   }
 }
