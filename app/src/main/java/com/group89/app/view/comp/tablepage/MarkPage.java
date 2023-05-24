@@ -11,6 +11,11 @@ import com.group89.app.view.comp.Header;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.ILabel;
 
+/**
+ * A table page for the mark table.
+ * 
+ * @see DefaultTablePage
+ */
 public class MarkPage extends DefaultTablePage {
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
@@ -90,18 +95,38 @@ public class MarkPage extends DefaultTablePage {
     new MarkPageController(this);
   }
 
+  /**
+   * Returns the semester combo box.
+   * 
+   * @return the semester combo box
+   */
   public JComboBox<String> getSemesterBox() {
     return semesterBox;
   }
 
+  /**
+   * Returns the scale combo box.
+   * 
+   * @return the scale combo box
+   */
   public JComboBox<String> getScaleBox() {
     return scaleBox;
   }
 
+  /**
+   * Returns the type combo box.
+   * 
+   * @return the type combo box
+   */
   public JComboBox<CourseType> getTypeBox() {
     return typeBox;
   }
 
+  /**
+   * Returns the labels.
+   * 
+   * @return the labels
+   */
   public JLabel[] getLabels() {
     return labels;
   }

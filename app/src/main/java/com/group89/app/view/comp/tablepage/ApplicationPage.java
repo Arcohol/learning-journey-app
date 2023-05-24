@@ -6,6 +6,9 @@ import com.group89.app.controller.ApplicationPageController;
 import com.group89.app.model.ApplicationStatus;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for the application table.
+ */
 public class ApplicationPage extends DefaultTablePage {
   private JComboBox<ApplicationStatus> statusBox;
 
@@ -25,6 +28,11 @@ public class ApplicationPage extends DefaultTablePage {
     new ApplicationPageController(this);
   }
 
+  /**
+   * Returns the status combo box.
+   * 
+   * @return the status combo box
+   */
   public JComboBox<ApplicationStatus> getStatusBox() {
     return statusBox;
   }

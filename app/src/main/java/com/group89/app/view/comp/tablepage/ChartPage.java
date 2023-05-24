@@ -13,14 +13,28 @@ import javax.swing.JPanel;
 import com.group89.app.controller.ChartPageController;
 import com.group89.app.view.comp.IButton;
 
+/**
+ * A custom JPanel for displaying charts.
+ */
 public class ChartPage extends JPanel {
+  /**
+   * The panel used to display the chart.
+   */
   private JPanel displayPanel;
+
+  /**
+   * The panel used to control the chart.
+   */
   private JPanel controlPanel;
+
+  /**
+   * The buttons used to switch between charts.
+   */
   private JButton[] buttons;
-  
+
   public ChartPage() {
     super();
-    
+
     setLayout(new GridBagLayout());
 
     displayPanel = new JPanel(new GridBagLayout());
@@ -76,18 +90,38 @@ public class ChartPage extends JPanel {
     new ChartPageController(this);
   }
 
+  /**
+   * Returns the display panel.
+   * 
+   * @return the display panel
+   */
   public JPanel getDisplayPanel() {
     return displayPanel;
   }
 
+  /**
+   * Returns the control panel.
+   * 
+   * @return the control panel
+   */
   public JPanel getControlPanel() {
     return controlPanel;
   }
 
+  /**
+   * Returns the buttons.
+   * 
+   * @return the buttons
+   */
   public JButton[] getButtons() {
     return buttons;
   }
 
+  /**
+   * Sets the chart to be displayed.
+   * 
+   * @param chart the chart to be displayed
+   */
   public void setChart(JPanel chart) {
     GridBagConstraints c = new GridBagConstraints();
     c.weightx = 1;

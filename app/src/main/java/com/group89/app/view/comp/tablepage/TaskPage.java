@@ -9,9 +9,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for tasks.
+ */
 public class TaskPage extends DefaultTablePage {
+  /**
+   * A table cell renderer for tasks. Makes the entire row green if the task is done.
+   */
   class TaskRenderer extends DefaultTableCellRenderer {
-    // make the entire row green if the task is done
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
         boolean hasFocus, int row, int column) {
@@ -48,6 +53,11 @@ public class TaskPage extends DefaultTablePage {
     new TaskPageController(this);
   }
 
+  /**
+   * Returns the status box.
+   * 
+   * @return the status box
+   */
   public JComboBox<String> getStatusBox() {
     return statusBox;
   }

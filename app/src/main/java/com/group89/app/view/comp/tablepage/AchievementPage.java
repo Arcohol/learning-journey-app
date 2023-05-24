@@ -7,6 +7,9 @@ import com.group89.app.model.AchievementType;
 import com.group89.app.model.SemesterList;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for the achievement table.
+ */
 public class AchievementPage extends DefaultTablePage {
   private JComboBox<String> semesterBox;
   private JComboBox<AchievementType> typeBox;
@@ -34,10 +37,20 @@ public class AchievementPage extends DefaultTablePage {
     new AchievementPageController(this);
   }
 
+  /**
+   * Returns the semester combo box.
+   * 
+   * @return the semester combo box
+   */
   public JComboBox<String> getSemesterBox() {
     return semesterBox;
   }
 
+  /**
+   * Returns the type combo box.
+   * 
+   * @return the type combo box
+   */
   public JComboBox<AchievementType> getTypeBox() {
     return typeBox;
   }

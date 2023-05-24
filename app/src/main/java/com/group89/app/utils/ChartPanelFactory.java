@@ -26,7 +26,16 @@ import org.jfree.data.statistics.HistogramDataset;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.entity.Mark;
 
+/**
+ * A factory class that creates different charts.
+ */
 public class ChartPanelFactory {
+
+  /**
+   * Creates a chart panel that shows the average mark trend.
+   * 
+   * @return a chart panel
+   */
   public static ChartPanel getAverageTrend() {
     JsonConverter<Mark> jsonConverter = new JsonConverter<>("marks.json", Mark[].class);
     List<Mark> marks = jsonConverter.toArrayList();
@@ -93,6 +102,11 @@ public class ChartPanelFactory {
     return panel;
   }
 
+  /**
+   * Creates a chart panel that shows the course composition.
+   * 
+   * @return a chart panel
+   */
   public static ChartPanel getCourseComposition() {
     // creates a pie chart containing different typs of courses
     JsonConverter<Mark> jsonConverter = new JsonConverter<>("marks.json", Mark[].class);
@@ -129,6 +143,11 @@ public class ChartPanelFactory {
     return panel;
   }
 
+  /**
+   * Creates a chart panel that shows the distribution of marks.
+   * 
+   * @return a chart panel
+   */
   public static ChartPanel getMarkDistribution() {
     JsonConverter<Mark> converter = new JsonConverter<>("marks.json", Mark[].class);
     List<Mark> list = converter.toArrayList();

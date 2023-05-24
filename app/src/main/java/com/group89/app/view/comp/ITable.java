@@ -5,6 +5,9 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
+/**
+ * Custom table component.
+ */
 public class ITable extends JTable {
   private static final float FONT_SIZE = 16f;
   private static final float HEADER_FONT_SIZE = 18f;

@@ -7,6 +7,9 @@ import com.group89.app.view.comp.Footer;
 import com.group89.app.view.comp.Header;
 import com.group89.app.view.comp.ITable;
 
+/**
+ * A table page with a header and a footer.
+ */
 public class DefaultTablePage extends AbstractTablePage {
   private Header header;
   private Footer footer;
@@ -53,10 +56,20 @@ public class DefaultTablePage extends AbstractTablePage {
     add(footer, c);
   }
 
+  /**
+   * Returns the header.
+   * 
+   * @return the header
+   */
   public Header getHeader() {
     return header;
   }
 
+  /**
+   * Returns the footer.
+   * 
+   * @return the footer
+   */
   public Footer getFooter() {
     return footer;
   }

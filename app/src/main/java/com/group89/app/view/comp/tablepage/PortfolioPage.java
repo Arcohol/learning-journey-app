@@ -7,6 +7,9 @@ import com.group89.app.model.PortfolioType;
 import com.group89.app.model.SemesterList;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for the portfolio table.
+ */
 public class PortfolioPage extends DefaultTablePage {
   private JComboBox<String> semesterBox;
   private JComboBox<PortfolioType> typeBox;
@@ -34,10 +37,20 @@ public class PortfolioPage extends DefaultTablePage {
     new PortfolioPageController(this);
   }
 
+  /**
+   * Returns the semester combo box.
+   * 
+   * @return the semester combo box
+   */
   public JComboBox<String> getSemesterBox() {
     return semesterBox;
   }
 
+  /**
+   * Returns the type combo box.
+   * 
+   * @return the type combo box
+   */
   public JComboBox<PortfolioType> getTypeBox() {
     return typeBox;
   }

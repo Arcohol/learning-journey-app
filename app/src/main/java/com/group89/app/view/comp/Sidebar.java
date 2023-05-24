@@ -10,8 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.group89.app.view.AppColor;
 
-
+/**
+ * A sidebar that contains buttons for navigating the application.
+ */
 public class Sidebar extends JPanel {
+  /**
+   * A button with a custom style. Used in {@link Sidebar}.
+   */
   class IButton extends JButton {
     public IButton(String text) {
       super(text);
@@ -25,10 +30,29 @@ public class Sidebar extends JPanel {
     }
   }
 
+  /**
+   * The size of the sidebar components.
+   */
   private static final Dimension BUTTON_SIZE = new Dimension(0, 50);
+
+  /**
+   * The size of the date label.
+   */
   private static final Dimension DATE_SIZE = new Dimension(0, 80);
+
+  /**
+   * The size of the sidebar.
+   */
   private static final Dimension SIDEBAR_SIZE = new Dimension(150, 0);
+
+  /**
+   * The font size of the sidebar buttons.
+   */
   private static final float BUTTON_FONT_SIZE = 18f;
+
+  /**
+   * The number of buttons in the sidebar.
+   */
   private static final int NUM_BUTTONS = 7;
 
   private JLabel date;
@@ -36,6 +60,9 @@ public class Sidebar extends JPanel {
   private JButton exitButton;
   private int currentButtonIndex = 0;
 
+  /**
+   * Constructs a new {@link Sidebar}.
+   */
   public Sidebar() {
     super(new GridBagLayout());
 

@@ -6,6 +6,9 @@ import com.group89.app.controller.RolePageController;
 import com.group89.app.model.SemesterList;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for the role table.
+ */
 public class RolePage extends DefaultTablePage {
   private JComboBox<String> semesterBox;
 
@@ -25,6 +28,11 @@ public class RolePage extends DefaultTablePage {
     new RolePageController(this);
   }
 
+  /**
+   * Returns the semester combo box.
+   * 
+   * @return the semester combo box
+   */
   public JComboBox<String> getSemesterBox() {
     return semesterBox;
   }
