@@ -1,26 +1,27 @@
 package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.AchievementType;
+import com.group89.app.model.enumeration.Semester;
 
 public class AchievementRecord {
-  private String semester;
+  private Semester semester;
   private String title;
   private String details;
   private AchievementType type;
 
-  public AchievementRecord(String semester, String title, String details, AchievementType type) {
-    this.semester = semester;
+  public AchievementRecord(Semester semester, String title, String details, AchievementType type) {
+    setSemester(semester);
     this.title = title;
     this.details = details;
     this.type = type;
   }
 
   public AchievementRecord() {
-    this("", "", "", AchievementType.OTHER);
+    this(Semester.values()[0], "", "", AchievementType.OTHER);
   }
 
-  public String getSemester() {
-    return semester;
+  public Semester getSemester() {
+    return semester.intern();
   }
 
   public String getTitle() {
@@ -35,8 +36,8 @@ public class AchievementRecord {
     return type;
   }
 
-  public void setSemester(String semester) {
-    this.semester = semester;
+  public void setSemester(Semester semester) {
+    this.semester = semester.intern();
   }
 
   public void setTitle(String title) {

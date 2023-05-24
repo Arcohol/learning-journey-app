@@ -3,6 +3,7 @@ package com.group89.app.model;
 import java.util.List;
 import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.model.enumeration.CourseType;
+import com.group89.app.model.enumeration.Semester;
 
 public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Module Code", "Title", "Mark (CN)",
@@ -32,7 +33,7 @@ public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     MarkRecord record = getItem(rowIndex);
     switch (columnIndex) {
-      case 0 -> record.setSemester((String) aValue);
+      case 0 -> record.setSemester((Semester) aValue);
       case 1 -> record.setModuleCode((String) aValue);
       case 2 -> record.setTitle((String) aValue);
       case 3 -> record.setMarkCN((int) aValue);

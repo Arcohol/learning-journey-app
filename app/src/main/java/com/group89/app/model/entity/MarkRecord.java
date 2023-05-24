@@ -1,10 +1,11 @@
 package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.CourseType;
+import com.group89.app.model.enumeration.Semester;
 import com.group89.app.utils.MarkConverter;
 
 public class MarkRecord {
-  private String semester;
+  private Semester semester;
   private String moduleCode;
   private String title;
   private Integer markCN;
@@ -13,9 +14,9 @@ public class MarkRecord {
   private Integer creditsUK;
   private CourseType type;
 
-  public MarkRecord(String semester, String moduleCode, String title, int markCN, int markUK,
+  public MarkRecord(Semester semester, String moduleCode, String title, int markCN, int markUK,
       double creditsCN, int creditsUK, CourseType type) {
-    this.semester = semester;
+    setSemester(semester);
     this.moduleCode = moduleCode;
     this.title = title;
     this.markCN = markCN;
@@ -26,18 +27,11 @@ public class MarkRecord {
   }
 
   public MarkRecord() {
-    semester = "";
-    moduleCode = "";
-    title = "";
-    markCN = 0;
-    markUK = 0;
-    creditsCN = 0.0;
-    creditsUK = 0;
-    type = CourseType.COMPULSORY;
+    this(Semester.values()[0], "", "", 0, 0, 0.0, 0, CourseType.COMPULSORY);
   }
 
-  public String getSemester() {
-    return semester;
+  public Semester getSemester() {
+    return semester.intern();
   }
 
   public String getModuleCode() {
@@ -68,8 +62,8 @@ public class MarkRecord {
     return type;
   }
 
-  public void setSemester(String semester) {
-    this.semester = semester;
+  public void setSemester(Semester semester) {
+    this.semester = semester.intern();
   }
 
   public void setModuleCode(String moduleCode) {

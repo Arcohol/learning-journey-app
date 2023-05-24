@@ -1,27 +1,26 @@
 package com.group89.app.model.entity;
 
+import com.group89.app.model.enumeration.Semester;
+
 public class RoleRecord {
-  private String semester;
+  private Semester semester;
   private String title;
   private String content;
   private String note;
 
-  public RoleRecord(String semester, String title, String content, String note) {
-    this.semester = semester;
+  public RoleRecord(Semester semester, String title, String content, String note) {
+    setSemester(semester);
     this.title = title;
     this.content = content;
     this.note = note;
   }
 
   public RoleRecord() {
-    semester = "";
-    title = "";
-    content = "";
-    note = "";
+    this(Semester.values()[0], "", "", "");
   }
 
-  public String getSemester() {
-    return semester;
+  public Semester getSemester() {
+    return semester.intern();
   }
 
   public String getTitle() {
@@ -36,8 +35,8 @@ public class RoleRecord {
     return note;
   }
 
-  public void setSemester(String semester) {
-    this.semester = semester;
+  public void setSemester(Semester semester) {
+    this.semester = semester.intern();
   }
 
   public void setTitle(String title) {

@@ -1,29 +1,27 @@
 package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.PortfolioType;
+import com.group89.app.model.enumeration.Semester;
 
 public class PortfolioRecord {
-  private String semester;
+  private Semester semester;
   private PortfolioType type;
   private String exhibition;
   private String details;
 
-  public PortfolioRecord(String semester, PortfolioType type, String exhibition, String details) {
-    this.semester = semester;
+  public PortfolioRecord(Semester semester, PortfolioType type, String exhibition, String details) {
+    setSemester(semester);
     this.type = type;
     this.exhibition = exhibition;
     this.details = details;
   }
 
   public PortfolioRecord() {
-    this.semester = "";
-    this.type = PortfolioType.OTHER;
-    this.exhibition = "";
-    this.details = "";
+    this(Semester.values()[0], PortfolioType.OTHER, "", "");
   }
 
-  public String getSemester() {
-    return semester;
+  public Semester getSemester() {
+    return semester.intern();
   }
 
   public PortfolioType getType() {
@@ -38,8 +36,8 @@ public class PortfolioRecord {
     return details;
   }
 
-  public void setSemester(String semester) {
-    this.semester = semester;
+  public void setSemester(Semester semester) {
+    this.semester = semester.intern();
   }
 
   public void setType(PortfolioType type) {

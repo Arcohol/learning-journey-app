@@ -3,6 +3,7 @@ package com.group89.app.model;
 import java.util.List;
 import com.group89.app.model.entity.PortfolioRecord;
 import com.group89.app.model.enumeration.PortfolioType;
+import com.group89.app.model.enumeration.Semester;
 
 public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Type", "Exhibition", "Detail"};
@@ -27,7 +28,7 @@ public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     PortfolioRecord portfolioRecord = getItem(rowIndex);
     switch (columnIndex) {
-      case 0 -> portfolioRecord.setSemester((String) aValue);
+      case 0 -> portfolioRecord.setSemester((Semester) aValue);
       case 1 -> portfolioRecord.setType((PortfolioType) aValue);
       case 2 -> portfolioRecord.setExhibition((String) aValue);
       case 3 -> portfolioRecord.setDetails((String) aValue);

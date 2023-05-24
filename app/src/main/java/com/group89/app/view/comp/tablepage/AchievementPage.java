@@ -3,23 +3,20 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.AchievementPageController;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.AchievementType;
-import com.group89.app.model.enumeration.AchievementItemType;
-import com.group89.app.model.enumeration.SemesterItemType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.Semester;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
 public class AchievementPage extends DefaultTablePage {
-  private JComboBox<String> semesterBox;
-  private JComboBox<AchievementType> typeBox;
+  private JComboBox<ComboBoxItem> semesterBox, typeBox;
 
   public AchievementPage() {
     super();
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
-    AbstractComboBoxItemType<AchievementType> achievementType = new AchievementItemType();
-    semesterBox = new IComboBox<>(semesterType.values());
-    typeBox = new IComboBox<>(achievementType.values());
+    semesterBox = new IComboBox<>(EnumFactory.addItemAll(Semester.values()));
+    typeBox = new IComboBox<>(EnumFactory.addItemAll(AchievementType.values()));
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -38,11 +35,11 @@ public class AchievementPage extends DefaultTablePage {
     new AchievementPageController(this);
   }
 
-  public JComboBox<String> getSemesterBox() {
+  public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 
-  public JComboBox<AchievementType> getTypeBox() {
+  public JComboBox<ComboBoxItem> getTypeBox() {
     return typeBox;
   }
 }

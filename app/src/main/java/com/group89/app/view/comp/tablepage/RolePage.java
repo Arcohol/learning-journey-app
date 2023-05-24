@@ -3,18 +3,18 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.RolePageController;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterItemType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.Semester;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
 public class RolePage extends DefaultTablePage {
-  private JComboBox<String> semesterBox;
+  private JComboBox<ComboBoxItem> semesterBox;
 
   public RolePage() {
     super();
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
-    semesterBox = new IComboBox<>(semesterType.values());
+    semesterBox = new IComboBox<>(EnumFactory.addItemAll(Semester.values()));
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -28,7 +28,7 @@ public class RolePage extends DefaultTablePage {
     new RolePageController(this);
   }
 
-  public JComboBox<String> getSemesterBox() {
+  public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 }

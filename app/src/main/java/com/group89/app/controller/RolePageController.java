@@ -5,14 +5,13 @@ import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.RoleRecordTableModel;
 import com.group89.app.model.entity.RoleRecord;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.SemesterItemType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.ItemAll;
+import com.group89.app.model.enumeration.Semester;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.RolePage;
 
 public class RolePageController extends AbstractTablePageController<RoleRecord, RolePage> {
-  private AbstractComboBoxItemType<String> semesterType;
-
   public RolePageController(RolePage page) {
     super(page, "roles.json", RoleRecord[].class, RoleRecord.class);
     init();
@@ -22,8 +21,6 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
     super.init();
 
     view.getSemesterBox().addActionListener(e -> query());
-
-    semesterType = new SemesterItemType();
 
     query();
   }
@@ -35,15 +32,15 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
     view.getTable().setModel(model);
     view.getTable().getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(semesterType.valuesWithoutAll())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(Semester.values())));
 
-    String semester = (String) view.getSemesterBox().getSelectedItem();
+    ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<RoleRecord>, Integer>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<RoleRecord>, ? extends Integer> entry) {
         ListTableModel<RoleRecord> model = entry.getModel();
         RoleRecord record = model.getItem(entry.getIdentifier());
-        return semester.equals(semesterType.getItemAll()) || record.getSemester().equals(semester);
+        return semester == ItemAll.ALL || semester == record.getSemester();
       }
     });
     sorter.setModel(model);
@@ -51,9 +48,9 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
   @Override
   protected void add() {
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    RoleRecord record =
-        new RoleRecord(!semester.equals(semesterType.getItemAll()) ? semester : "", "", "", "");
+    ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
+    RoleRecord record = new RoleRecord(
+        semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "", "", "");
     model.addItem(record);
   }
 }

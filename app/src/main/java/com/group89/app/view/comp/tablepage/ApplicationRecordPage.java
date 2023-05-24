@@ -3,19 +3,18 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.ApplicationRecordPageController;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.ApplicationStatus;
-import com.group89.app.model.enumeration.ApplicationStatusItemType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
 public class ApplicationRecordPage extends DefaultTablePage {
-  private JComboBox<ApplicationStatus> statusBox;
+  private JComboBox<ComboBoxItem> statusBox;
 
   public ApplicationRecordPage() {
     super();
 
-    AbstractComboBoxItemType<ApplicationStatus> achievementType = new ApplicationStatusItemType();
-    statusBox = new IComboBox<>(achievementType.values());
+    statusBox = new IComboBox<>(EnumFactory.addItemAll(ApplicationStatus.values()));
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -29,7 +28,7 @@ public class ApplicationRecordPage extends DefaultTablePage {
     new ApplicationRecordPageController(this);
   }
 
-  public JComboBox<ApplicationStatus> getStatusBox() {
+  public JComboBox<ComboBoxItem> getStatusBox() {
     return statusBox;
   }
 }

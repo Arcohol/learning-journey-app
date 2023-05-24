@@ -6,10 +6,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.group89.app.controller.MarkRecordPageController;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
 import com.group89.app.model.enumeration.ComboBoxItem;
 import com.group89.app.model.enumeration.CourseType;
-import com.group89.app.model.enumeration.SemesterItemType;
+import com.group89.app.model.enumeration.Semester;
 import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IButton;
 import com.group89.app.view.comp.ILabel;
@@ -21,8 +20,8 @@ public class MarkRecordPage extends AbstractTablePage {
 
   private static final int LABEL_COUNT = 5;
 
-  private JComboBox<String> semesterBox, scaleBox;
-  private JComboBox<ComboBoxItem> typeBox;
+  private JComboBox<String> scaleBox;
+  private JComboBox<ComboBoxItem> semesterBox, typeBox;
   private JLabel[] labels;
 
   public MarkRecordPage() {
@@ -30,8 +29,7 @@ public class MarkRecordPage extends AbstractTablePage {
 
     setLayout(new GridBagLayout());
 
-    AbstractComboBoxItemType<String> semesterType = new SemesterItemType();
-    semesterBox = new IComboBox<>(semesterType.values());
+    semesterBox = new IComboBox<>(EnumFactory.addItemAll(Semester.values()));
     scaleBox = new IComboBox<>(SCALES);
     typeBox = new IComboBox<>(EnumFactory.addItemAll(CourseType.values()));
 
@@ -139,7 +137,7 @@ public class MarkRecordPage extends AbstractTablePage {
     new MarkRecordPageController(this);
   }
 
-  public JComboBox<String> getSemesterBox() {
+  public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 

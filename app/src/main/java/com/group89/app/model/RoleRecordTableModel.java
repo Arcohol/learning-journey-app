@@ -2,6 +2,7 @@ package com.group89.app.model;
 
 import java.util.List;
 import com.group89.app.model.entity.RoleRecord;
+import com.group89.app.model.enumeration.Semester;
 
 public class RoleRecordTableModel extends ListTableModel<RoleRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Content", "Note"};
@@ -26,7 +27,7 @@ public class RoleRecordTableModel extends ListTableModel<RoleRecord> {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     RoleRecord roleRecord = getItem(rowIndex);
     switch (columnIndex) {
-      case 0 -> roleRecord.setSemester((String) aValue);
+      case 0 -> roleRecord.setSemester((Semester) aValue);
       case 1 -> roleRecord.setTitle((String) aValue);
       case 2 -> roleRecord.setContent((String) aValue);
       case 3 -> roleRecord.setNote((String) aValue);

@@ -7,8 +7,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.group89.app.controller.TaskPageController;
-import com.group89.app.model.enumeration.AbstractComboBoxItemType;
-import com.group89.app.model.enumeration.TaskStatusItemType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.TaskStatus;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
 public class TaskPage extends DefaultTablePage {
@@ -28,13 +29,12 @@ public class TaskPage extends DefaultTablePage {
     }
   }
 
-  private JComboBox<String> statusBox;
+  private JComboBox<ComboBoxItem> statusBox;
 
   public TaskPage() {
     super();
 
-    AbstractComboBoxItemType<String> statusType = new TaskStatusItemType();
-    statusBox = new IComboBox<>(statusType.values());
+    statusBox = new IComboBox<>(EnumFactory.addItemAll(TaskStatus.values()));
 
     GridBagConstraints c = new GridBagConstraints();
 
@@ -50,7 +50,7 @@ public class TaskPage extends DefaultTablePage {
     new TaskPageController(this);
   }
 
-  public JComboBox<String> getStatusBox() {
+  public JComboBox<ComboBoxItem> getStatusBox() {
     return statusBox;
   }
 }
