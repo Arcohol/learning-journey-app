@@ -63,6 +63,8 @@ public class Sidebar extends JPanel {
     add(date, c);
 
     buttons[0] = new IButton("Mark");
+    buttons[0].setForeground(AppColor.BLACK);
+    buttons[0].setBackground(AppColor.WHITE);
 
     c.gridx = 0;
     c.gridy = 1;
