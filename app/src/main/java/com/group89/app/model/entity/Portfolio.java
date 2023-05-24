@@ -21,7 +21,7 @@ public class Portfolio {
   }
 
   public Semester getSemester() {
-    return semester.intern();
+    return semester;
   }
 
   public PortfolioType getType() {
@@ -37,7 +37,7 @@ public class Portfolio {
   }
 
   public void setSemester(Semester semester) {
-    this.semester = semester.intern();
+    this.semester = semester;
   }
 
   public void setType(PortfolioType type) {

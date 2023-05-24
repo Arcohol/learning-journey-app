@@ -1,49 +1,12 @@
 package com.group89.app.model.enumeration;
 
-import java.util.Arrays;
-
-public class Semester implements ComboBoxItem, Comparable<Semester> {
-  private static final Semester[] semesters;
-
-  static {
-    int year = java.time.LocalDate.now().getYear() + 4;
-    semesters = new Semester[(year - 2000 + 1) * 2];
-    for (int i = 0; i < semesters.length; i += 2, year--) {
-      semesters[i] = new Semester(year + "-" + (year + 1) + "-2");
-      semesters[i + 1] = new Semester(year + "-" + (year + 1) + "-1");
-    }
-  }
-
-  public static Semester[] values() {
-    return Arrays.copyOf(semesters, semesters.length);
-  }
-
-  public static Semester valueOf(String name) {
-    return Arrays.stream(semesters).filter(semester -> semester.toString().equals(name)).findAny()
-        .orElseThrow(IllegalArgumentException::new);
-  }
-
-  private final String semester;
-
-  private Semester(String semester) {
-    this.semester = semester;
-  }
-
-  public final String name() {
-    return semester;
-  }
-
-  public Semester intern() {
-    return Semester.valueOf(name());
-  }
-
-  @Override
-  public String toString() {
-    return name();
-  }
-
-  @Override
-  public int compareTo(Semester o) {
-    return name().compareTo(o.name());
-  }
+public enum Semester implements ComboBoxItem {
+  Y2020_2021_1,
+  Y2020_2021_2,
+  Y2021_2022_1,
+  Y2021_2022_2,
+  Y2022_2023_1,
+  Y2022_2023_2,
+  Y2023_2024_1,
+  Y2023_2024_2,
 }

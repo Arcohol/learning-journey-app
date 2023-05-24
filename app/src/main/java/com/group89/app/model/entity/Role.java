@@ -20,7 +20,7 @@ public class Role {
   }
 
   public Semester getSemester() {
-    return semester.intern();
+    return semester;
   }
 
   public String getTitle() {
@@ -36,7 +36,7 @@ public class Role {
   }
 
   public void setSemester(Semester semester) {
-    this.semester = semester.intern();
+    this.semester = semester;
   }
 
   public void setTitle(String title) {

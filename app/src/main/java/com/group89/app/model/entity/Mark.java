@@ -31,7 +31,7 @@ public class Mark {
   }
 
   public Semester getSemester() {
-    return semester.intern();
+    return semester;
   }
 
   public String getModuleCode() {
@@ -63,7 +63,7 @@ public class Mark {
   }
 
   public void setSemester(Semester semester) {
-    this.semester = semester.intern();
+    this.semester = semester;
   }
 
   public void setModuleCode(String moduleCode) {
