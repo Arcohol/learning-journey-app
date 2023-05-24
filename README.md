@@ -8,3 +8,7 @@ A Learning Journey Application for BUPT International School students.
 ```
 $ ./gradlew run
 ```
+
+## Usage
+
+See [User Manual](./user_manual.md).

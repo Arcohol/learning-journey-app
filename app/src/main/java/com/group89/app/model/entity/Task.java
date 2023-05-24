@@ -1,17 +1,17 @@
 package com.group89.app.model.entity;
 
-public class TaskRecord {
+public class Task {
   private String content;
   private String due;
   private Boolean status;
 
-  public TaskRecord(String content, String due, boolean status) {
+  public Task(String content, String due, boolean status) {
     this.content = content;
     this.due = due;
     this.status = status;
   }
 
-  public TaskRecord() {
+  public Task() {
     content = "";
     due = "";
     status = false;

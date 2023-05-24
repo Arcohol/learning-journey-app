@@ -2,32 +2,39 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
-import com.group89.app.controller.ApplicationRecordPageController;
 import com.group89.app.model.enumeration.ApplicationStatus;
 import com.group89.app.model.enumeration.ComboBoxItem;
 import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
+import com.group89.app.controller.ApplicationPageController;
 
-public class ApplicationRecordPage extends DefaultTablePage {
+/**
+ * A table page for the application table.
+ */
+public class ApplicationPage extends DefaultTablePage {
   private JComboBox<ComboBoxItem> statusBox;
 
-  public ApplicationRecordPage() {
+  public ApplicationPage() {
     super();
 
     statusBox = new IComboBox<>(EnumFactory.addItemAll(ApplicationStatus.values()));
 
     GridBagConstraints c = new GridBagConstraints();
-
-    c.insets.set(10, 10, 0, 0);
+    c.anchor = GridBagConstraints.WEST;
 
     c.gridx = 0;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(statusBox, c);
+    c.weightx = 1;
+    getHeader().add(statusBox, c);
 
-    new ApplicationRecordPageController(this);
+    new ApplicationPageController(this);
   }
 
+  /**
+   * Returns the status combo box.
+   * 
+   * @return the status combo box
+   */
   public JComboBox<ComboBoxItem> getStatusBox() {
     return statusBox;
   }

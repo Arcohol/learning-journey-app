@@ -3,6 +3,9 @@ package com.group89.app.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Converts marks from Chinese to UK and vice versa. HashMaps are used for the conversion.
+ */
 public class MarkConverter {
   private Map<Integer, Integer> CNtoUK;
   private Map<Integer, Integer> UKtoCN;

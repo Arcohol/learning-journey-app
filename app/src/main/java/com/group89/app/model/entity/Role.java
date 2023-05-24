@@ -2,20 +2,20 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.Semester;
 
-public class RoleRecord {
+public class Role {
   private Semester semester;
   private String title;
   private String content;
   private String note;
 
-  public RoleRecord(Semester semester, String title, String content, String note) {
+  public Role(Semester semester, String title, String content, String note) {
     setSemester(semester);
     this.title = title;
     this.content = content;
     this.note = note;
   }
 
-  public RoleRecord() {
+  public Role() {
     this(Semester.values()[0], "", "", "");
   }
 

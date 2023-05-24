@@ -1,20 +1,20 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.ApplicationRecord;
 import com.group89.app.model.enumeration.ApplicationStatus;
+import com.group89.app.model.entity.Application;
 
-public class ApplicationRecordTableModel extends ListTableModel<ApplicationRecord> {
+public class ApplicationTableModel extends ListTableModel<Application> {
   private static final String[] COLUMN_NAMES =
       {"Status", "Country", "University", "Program", "GPA", "Language", "GRE", "Note"};
 
-  public ApplicationRecordTableModel(List<ApplicationRecord> applicationRecords) {
-    super(ApplicationRecord.class, COLUMN_NAMES, applicationRecords);
+  public ApplicationTableModel(List<Application> applicationRecords) {
+    super(Application.class, COLUMN_NAMES, applicationRecords);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    ApplicationRecord applicationRecord = getItem(rowIndex);
+    Application applicationRecord = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> applicationRecord.getStatus();
       case 1 -> applicationRecord.getCountry();
@@ -30,7 +30,7 @@ public class ApplicationRecordTableModel extends ListTableModel<ApplicationRecor
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    ApplicationRecord applicationRecord = getItem(rowIndex);
+    Application applicationRecord = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> applicationRecord.setStatus((ApplicationStatus) aValue);
       case 1 -> applicationRecord.setCountry((String) aValue);

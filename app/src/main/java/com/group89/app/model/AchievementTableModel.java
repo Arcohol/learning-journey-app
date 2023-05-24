@@ -1,20 +1,20 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.AchievementRecord;
 import com.group89.app.model.enumeration.AchievementType;
 import com.group89.app.model.enumeration.Semester;
+import com.group89.app.model.entity.Achievement;
 
-public class AchievementRecordTableModel extends ListTableModel<AchievementRecord> {
+public class AchievementTableModel extends ListTableModel<Achievement> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Detail", "Type"};
 
-  public AchievementRecordTableModel(List<AchievementRecord> achievementRecords) {
-    super(AchievementRecord.class, COLUMN_NAMES, achievementRecords);
+  public AchievementTableModel(List<Achievement> achievementRecords) {
+    super(Achievement.class, COLUMN_NAMES, achievementRecords);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    AchievementRecord achievementRecord = getItem(rowIndex);
+    Achievement achievementRecord = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> achievementRecord.getSemester();
       case 1 -> achievementRecord.getTitle();
@@ -26,7 +26,7 @@ public class AchievementRecordTableModel extends ListTableModel<AchievementRecor
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    AchievementRecord achievementRecord = getItem(rowIndex);
+    Achievement achievementRecord = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> achievementRecord.setSemester((Semester) aValue);
       case 1 -> achievementRecord.setTitle((String) aValue);

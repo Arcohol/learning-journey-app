@@ -3,17 +3,17 @@ package com.group89.app.controller;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.RoleRecordTableModel;
-import com.group89.app.model.entity.RoleRecord;
 import com.group89.app.model.enumeration.ComboBoxItem;
 import com.group89.app.model.enumeration.ItemAll;
 import com.group89.app.model.enumeration.Semester;
+import com.group89.app.model.RoleTableModel;
+import com.group89.app.model.entity.Role;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.RolePage;
 
-public class RolePageController extends AbstractTablePageController<RoleRecord, RolePage> {
+public class RolePageController extends AbstractTablePageController<Role, RolePage> {
   public RolePageController(RolePage page) {
-    super(page, "roles.json", RoleRecord[].class, RoleRecord.class);
+    super(page, "roles.json", Role[].class, Role.class);
     init();
   }
 
@@ -27,7 +27,7 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
 
   @Override
   protected void query() {
-    model = new RoleRecordTableModel(list);
+    model = new RoleTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
@@ -35,11 +35,11 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
         .setCellEditor(new DefaultCellEditor(new IComboBox<>(Semester.values())));
 
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
-    sorter.setRowFilter(new RowFilter<ListTableModel<RoleRecord>, Integer>() {
+    sorter.setRowFilter(new RowFilter<ListTableModel<Role>, Integer>() {
       @Override
-      public boolean include(Entry<? extends ListTableModel<RoleRecord>, ? extends Integer> entry) {
-        ListTableModel<RoleRecord> model = entry.getModel();
-        RoleRecord record = model.getItem(entry.getIdentifier());
+      public boolean include(Entry<? extends ListTableModel<Role>, ? extends Integer> entry) {
+        ListTableModel<Role> model = entry.getModel();
+        Role record = model.getItem(entry.getIdentifier());
         return semester == ItemAll.ALL || semester == record.getSemester();
       }
     });
@@ -49,8 +49,8 @@ public class RolePageController extends AbstractTablePageController<RoleRecord, 
   @Override
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
-    RoleRecord record = new RoleRecord(
-        semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "", "", "");
+    Role record =
+        new Role(semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "", "", "");
     model.addItem(record);
   }
 }

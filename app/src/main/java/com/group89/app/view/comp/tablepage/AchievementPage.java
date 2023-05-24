@@ -9,6 +9,9 @@ import com.group89.app.model.enumeration.Semester;
 import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
+/**
+ * A table page for the achievement table.
+ */
 public class AchievementPage extends DefaultTablePage {
   private JComboBox<ComboBoxItem> semesterBox, typeBox;
 
@@ -19,26 +22,36 @@ public class AchievementPage extends DefaultTablePage {
     typeBox = new IComboBox<>(EnumFactory.addItemAll(AchievementType.values()));
 
     GridBagConstraints c = new GridBagConstraints();
-
-    c.insets.set(10, 10, 0, 0);
+    c.anchor = GridBagConstraints.WEST;
 
     c.gridx = 0;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(semesterBox, c);
+    getHeader().add(semesterBox, c);
+
+    c.insets.set(0, 10, 0, 0);
 
     c.gridx = 1;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(typeBox, c);
+    c.weightx = 1;
+    getHeader().add(typeBox, c);
 
     new AchievementPageController(this);
   }
 
+  /**
+   * Returns the semester combo box.
+   * 
+   * @return the semester combo box
+   */
   public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 
+  /**
+   * Returns the type combo box.
+   * 
+   * @return the type combo box
+   */
   public JComboBox<ComboBoxItem> getTypeBox() {
     return typeBox;
   }

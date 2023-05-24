@@ -3,20 +3,20 @@ package com.group89.app.model.entity;
 import com.group89.app.model.enumeration.AchievementType;
 import com.group89.app.model.enumeration.Semester;
 
-public class AchievementRecord {
+public class Achievement {
   private Semester semester;
   private String title;
   private String details;
   private AchievementType type;
 
-  public AchievementRecord(Semester semester, String title, String details, AchievementType type) {
+  public Achievement(Semester semester, String title, String details, AchievementType type) {
     setSemester(semester);
     this.title = title;
     this.details = details;
     this.type = type;
   }
 
-  public AchievementRecord() {
+  public Achievement() {
     this(Semester.values()[0], "", "", AchievementType.OTHER);
   }
 

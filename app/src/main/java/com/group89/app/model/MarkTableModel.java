@@ -1,21 +1,21 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
+import com.group89.app.model.entity.Mark;
 
-public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
+public class MarkTableModel extends ListTableModel<Mark> {
   private static final String[] COLUMN_NAMES = {"Semester", "Module Code", "Title", "Mark (CN)",
       "Mark (UK)", "Credits (CN)", "Credits (UK)", "Type"};
 
-  public MarkRecordTableModel(List<MarkRecord> records) {
-    super(MarkRecord.class, COLUMN_NAMES, records);
+  public MarkTableModel(List<Mark> records) {
+    super(Mark.class, COLUMN_NAMES, records);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    MarkRecord record = getItem(rowIndex);
+    Mark record = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> record.getSemester();
       case 1 -> record.getModuleCode();
@@ -31,7 +31,7 @@ public class MarkRecordTableModel extends ListTableModel<MarkRecord> {
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    MarkRecord record = getItem(rowIndex);
+    Mark record = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> record.setSemester((Semester) aValue);
       case 1 -> record.setModuleCode((String) aValue);

@@ -11,19 +11,18 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.MarkRecordTableModel;
-import com.group89.app.model.MarkRecordTableModelCN;
-import com.group89.app.model.MarkRecordTableModelUK;
-import com.group89.app.model.entity.MarkRecord;
 import com.group89.app.model.enumeration.ComboBoxItem;
 import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.ItemAll;
 import com.group89.app.model.enumeration.Semester;
+import com.group89.app.model.MarkTableModel;
+import com.group89.app.model.MarkTableModelCN;
+import com.group89.app.model.MarkTableModelUK;
+import com.group89.app.model.entity.Mark;
 import com.group89.app.view.comp.IComboBox;
-import com.group89.app.view.comp.tablepage.MarkRecordPage;
+import com.group89.app.view.comp.tablepage.MarkPage;
 
-public class MarkRecordPageController
-    extends AbstractTablePageController<MarkRecord, MarkRecordPage> {
+public class MarkPageController extends AbstractTablePageController<Mark, MarkPage> {
   // temporary solution for enforcing number range
   // subject to change
   class MarkEditor extends DefaultCellEditor {
@@ -67,8 +66,8 @@ public class MarkRecordPageController
     }
   }
 
-  public MarkRecordPageController(MarkRecordPage page) {
-    super(page, "marks.json", MarkRecord[].class, MarkRecord.class);
+  public MarkPageController(MarkPage page) {
+    super(page, "marks.json", Mark[].class, Mark.class);
 
     init();
   }
@@ -91,20 +90,20 @@ public class MarkRecordPageController
 
     switch (scale) {
       case "BOTH" -> {
-        model = new MarkRecordTableModel(list);
+        model = new MarkTableModel(list);
         model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
       }
       case "CN" -> {
-        model = new MarkRecordTableModelCN(list);
+        model = new MarkTableModelCN(list);
         model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (CN)").setCellEditor(new MarkEditor());
       }
       case "UK" -> {
-        model = new MarkRecordTableModelUK(list);
+        model = new MarkTableModelUK(list);
         model.addTableModelListener(e -> updateLabels());
         table.setModel(model);
         table.getColumn("Mark (UK)").setCellEditor(new MarkEditor());
@@ -120,11 +119,11 @@ public class MarkRecordPageController
 
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
     ComboBoxItem type = (ComboBoxItem) view.getTypeBox().getSelectedItem();
-    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Integer>() {
+    sorter.setRowFilter(new RowFilter<ListTableModel<Mark>, Integer>() {
       @Override
-      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Integer> entry) {
-        ListTableModel<MarkRecord> model = entry.getModel();
-        MarkRecord record = model.getItem(entry.getIdentifier());
+      public boolean include(Entry<? extends ListTableModel<Mark>, ? extends Integer> entry) {
+        ListTableModel<Mark> model = entry.getModel();
+        Mark record = model.getItem(entry.getIdentifier());
         return (semester == ItemAll.ALL || semester == record.getSemester())
             && (type == ItemAll.ALL || type == record.getType());
       }
@@ -138,9 +137,8 @@ public class MarkRecordPageController
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
     ComboBoxItem type = (ComboBoxItem) view.getTypeBox().getSelectedItem();
-    MarkRecord record =
-        new MarkRecord(semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "", "",
-            0, 0, 0.0, 0, type != ItemAll.ALL ? (CourseType) type : CourseType.COMPULSORY);
+    Mark record = new Mark(semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "",
+        "", 0, 0, 0.0, 0, type != ItemAll.ALL ? (CourseType) type : CourseType.COMPULSORY);
     model.addItem(record);
   }
 
@@ -152,7 +150,7 @@ public class MarkRecordPageController
     double gpa = 0.0;
     double averageCN = 0.0;
     for (int viewRow = 0; viewRow < size; viewRow++) {
-      MarkRecord record = model.getItem(table.convertRowIndexToModel(viewRow));
+      Mark record = model.getItem(table.convertRowIndexToModel(viewRow));
 
       totalCreditsCN += record.getCreditsCN();
       averageCN += (double) record.getMarkCN() * record.getCreditsCN();

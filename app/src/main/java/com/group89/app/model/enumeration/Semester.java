@@ -2,7 +2,7 @@ package com.group89.app.model.enumeration;
 
 import java.util.Arrays;
 
-public class Semester implements ComboBoxItem {
+public class Semester implements ComboBoxItem, Comparable<Semester> {
   private static final Semester[] semesters;
 
   static {
@@ -40,5 +40,10 @@ public class Semester implements ComboBoxItem {
   @Override
   public String toString() {
     return name();
+  }
+
+  @Override
+  public int compareTo(Semester o) {
+    return name().compareTo(o.name());
   }
 }

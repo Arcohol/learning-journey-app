@@ -4,7 +4,7 @@ import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.utils.MarkConverter;
 
-public class MarkRecord {
+public class Mark {
   private Semester semester;
   private String moduleCode;
   private String title;
@@ -14,7 +14,7 @@ public class MarkRecord {
   private Integer creditsUK;
   private CourseType type;
 
-  public MarkRecord(Semester semester, String moduleCode, String title, int markCN, int markUK,
+  public Mark(Semester semester, String moduleCode, String title, int markCN, int markUK,
       double creditsCN, int creditsUK, CourseType type) {
     setSemester(semester);
     this.moduleCode = moduleCode;
@@ -26,7 +26,7 @@ public class MarkRecord {
     this.type = type;
   }
 
-  public MarkRecord() {
+  public Mark() {
     this(Semester.values()[0], "", "", 0, 0, 0.0, 0, CourseType.COMPULSORY);
   }
 
