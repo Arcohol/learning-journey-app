@@ -8,24 +8,26 @@ public class PortfolioRecord {
   private String exhibition;
   private String details;
 
-  public PortfolioRecord(String details, String semester, PortfolioType courseType,
-      String exhibition) {
-    this.details = details;
-    this.exhibition = exhibition;
-    this.type = courseType;
+  public PortfolioRecord(String semester, PortfolioType type, String exhibition, String details) {
     this.semester = semester;
+    this.type = type;
+    this.exhibition = exhibition;
+    this.details = details;
   }
 
   public PortfolioRecord() {
-    this("", "", PortfolioType.OTHER, "");
-  }
-
-  public PortfolioType getType() {
-    return type;
+    this.semester = "";
+    this.type = PortfolioType.OTHER;
+    this.exhibition = "";
+    this.details = "";
   }
 
   public String getSemester() {
     return semester;
+  }
+
+  public PortfolioType getType() {
+    return type;
   }
 
   public String getExhibition() {
@@ -36,12 +38,12 @@ public class PortfolioRecord {
     return details;
   }
 
-  public void setType(PortfolioType type) {
-    this.type = type;
-  }
-
   public void setSemester(String semester) {
     this.semester = semester;
+  }
+
+  public void setType(PortfolioType type) {
+    this.type = type;
   }
 
   public void setExhibition(String exhibition) {

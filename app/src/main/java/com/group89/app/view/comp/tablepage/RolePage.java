@@ -3,27 +3,29 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.RolePageController;
-import com.group89.app.view.comp.MyComboBox;
+import com.group89.app.model.SemesterList;
+import com.group89.app.view.comp.IComboBox;
 
 public class RolePage extends DefaultTablePage {
-  public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-      "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
   private JComboBox<String> semesterBox;
 
   public RolePage() {
     super();
 
-    semesterBox = new MyComboBox<>(SEMESTERS);
+    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
 
     GridBagConstraints c = new GridBagConstraints();
-    
-    c.insets.set(10, 10, 0, 0);
+    c.anchor = GridBagConstraints.WEST;
 
     c.gridx = 0;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(semesterBox, c);
+    c.weightx = 1;
+    getHeader().add(semesterBox, c);
 
     new RolePageController(this);
+  }
+
+  public JComboBox<String> getSemesterBox() {
+    return semesterBox;
   }
 }

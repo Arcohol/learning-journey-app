@@ -3,6 +3,7 @@ package com.group89.app.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import javax.swing.JTable;
+import javax.swing.table.TableRowSorter;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.utils.JsonConverter;
 import com.group89.app.view.comp.tablepage.AbstractTablePage;
@@ -14,6 +15,8 @@ public abstract class AbstractTablePageController<T, S extends AbstractTablePage
   protected JsonConverter<T> converter;
   protected List<T> list;
 
+  protected TableRowSorter<ListTableModel<T>> sorter;
+
   protected Class<T> itemClazz;
 
   public AbstractTablePageController(S page, String filename, Class<T[]> listClazz,
@@ -23,12 +26,16 @@ public abstract class AbstractTablePageController<T, S extends AbstractTablePage
 
     converter = new JsonConverter<T>(filename, listClazz);
     list = converter.toArrayList();
+
+    sorter = new TableRowSorter<ListTableModel<T>>();
   }
 
   protected void init() {
     view.getAddButton().addActionListener(e -> add());
     view.getDeleteButton().addActionListener(e -> delete());
     view.getSaveButton().addActionListener(e -> save());
+
+    view.getTable().setRowSorter(sorter);
   }
 
   protected abstract void query();
@@ -55,5 +62,6 @@ public abstract class AbstractTablePageController<T, S extends AbstractTablePage
 
   protected void save() {
     converter.toFile(list);
+    view.getSaveButton().setEnabled(false);
   }
 }

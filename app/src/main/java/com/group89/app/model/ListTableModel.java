@@ -54,8 +54,8 @@ public abstract class ListTableModel<T> extends AbstractTableModel {
     return list;
   }
 
-  public T getItem(Object identifier) {
-    return list.get((int) identifier);
+  public T getItem(Integer identifier) {
+    return list.get(identifier);
   }
 
   public void addItem(T item) {

@@ -5,7 +5,7 @@ import com.group89.app.model.entity.PortfolioRecord;
 
 public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
   private static final String[] COLUMN_NAMES = {"Semester", "Type", "Exhibition", "Detail"};
-  
+
   public PortfolioRecordTableModel(List<PortfolioRecord> portfolioRecords) {
     super(PortfolioRecord.class, COLUMN_NAMES, portfolioRecords);
   }

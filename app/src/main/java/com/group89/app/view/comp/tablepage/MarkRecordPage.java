@@ -1,20 +1,17 @@
 package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import javax.swing.JPanel;
 import com.group89.app.controller.MarkRecordPageController;
 import com.group89.app.model.CourseType;
-import com.group89.app.view.comp.IButton;
+import com.group89.app.model.SemesterList;
+import com.group89.app.view.comp.Header;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.ILabel;
-import com.group89.app.view.comp.ITable;
-import com.group89.app.view.comp.MyComboBox;
 
-public class MarkRecordPage extends AbstractTablePage {
-  public static final String[] SEMESTERS = {"all", "2020-2021-1", "2020-2021-2", "2021-2022-1",
-      "2021-2022-2", "2022-2023-1", "2022-2023-2", "2023-2024-1", "2023-2024-2"};
+public class MarkRecordPage extends DefaultTablePage {
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
@@ -26,15 +23,9 @@ public class MarkRecordPage extends AbstractTablePage {
   public MarkRecordPage() {
     super();
 
-    setLayout(new GridBagLayout());
-
-    semesterBox = new MyComboBox<>(SEMESTERS);
-    scaleBox = new MyComboBox<>(SCALES);
-    typeBox = new MyComboBox<>(CourseType.values());
-
-    saveButton = new IButton("Save");
-    deleteButton = new IButton("Delete");
-    addButton = new IButton("Add");
+    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
+    scaleBox = new IComboBox<>(SCALES);
+    typeBox = new IComboBox<>(CourseType.values());
 
     labels = new JLabel[LABEL_COUNT];
     labels[0] = new ILabel("Semester:");
@@ -43,95 +34,58 @@ public class MarkRecordPage extends AbstractTablePage {
     labels[3] = new ILabel("GPA: ");
     labels[4] = new ILabel("Average Mark: ");
 
-    scrollPane = new JScrollPane();
-    table = new ITable();
-
     GridBagConstraints c = new GridBagConstraints();
-
-    c.insets.set(10, 10, 0, 0);
+    c.anchor = GridBagConstraints.WEST;
 
     c.gridx = 0;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(semesterBox, c);
+    getHeader().add(semesterBox, c);
+
+    c.insets.set(0, 10, 0, 0);
 
     c.gridx = 1;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(scaleBox, c);
+    getHeader().add(scaleBox, c);
 
     c.gridx = 2;
     c.gridy = 0;
-    c.anchor = GridBagConstraints.WEST;
-    add(typeBox, c);
+    c.weightx = 1;
+    getHeader().add(typeBox, c);
 
-    c.insets.set(10, 0, 0, 10);
-
+    JPanel labelPanel = new Header();
+    c.anchor = GridBagConstraints.CENTER;
+    c.fill = GridBagConstraints.HORIZONTAL;
+    c.insets.set(0, 0, 0, 0);
     c.weightx = 1;
 
-    c.anchor = GridBagConstraints.CENTER;
-    c.fill = GridBagConstraints.BOTH;
-
     c.gridx = 0;
-    c.gridy = 1;
-    add(labels[0], c);
-
+    c.gridy = 0;
+    labelPanel.add(labels[0], c);
 
     c.gridx = 1;
-    c.gridy = 1;
-    add(labels[1], c);
+    c.gridy = 0;
+    labelPanel.add(labels[1], c);
 
     c.gridx = 2;
-    c.gridy = 1;
-    add(labels[2], c);
+    c.gridy = 0;
+    labelPanel.add(labels[2], c);
 
     c.gridx = 3;
-    c.gridy = 1;
-    add(labels[3], c);
-
-    c.insets.set(10, 10, 0, 10);
+    c.gridy = 0;
+    labelPanel.add(labels[3], c);
 
     c.gridx = 4;
-    c.gridy = 1;
-    add(labels[4], c);
+    c.gridy = 0;
+    labelPanel.add(labels[4], c);
 
-    c.weightx = 1;
-    c.weighty = 1;
-
-    c.insets.set(10, 10, 10, 10);
-
-    scrollPane.setViewportView(table);
+    c.insets.set(5, 0, 0, 0);
     c.gridx = 0;
-    c.gridy = 2;
-    c.gridwidth = 5;
-    c.anchor = GridBagConstraints.CENTER;
-    c.fill = GridBagConstraints.BOTH;
-    add(scrollPane, c);
-
+    c.gridy = 1;
+    c.gridwidth = 3;
     c.weightx = 1;
     c.weighty = 0;
-    c.gridwidth = 1;
-
-    c.insets.set(0, 10, 10, 10);
-
-    c.gridx = 0;
-    c.gridy = 3;
-    c.anchor = GridBagConstraints.WEST;
-    c.fill = GridBagConstraints.NONE;
-    add(addButton, c);
-
-    saveButton.setEnabled(false);
-    c.gridx = 2;
-    c.gridy = 3;
-    c.anchor = GridBagConstraints.CENTER;
-    c.fill = GridBagConstraints.NONE;
-    add(saveButton, c);
-
-    c.gridx = 4;
-    c.gridy = 3;
-    c.anchor = GridBagConstraints.EAST;
-    c.fill = GridBagConstraints.NONE;
-    add(deleteButton, c);
+    c.fill = GridBagConstraints.HORIZONTAL;
+    getHeader().add(labelPanel, c);
 
     new MarkRecordPageController(this);
   }

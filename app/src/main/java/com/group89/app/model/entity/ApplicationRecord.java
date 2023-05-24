@@ -12,7 +12,8 @@ public class ApplicationRecord {
   private Integer gre;
   private String note;
 
-  public ApplicationRecord(ApplicationStatus status, String country, String university, String program, Double gpa, Double languageScore, Integer gre, String note) {
+  public ApplicationRecord(ApplicationStatus status, String country, String university,
+      String program, Double gpa, Double languageScore, Integer gre, String note) {
     this.status = status;
     this.country = country;
     this.university = university;

@@ -3,6 +3,8 @@ package com.group89.app.controller;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -10,14 +12,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
-import javax.swing.table.TableRowSorter;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.ListTableModel;
 import com.group89.app.model.MarkRecordTableModel;
 import com.group89.app.model.MarkRecordTableModelCN;
 import com.group89.app.model.MarkRecordTableModelUK;
+import com.group89.app.model.SemesterList;
 import com.group89.app.model.entity.MarkRecord;
-import com.group89.app.view.comp.MyComboBox;
+// import com.group89.app.utils.SemesterGenerator;
+import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkRecordPage;
 
 public class MarkRecordPageController
@@ -65,12 +68,8 @@ public class MarkRecordPageController
     }
   }
 
-  private TableRowSorter<ListTableModel<MarkRecord>> sorter;
-
   public MarkRecordPageController(MarkRecordPage page) {
     super(page, "marks.json", MarkRecord[].class, MarkRecord.class);
-
-    sorter = new TableRowSorter<>(model);
 
     init();
   }
@@ -81,7 +80,6 @@ public class MarkRecordPageController
     view.getScaleBox().addActionListener(e -> query());
     view.getSemesterBox().addActionListener(e -> query());
     view.getTypeBox().addActionListener(e -> query());
-    view.getTable().setRowSorter(sorter);
 
     query();
   }
@@ -89,8 +87,6 @@ public class MarkRecordPageController
   @Override
   protected void query() {
     String scale = (String) view.getScaleBox().getSelectedItem();
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
 
     JTable table = view.getTable();
 
@@ -119,24 +115,36 @@ public class MarkRecordPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
     table.getColumn("Title").setPreferredWidth(200);
     table.getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new MyComboBox<>(MarkRecordPage.SEMESTERS)));
-    table.getColumn("Type").setCellEditor(new DefaultCellEditor(new MyComboBox<>(
-        new CourseType[] {CourseType.COMPULSORY, CourseType.ELECTIVE, CourseType.OPTIONAL})));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
 
+    ArrayList<CourseType> types = new ArrayList<>(Arrays.asList(CourseType.values()));
+    types.remove(CourseType.ALL);
+    table.getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(types.toArray(new CourseType[0]))));
 
-    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Object>() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
+    sorter.setRowFilter(new RowFilter<ListTableModel<MarkRecord>, Integer>() {
       @Override
-      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Object> entry) {
+      public boolean include(Entry<? extends ListTableModel<MarkRecord>, ? extends Integer> entry) {
         ListTableModel<MarkRecord> model = entry.getModel();
         MarkRecord record = model.getItem(entry.getIdentifier());
-        return (semester.equals("all") || record.getSemester().equals(semester))
+        return (semester.equals("All") || record.getSemester().equals(semester))
             && (type == CourseType.ALL || record.getType() == type);
       }
     });
     sorter.setModel(model);
 
     updateLabels();
-    view.getSaveButton().setEnabled(false);
+  }
+
+  @Override
+  protected void add() {
+    String semester = (String) view.getSemesterBox().getSelectedItem();
+    CourseType type = (CourseType) view.getTypeBox().getSelectedItem();
+    MarkRecord record = new MarkRecord(!semester.equals("All") ? semester : "", "", "", 0, 0, 0.0,
+        0, type != CourseType.ALL ? type : CourseType.COMPULSORY);
+    model.addItem(record);
   }
 
   private void updateLabels() {
