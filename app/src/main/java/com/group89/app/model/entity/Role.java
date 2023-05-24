@@ -1,19 +1,19 @@
 package com.group89.app.model.entity;
 
-public class RoleRecord {
+public class Role {
   private String semester;
   private String title;
   private String content;
   private String note;
 
-  public RoleRecord(String semester, String title, String content, String note) {
+  public Role(String semester, String title, String content, String note) {
     this.semester = semester;
     this.title = title;
     this.content = content;
     this.note = note;
   }
 
-  public RoleRecord() {
+  public Role() {
     semester = "";
     title = "";
     content = "";

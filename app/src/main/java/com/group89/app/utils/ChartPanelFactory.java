@@ -24,12 +24,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.statistics.HistogramDataset;
 import com.group89.app.model.CourseType;
-import com.group89.app.model.entity.MarkRecord;
+import com.group89.app.model.entity.Mark;
 
 public class ChartPanelFactory {
   public static ChartPanel getAverageTrend() {
-    JsonConverter<MarkRecord> jsonConverter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    List<MarkRecord> marks = jsonConverter.toArrayList();
+    JsonConverter<Mark> jsonConverter = new JsonConverter<>("marks.json", Mark[].class);
+    List<Mark> marks = jsonConverter.toArrayList();
 
     if (marks == null) {
       return null;
@@ -39,7 +39,7 @@ public class ChartPanelFactory {
     HashMap<String, Double> totalCredits = new HashMap<>();
 
     // calculate the weighted marks and total credits for each semester
-    for (MarkRecord mark : marks) {
+    for (Mark mark : marks) {
       if (!weightedMarks.containsKey(mark.getSemester())) {
         LinkedList<Double> marksInSemester = new LinkedList<>();
         marksInSemester.add(0.0);
@@ -95,15 +95,15 @@ public class ChartPanelFactory {
 
   public static ChartPanel getCourseComposition() {
     // creates a pie chart containing different typs of courses
-    JsonConverter<MarkRecord> jsonConverter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    List<MarkRecord> marks = jsonConverter.toArrayList();
+    JsonConverter<Mark> jsonConverter = new JsonConverter<>("marks.json", Mark[].class);
+    List<Mark> marks = jsonConverter.toArrayList();
 
     if (marks == null) {
       return null;
     }
 
     HashMap<CourseType, Integer> courseTypeCount = new HashMap<>();
-    for (MarkRecord mark : marks) {
+    for (Mark mark : marks) {
       if (!courseTypeCount.containsKey(mark.getType())) {
         courseTypeCount.put(mark.getType(), 0);
       }
@@ -130,8 +130,8 @@ public class ChartPanelFactory {
   }
 
   public static ChartPanel getMarkDistribution() {
-    JsonConverter<MarkRecord> converter = new JsonConverter<>("marks.json", MarkRecord[].class);
-    List<MarkRecord> list = converter.toArrayList();
+    JsonConverter<Mark> converter = new JsonConverter<>("marks.json", Mark[].class);
+    List<Mark> list = converter.toArrayList();
 
     HistogramDataset dataset = new HistogramDataset();
     double[] values = new double[list.size()];

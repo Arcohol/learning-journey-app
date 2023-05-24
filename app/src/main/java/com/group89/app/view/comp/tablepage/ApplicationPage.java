@@ -2,14 +2,14 @@ package com.group89.app.view.comp.tablepage;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
-import com.group89.app.controller.ApplicationRecordPageController;
+import com.group89.app.controller.ApplicationPageController;
 import com.group89.app.model.ApplicationStatus;
 import com.group89.app.view.comp.IComboBox;
 
-public class ApplicationRecordPage extends DefaultTablePage {
+public class ApplicationPage extends DefaultTablePage {
   private JComboBox<ApplicationStatus> statusBox;
 
-  public ApplicationRecordPage() {
+  public ApplicationPage() {
     super();
 
     statusBox = new IComboBox<>(ApplicationStatus.values());
@@ -22,7 +22,7 @@ public class ApplicationRecordPage extends DefaultTablePage {
     c.weightx = 1;
     getHeader().add(statusBox, c);
 
-    new ApplicationRecordPageController(this);
+    new ApplicationPageController(this);
   }
 
   public JComboBox<ApplicationStatus> getStatusBox() {

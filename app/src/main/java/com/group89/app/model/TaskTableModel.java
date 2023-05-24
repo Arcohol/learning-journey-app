@@ -1,18 +1,18 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.TaskRecord;
+import com.group89.app.model.entity.Task;
 
-public class TaskRecordTableModel extends ListTableModel<TaskRecord> {
+public class TaskTableModel extends ListTableModel<Task> {
   private static final String[] COLUMN_NAMES = {"Content", "Due", "Status"};
 
-  public TaskRecordTableModel(List<TaskRecord> tasks) {
-    super(TaskRecord.class, COLUMN_NAMES, tasks);
+  public TaskTableModel(List<Task> tasks) {
+    super(Task.class, COLUMN_NAMES, tasks);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    TaskRecord task = getItem(rowIndex);
+    Task task = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> task.getContent();
       case 1 -> task.getDue();
@@ -23,7 +23,7 @@ public class TaskRecordTableModel extends ListTableModel<TaskRecord> {
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    TaskRecord task = getItem(rowIndex);
+    Task task = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> task.setContent((String) aValue);
       case 1 -> task.setDue((String) aValue);

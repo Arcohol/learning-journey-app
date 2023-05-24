@@ -2,20 +2,20 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.PortfolioType;
 
-public class PortfolioRecord {
+public class Portfolio {
   private String semester;
   private PortfolioType type;
   private String exhibition;
   private String details;
 
-  public PortfolioRecord(String semester, PortfolioType type, String exhibition, String details) {
+  public Portfolio(String semester, PortfolioType type, String exhibition, String details) {
     this.semester = semester;
     this.type = type;
     this.exhibition = exhibition;
     this.details = details;
   }
 
-  public PortfolioRecord() {
+  public Portfolio() {
     this.semester = "";
     this.type = PortfolioType.OTHER;
     this.exhibition = "";

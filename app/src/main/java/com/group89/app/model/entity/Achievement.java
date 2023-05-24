@@ -2,20 +2,20 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.AchievementType;
 
-public class AchievementRecord {
+public class Achievement {
   private String semester;
   private String title;
   private String details;
   private AchievementType type;
 
-  public AchievementRecord(String semester, String title, String details, AchievementType type) {
+  public Achievement(String semester, String title, String details, AchievementType type) {
     this.semester = semester;
     this.title = title;
     this.details = details;
     this.type = type;
   }
 
-  public AchievementRecord() {
+  public Achievement() {
     this("", "", "", AchievementType.OTHER);
   }
 

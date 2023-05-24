@@ -2,7 +2,7 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.ApplicationStatus;
 
-public class ApplicationRecord {
+public class Application {
   private ApplicationStatus status;
   private String country;
   private String university;
@@ -12,7 +12,7 @@ public class ApplicationRecord {
   private Integer gre;
   private String note;
 
-  public ApplicationRecord(ApplicationStatus status, String country, String university,
+  public Application(ApplicationStatus status, String country, String university,
       String program, Double gpa, Double languageScore, Integer gre, String note) {
     this.status = status;
     this.country = country;
@@ -24,7 +24,7 @@ public class ApplicationRecord {
     this.note = note;
   }
 
-  public ApplicationRecord() {
+  public Application() {
     status = ApplicationStatus.PENDING;
     country = "";
     university = "";

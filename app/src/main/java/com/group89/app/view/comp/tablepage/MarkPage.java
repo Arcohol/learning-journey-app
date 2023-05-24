@@ -4,14 +4,14 @@ import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import com.group89.app.controller.MarkRecordPageController;
+import com.group89.app.controller.MarkPageController;
 import com.group89.app.model.CourseType;
 import com.group89.app.model.SemesterList;
 import com.group89.app.view.comp.Header;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.ILabel;
 
-public class MarkRecordPage extends DefaultTablePage {
+public class MarkPage extends DefaultTablePage {
   public static final String[] SCALES = {"BOTH", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
@@ -20,7 +20,7 @@ public class MarkRecordPage extends DefaultTablePage {
   private JComboBox<CourseType> typeBox;
   private JLabel[] labels;
 
-  public MarkRecordPage() {
+  public MarkPage() {
     super();
 
     semesterBox = new IComboBox<>(new SemesterList(true).toArray());
@@ -87,7 +87,7 @@ public class MarkRecordPage extends DefaultTablePage {
     c.fill = GridBagConstraints.HORIZONTAL;
     getHeader().add(labelPanel, c);
 
-    new MarkRecordPageController(this);
+    new MarkPageController(this);
   }
 
   public JComboBox<String> getSemesterBox() {

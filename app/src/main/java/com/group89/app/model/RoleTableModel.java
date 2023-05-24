@@ -1,18 +1,18 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.RoleRecord;
+import com.group89.app.model.entity.Role;
 
-public class RoleRecordTableModel extends ListTableModel<RoleRecord> {
+public class RoleTableModel extends ListTableModel<Role> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Content", "Note"};
 
-  public RoleRecordTableModel(List<RoleRecord> roleRecords) {
-    super(RoleRecord.class, COLUMN_NAMES, roleRecords);
+  public RoleTableModel(List<Role> roleRecords) {
+    super(Role.class, COLUMN_NAMES, roleRecords);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    RoleRecord roleRecord = getItem(rowIndex);
+    Role roleRecord = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> roleRecord.getSemester();
       case 1 -> roleRecord.getTitle();
@@ -24,7 +24,7 @@ public class RoleRecordTableModel extends ListTableModel<RoleRecord> {
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    RoleRecord roleRecord = getItem(rowIndex);
+    Role roleRecord = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> roleRecord.setSemester((String) aValue);
       case 1 -> roleRecord.setTitle((String) aValue);

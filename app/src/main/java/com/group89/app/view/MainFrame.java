@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.tablepage.AchievementPage;
-import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
+import com.group89.app.view.comp.tablepage.ApplicationPage;
 import com.group89.app.view.comp.tablepage.ChartPage;
-import com.group89.app.view.comp.tablepage.MarkRecordPage;
+import com.group89.app.view.comp.tablepage.MarkPage;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 import com.group89.app.view.comp.tablepage.RolePage;
 import com.group89.app.view.comp.tablepage.TaskPage;
@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
     content = new JPanel(new CardLayout());
     add(content, BorderLayout.CENTER);
 
-    pages[0] = new MarkRecordPage();
+    pages[0] = new MarkPage();
     pages[0].setBackground(java.awt.Color.WHITE);
 
     pages[1] = new TaskPage();
@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
     pages[4] = new PortfolioPage();
     pages[4].setBackground(java.awt.Color.WHITE);
 
-    pages[5] = new ApplicationRecordPage();
+    pages[5] = new ApplicationPage();
     pages[5].setBackground(java.awt.Color.WHITE);
 
     pages[6] = new ChartPage();

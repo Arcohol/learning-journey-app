@@ -3,7 +3,7 @@ package com.group89.app.model.entity;
 import com.group89.app.model.CourseType;
 import com.group89.app.utils.MarkConverter;
 
-public class MarkRecord {
+public class Mark {
   private String semester;
   private String moduleCode;
   private String title;
@@ -13,7 +13,7 @@ public class MarkRecord {
   private Integer creditsUK;
   private CourseType type;
 
-  public MarkRecord(String semester, String moduleCode, String title, int markCN, int markUK,
+  public Mark(String semester, String moduleCode, String title, int markCN, int markUK,
       double creditsCN, int creditsUK, CourseType type) {
     this.semester = semester;
     this.moduleCode = moduleCode;
@@ -25,7 +25,7 @@ public class MarkRecord {
     this.type = type;
   }
 
-  public MarkRecord() {
+  public Mark() {
     semester = "";
     moduleCode = "";
     title = "";

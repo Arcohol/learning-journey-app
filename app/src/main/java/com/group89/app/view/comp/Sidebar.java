@@ -62,27 +62,25 @@ public class Sidebar extends JPanel {
     c.gridy = 0;
     add(date, c);
 
-    buttons[0] = new IButton("Marks");
-    buttons[0].setForeground(AppColor.BLACK);
-    buttons[0].setBackground(AppColor.WHITE);
+    buttons[0] = new IButton("Mark");
 
     c.gridx = 0;
     c.gridy = 1;
     add(buttons[0], c);
 
-    buttons[1] = new IButton("Tasks");
+    buttons[1] = new IButton("Task");
 
     c.gridx = 0;
     c.gridy = 2;
     add(buttons[1], c);
 
-    buttons[2] = new IButton("Roles");
+    buttons[2] = new IButton("Role");
 
     c.gridx = 0;
     c.gridy = 3;
     add(buttons[2], c);
 
-    buttons[3] = new IButton("Achievements");
+    buttons[3] = new IButton("Achievement");
 
     c.gridx = 0;
     c.gridy = 4;

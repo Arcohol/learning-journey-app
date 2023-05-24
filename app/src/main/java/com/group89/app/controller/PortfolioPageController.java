@@ -5,17 +5,17 @@ import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.PortfolioRecordTableModel;
+import com.group89.app.model.PortfolioTableModel;
 import com.group89.app.model.PortfolioType;
 import com.group89.app.model.SemesterList;
-import com.group89.app.model.entity.PortfolioRecord;
+import com.group89.app.model.entity.Portfolio;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
 public class PortfolioPageController
-    extends AbstractTablePageController<PortfolioRecord, PortfolioPage> {
+    extends AbstractTablePageController<Portfolio, PortfolioPage> {
   public PortfolioPageController(PortfolioPage page) {
-    super(page, "portfolios.json", PortfolioRecord[].class, PortfolioRecord.class);
+    super(page, "portfolios.json", Portfolio[].class, Portfolio.class);
     init();
   }
 
@@ -30,7 +30,7 @@ public class PortfolioPageController
 
   @Override
   protected void query() {
-    model = new PortfolioRecordTableModel(list);
+    model = new PortfolioTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
@@ -44,12 +44,12 @@ public class PortfolioPageController
 
     String semester = (String) view.getSemesterBox().getSelectedItem();
     PortfolioType type = (PortfolioType) view.getTypeBox().getSelectedItem();
-    sorter.setRowFilter(new RowFilter<ListTableModel<PortfolioRecord>, Integer>() {
+    sorter.setRowFilter(new RowFilter<ListTableModel<Portfolio>, Integer>() {
       @Override
       public boolean include(
-          Entry<? extends ListTableModel<PortfolioRecord>, ? extends Integer> entry) {
-        ListTableModel<PortfolioRecord> model = entry.getModel();
-        PortfolioRecord record = model.getItem(entry.getIdentifier());
+          Entry<? extends ListTableModel<Portfolio>, ? extends Integer> entry) {
+        ListTableModel<Portfolio> model = entry.getModel();
+        Portfolio record = model.getItem(entry.getIdentifier());
         return (semester.equals("All") || record.getSemester().equals(semester))
             && (type == PortfolioType.ALL || record.getType() == type);
       }
@@ -61,7 +61,7 @@ public class PortfolioPageController
   protected void add() {
     String semester = (String) view.getSemesterBox().getSelectedItem();
     PortfolioType type = (PortfolioType) view.getTypeBox().getSelectedItem();
-    PortfolioRecord record = new PortfolioRecord(!semester.equals("All") ? semester : "",
+    Portfolio record = new Portfolio(!semester.equals("All") ? semester : "",
         type != PortfolioType.ALL ? type : PortfolioType.OTHER, "", "");
     model.addItem(record);
   }

@@ -1,18 +1,18 @@
 package com.group89.app.model;
 
 import java.util.List;
-import com.group89.app.model.entity.PortfolioRecord;
+import com.group89.app.model.entity.Portfolio;
 
-public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
+public class PortfolioTableModel extends ListTableModel<Portfolio> {
   private static final String[] COLUMN_NAMES = {"Semester", "Type", "Exhibition", "Detail"};
 
-  public PortfolioRecordTableModel(List<PortfolioRecord> portfolioRecords) {
-    super(PortfolioRecord.class, COLUMN_NAMES, portfolioRecords);
+  public PortfolioTableModel(List<Portfolio> portfolioRecords) {
+    super(Portfolio.class, COLUMN_NAMES, portfolioRecords);
   }
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    PortfolioRecord portfolioRecord = getItem(rowIndex);
+    Portfolio portfolioRecord = getItem(rowIndex);
     return switch (columnIndex) {
       case 0 -> portfolioRecord.getSemester();
       case 1 -> portfolioRecord.getType();
@@ -24,7 +24,7 @@ public class PortfolioRecordTableModel extends ListTableModel<PortfolioRecord> {
 
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    PortfolioRecord portfolioRecord = getItem(rowIndex);
+    Portfolio portfolioRecord = getItem(rowIndex);
     switch (columnIndex) {
       case 0 -> portfolioRecord.setSemester((String) aValue);
       case 1 -> portfolioRecord.setType((PortfolioType) aValue);

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
-import com.group89.app.model.ApplicationRecordTableModel;
+import com.group89.app.model.ApplicationTableModel;
 import com.group89.app.model.ApplicationStatus;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.entity.ApplicationRecord;
+import com.group89.app.model.entity.Application;
 import com.group89.app.view.comp.IComboBox;
-import com.group89.app.view.comp.tablepage.ApplicationRecordPage;
+import com.group89.app.view.comp.tablepage.ApplicationPage;
 
-public class ApplicationRecordPageController
-    extends AbstractTablePageController<ApplicationRecord, ApplicationRecordPage> {
-  public ApplicationRecordPageController(ApplicationRecordPage page) {
-    super(page, "applications.json", ApplicationRecord[].class, ApplicationRecord.class);
+public class ApplicationPageController
+    extends AbstractTablePageController<Application, ApplicationPage> {
+  public ApplicationPageController(ApplicationPage page) {
+    super(page, "applications.json", Application[].class, Application.class);
     init();
   }
 
@@ -28,7 +28,7 @@ public class ApplicationRecordPageController
 
   @Override
   protected void query() {
-    model = new ApplicationRecordTableModel(list);
+    model = new ApplicationTableModel(list);
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
@@ -39,12 +39,12 @@ public class ApplicationRecordPageController
         new DefaultCellEditor(new IComboBox<>(types.toArray(new ApplicationStatus[0]))));
 
     ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
-    sorter.setRowFilter(new RowFilter<ListTableModel<ApplicationRecord>, Integer>() {
+    sorter.setRowFilter(new RowFilter<ListTableModel<Application>, Integer>() {
       @Override
       public boolean include(
-          Entry<? extends ListTableModel<ApplicationRecord>, ? extends Integer> entry) {
-        ListTableModel<ApplicationRecord> model = entry.getModel();
-        ApplicationRecord record = model.getItem(entry.getIdentifier());
+          Entry<? extends ListTableModel<Application>, ? extends Integer> entry) {
+        ListTableModel<Application> model = entry.getModel();
+        Application record = model.getItem(entry.getIdentifier());
         return status == ApplicationStatus.ALL || record.getStatus() == status;
       }
     });
@@ -54,8 +54,8 @@ public class ApplicationRecordPageController
   @Override
   protected void add() {
     ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
-    ApplicationRecord record =
-        new ApplicationRecord(status != ApplicationStatus.ALL ? status : ApplicationStatus.PENDING,
+    Application record =
+        new Application(status != ApplicationStatus.ALL ? status : ApplicationStatus.PENDING,
             "", "", "", 0.0, 0.0, 0, "");
     model.addItem(record);
   }
