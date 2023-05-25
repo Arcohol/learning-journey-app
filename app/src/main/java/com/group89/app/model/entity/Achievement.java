@@ -10,7 +10,7 @@ public class Achievement {
   private AchievementType type;
 
   public Achievement(Semester semester, String title, String details, AchievementType type) {
-    setSemester(semester);
+    this.semester = semester;
     this.title = title;
     this.details = details;
     this.type = type;

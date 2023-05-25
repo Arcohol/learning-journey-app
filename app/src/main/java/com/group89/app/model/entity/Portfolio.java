@@ -10,7 +10,7 @@ public class Portfolio {
   private String details;
 
   public Portfolio(Semester semester, PortfolioType type, String exhibition, String details) {
-    setSemester(semester);
+    this.semester = semester;
     this.type = type;
     this.exhibition = exhibition;
     this.details = details;

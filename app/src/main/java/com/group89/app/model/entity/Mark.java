@@ -16,7 +16,7 @@ public class Mark {
 
   public Mark(Semester semester, String moduleCode, String title, int markCN, int markUK,
       double creditsCN, int creditsUK, CourseType type) {
-    setSemester(semester);
+    this.semester = semester;
     this.moduleCode = moduleCode;
     this.title = title;
     this.markCN = markCN;

@@ -19,7 +19,7 @@ import com.group89.app.view.comp.Header;
  * @see DefaultTablePage
  */
 public class MarkPage extends DefaultTablePage {
-  public static final String[] SCALES = {"BOTH", "CN", "UK"};
+  public static final String[] SCALES = {"Both", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
 

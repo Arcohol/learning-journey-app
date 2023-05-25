@@ -89,7 +89,7 @@ public class MarkPageController extends AbstractTablePageController<Mark, MarkPa
     JTable table = view.getTable();
 
     switch (scale) {
-      case "BOTH" -> {
+      case "Both" -> {
         model = new MarkTableModel(list);
         model.addTableModelListener(e -> updateLabels());
         table.setModel(model);

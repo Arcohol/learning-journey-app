@@ -9,7 +9,7 @@ public class Role {
   private String note;
 
   public Role(Semester semester, String title, String content, String note) {
-    setSemester(semester);
+    this.semester = semester;
     this.title = title;
     this.content = content;
     this.note = note;

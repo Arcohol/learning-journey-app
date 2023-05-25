@@ -3,10 +3,10 @@ package com.group89.app.utils;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -45,41 +45,15 @@ public class ChartPanelFactory {
       return null;
     }
 
-    HashMap<Semester, List<Double>> weightedMarks = new HashMap<>();
-    HashMap<Semester, Double> totalCredits = new HashMap<>();
-
-    // calculate the weighted marks and total credits for each semester
-    for (Mark mark : marks) {
-      if (!weightedMarks.containsKey(mark.getSemester())) {
-        LinkedList<Double> marksInSemester = new LinkedList<>();
-        marksInSemester.add(0.0);
-        weightedMarks.put(mark.getSemester(), marksInSemester);
-      }
-
-      if (!totalCredits.containsKey(mark.getSemester())) {
-        totalCredits.put(mark.getSemester(), 0.0);
-      }
-
-      List<Double> marksInSemester = weightedMarks.get(mark.getSemester());
-      marksInSemester.add(mark.getMarkCN() * mark.getCreditsCN());
-
-      totalCredits.put(mark.getSemester(),
-          totalCredits.get(mark.getSemester()) + mark.getCreditsCN());;
-    }
+    Map<Semester, Double> averageMarks = marks.stream()
+        .collect(Collectors.groupingBy(Mark::getSemester,
+            Collectors.teeing(Collectors.summingDouble(m -> m.getMarkCN() * m.getCreditsCN()),
+                Collectors.summingDouble(m -> m.getCreditsCN()),
+                (weighted, credits) -> weighted / credits)));
 
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    LinkedList<Semester> semesters = new LinkedList<>(weightedMarks.keySet());
-    Collections.sort(semesters);
-
-    // calculate the average mark for each semester
-    for (Semester semester : semesters) {
-      List<Double> marksInSemester = weightedMarks.get(semester);
-      double sum = 0;
-      for (Double mark : marksInSemester) {
-        sum += mark;
-      }
-      dataset.addValue(sum / totalCredits.get(semester), "Average Mark", semester);
-    }
+    marks.stream().map(Mark::getSemester).distinct().sorted()
+        .forEach(s -> dataset.addValue(averageMarks.get(s), "Average Mark", s));
 
     // return a JFreeChart using the dataset
     JFreeChart chart =
@@ -94,7 +68,6 @@ public class ChartPanelFactory {
     renderer.setSeriesItemLabelsVisible(0, true);
     renderer.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
     chart.getCategoryPlot().setRenderer(renderer);
-
 
     ChartPanel panel = new ChartPanel(chart);
     // set the panel small enough so that it can be automatically resized
@@ -117,18 +90,12 @@ public class ChartPanelFactory {
       return null;
     }
 
-    HashMap<CourseType, Integer> courseTypeCount = new HashMap<>();
-    for (Mark mark : marks) {
-      if (!courseTypeCount.containsKey(mark.getType())) {
-        courseTypeCount.put(mark.getType(), 0);
-      }
-      courseTypeCount.put(mark.getType(), courseTypeCount.get(mark.getType()) + 1);
-    }
+    Map<CourseType, Integer> courseTypeCount =
+        marks.stream().collect(Collectors.groupingBy(Mark::getType, Collectors.summingInt(m -> 1)));
 
     DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-    for (CourseType type : courseTypeCount.keySet()) {
-      dataset.setValue(type.toString(), courseTypeCount.get(type));
-    }
+    marks.stream().map(Mark::getType).distinct().sorted()
+        .forEach(t -> dataset.setValue(t.toString(), courseTypeCount.get(t)));
 
     JFreeChart chart = ChartFactory.createPieChart("Course Composition", dataset);
     chart.getPlot().setBackgroundPaint(Color.WHITE);
@@ -153,23 +120,16 @@ public class ChartPanelFactory {
     JsonConverter<Mark> converter = new JsonConverter<>("marks.json", Mark[].class);
     List<Mark> list = converter.toArrayList();
 
+    DoubleStream.Builder builder = DoubleStream.builder();
+    DoubleStream stream = list.stream().mapToDouble(Mark::getMarkCN);
+    double[] values = stream.peek(builder).toArray();
+    stream = builder.build();
+    builder = DoubleStream.builder();
+    double max = stream.peek(builder).max().orElse(0);
+    stream = builder.build();
+    double min = stream.min().orElse(0);
+
     HistogramDataset dataset = new HistogramDataset();
-    double[] values = new double[list.size()];
-    double max = 0, min = 0;
-    for (int i = 0; i < list.size(); i++) {
-      values[i] = list.get(i).getMarkCN();
-      if (i == 0) {
-        max = values[i];
-        min = values[i];
-      } else {
-        if (values[i] > max) {
-          max = values[i];
-        }
-        if (values[i] < min) {
-          min = values[i];
-        }
-      }
-    }
     dataset.addSeries("Marks", values, (int) (max - min + 1), min, max + 1);
 
     JFreeChart chart = ChartFactory.createHistogram("Distribution of Marks", "Mark Range",
