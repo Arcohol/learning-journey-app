@@ -4,10 +4,18 @@ import java.util.List;
 import com.group89.app.model.enumeration.ApplicationStatus;
 import com.group89.app.model.entity.Application;
 
+/**
+ * A table model for applications.
+ */
 public class ApplicationTableModel extends ListTableModel<Application> {
   private static final String[] COLUMN_NAMES =
       {"Status", "Country", "University", "Program", "GPA", "Language", "GRE", "Note"};
 
+  /**
+   * Constructs an application table model.
+   * 
+   * @param applicationRecords the list of applications
+   */
   public ApplicationTableModel(List<Application> applicationRecords) {
     super(Application.class, COLUMN_NAMES, applicationRecords);
   }

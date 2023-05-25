@@ -14,9 +14,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 /**
- * A class that converts a JSON file to an ArrayList and vice versa.
+ * A class that converts a JSON file to an {@code ArrayList} and vice versa.
  * 
- * @param <T> The type of the items
+ * @param <T> the type of the items
  */
 public class JsonConverter<T> {
   private String fileUrl;
@@ -25,8 +25,8 @@ public class JsonConverter<T> {
   /**
    * Constructor of the class.
    * 
-   * @param fileUrl The URL of the JSON file
-   * @param type The type of the items
+   * @param fileUrl the URL of the JSON file
+   * @param type the type of the items
    */
   public JsonConverter(String fileUrl, Class<T[]> type) {
     this.fileUrl = fileUrl;
@@ -34,9 +34,9 @@ public class JsonConverter<T> {
   }
 
   /**
-   * Read the JSON file and convert it to an ArrayList.
+   * Returns a list of items from the JSON file.
    * 
-   * @return The ArrayList
+   * @return an {@code ArrayList}
    */
   public ArrayList<T> toArrayList() {
     Gson gson = new Gson();
@@ -54,9 +54,9 @@ public class JsonConverter<T> {
   }
 
   /**
-   * Write a list of items to the JSON file.
+   * Writes a list to the JSON file.
    * 
-   * @param list The ArrayList
+   * @param list the list to be written
    */
   public void toFile(List<T> list) {
     Gson gson = new Gson();

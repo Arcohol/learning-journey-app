@@ -11,7 +11,15 @@ import com.group89.app.model.entity.Role;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.RolePage;
 
+/**
+ * A controller class that controls the role page.
+ */
 public class RolePageController extends AbstractTablePageController<Role, RolePage> {
+  /**
+   * Constructs a role page controller.
+   * 
+   * @param page the role page
+   */
   public RolePageController(RolePage page) {
     super(page, "roles.json", Role[].class, Role.class);
     init();
@@ -46,6 +54,10 @@ public class RolePageController extends AbstractTablePageController<Role, RolePa
     sorter.setModel(model);
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();

@@ -5,14 +5,14 @@ import javax.swing.JButton;
 import com.group89.app.view.AppColor;
 
 /**
- * A JButton with a fixed size and font size.
+ * A JButton with a fixed size and font sizes.
  */
 public class IButton extends JButton {
   private static final float FONT_SIZE = 16f;
   private static final Dimension BUTTON_SIZE = new Dimension(100, 30);
 
   /**
-   * Constructs a new IButton with the given text.
+   * Constructs a new {@code IButton} with the given text.
    * 
    * @param text the text of the button
    */

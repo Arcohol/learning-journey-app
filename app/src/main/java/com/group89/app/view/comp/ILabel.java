@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 
 /**
- * A JLabel with a fixed size and font size.
+ * A {@code JLabel} with a fixed size and font sizes.
  */
 public class ILabel extends JLabel {
   private static final float FONT_SIZE = 16f;

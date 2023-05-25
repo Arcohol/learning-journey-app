@@ -5,12 +5,20 @@ import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Mark;
 
+/**
+ * A mark table model that only shows the UK mark and credits of each module.
+ */
 public class MarkTableModelUK extends ListTableModel<Mark> {
   private static final String[] COLUMN_NAMES =
       {"Semester", "Module Code", "Title", "Mark (UK)", "Credits (UK)", "Type"};
 
-  public MarkTableModelUK(List<Mark> list) {
-    super(Mark.class, COLUMN_NAMES, list);
+  /**
+   * Constructs a mark table model that only shows the UK mark and credits of each module.
+   * 
+   * @param records the list of marks
+   */
+  public MarkTableModelUK(List<Mark> records) {
+    super(Mark.class, COLUMN_NAMES, records);
   }
 
   @Override

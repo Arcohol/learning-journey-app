@@ -4,9 +4,17 @@ import java.util.List;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Role;
 
+/**
+ * A table model for roles.
+ */
 public class RoleTableModel extends ListTableModel<Role> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Content", "Note"};
 
+  /**
+   * Constructs a role table model.
+   *
+   * @param roleRecords the list of roles
+   */
   public RoleTableModel(List<Role> roleRecords) {
     super(Role.class, COLUMN_NAMES, roleRecords);
   }

@@ -4,6 +4,9 @@ import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.utils.MarkConverter;
 
+/**
+ * An entity class whose instance represents a mark.
+ */
 public class Mark {
   private Semester semester;
   private String moduleCode;
@@ -74,6 +77,12 @@ public class Mark {
     this.title = title;
   }
 
+  /**
+   * Set the mark in the Chinese scale. If this is a {@code Mark} instance of a Chinese module, the
+   * mark will also be automatically converted to update the mark in the UK scale.
+   * 
+   * @param markCN the mark in Chinese scale
+   */
   public void setMarkCN(int markCN) {
     MarkConverter converter = new MarkConverter();
 
@@ -83,6 +92,12 @@ public class Mark {
     }
   }
 
+  /**
+   * Set the mark in the UK scale. If this is a {@code Mark} instance of a UK module, the mark will
+   * also be automatically converted to update the mark in the Chinese scale.
+   * 
+   * @param markUK the mark in UK scale
+   */
   public void setMarkUK(int markUK) {
     MarkConverter converter = new MarkConverter();
 
@@ -104,6 +119,11 @@ public class Mark {
     this.type = type;
   }
 
+  /**
+   * Get the grade point of this instance.
+   * 
+   * @return the grade point
+   */
   public double getGradePoint() {
     double gradePoint = 0.0;
     if (markCN >= 60) {

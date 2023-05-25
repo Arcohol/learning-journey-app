@@ -5,9 +5,20 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import com.group89.app.view.MainFrame;
 
+/**
+ * A controller class that controls the main frame.
+ */
 public class MainFrameController {
+  /**
+   * The main frame.
+   */
   private MainFrame frame;
 
+  /**
+   * Constructs a main frame controller.
+   * 
+   * @param frame the main frame
+   */
   public MainFrameController(MainFrame frame) {
     this.frame = frame;
 

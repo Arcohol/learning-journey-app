@@ -1,5 +1,8 @@
 package com.group89.app.model.entity;
 
+/**
+ * An entity class whose instance represents a task.
+ */
 public class Task {
   private String content;
   private String due;

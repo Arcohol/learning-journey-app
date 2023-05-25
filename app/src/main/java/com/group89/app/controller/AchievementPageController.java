@@ -12,8 +12,16 @@ import com.group89.app.model.entity.Achievement;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
+/**
+ * A controller class that controls the achievement page.
+ */
 public class AchievementPageController
     extends AbstractTablePageController<Achievement, AchievementPage> {
+  /**
+   * Constructs an achievement page controller.
+   * 
+   * @param page the achievement page
+   */
   public AchievementPageController(AchievementPage page) {
     super(page, "achievements.json", Achievement[].class, Achievement.class);
     init();
@@ -54,6 +62,10 @@ public class AchievementPageController
     sorter.setModel(model);
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();

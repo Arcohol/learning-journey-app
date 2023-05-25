@@ -9,7 +9,15 @@ import com.group89.app.model.TaskTableModel;
 import com.group89.app.model.entity.Task;
 import com.group89.app.view.comp.tablepage.TaskPage;
 
+/**
+ * A controller class that controls the task page.
+ */
 public class TaskPageController extends AbstractTablePageController<Task, TaskPage> {
+  /**
+   * Constructs a task page controller.
+   * 
+   * @param page the task page
+   */
   public TaskPageController(TaskPage page) {
     super(page, "tasks.json", Task[].class, Task.class);
     init();
@@ -43,6 +51,10 @@ public class TaskPageController extends AbstractTablePageController<Task, TaskPa
     sorter.setModel(model);
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();

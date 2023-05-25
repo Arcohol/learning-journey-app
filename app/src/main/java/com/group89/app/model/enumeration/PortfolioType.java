@@ -1,5 +1,8 @@
 package com.group89.app.model.enumeration;
 
+/**
+ * An enum class that represents type of portfolio.
+ */
 public enum PortfolioType implements ComboBoxItem {
   VIDEOS, POSTERS, PHOTOS, DESIGN, FREEHAND, OTHER;
 

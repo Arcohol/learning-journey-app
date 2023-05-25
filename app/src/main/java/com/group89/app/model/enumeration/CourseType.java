@@ -1,5 +1,8 @@
 package com.group89.app.model.enumeration;
 
+/**
+ * An enum class that represents type of course.
+ */
 public enum CourseType implements ComboBoxItem {
   COMPULSORY, ELECTIVE, OPTIONAL;
 

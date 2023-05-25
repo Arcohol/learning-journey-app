@@ -3,9 +3,17 @@ package com.group89.app.model;
 import java.util.List;
 import com.group89.app.model.entity.Task;
 
+/**
+ * A table model for tasks.
+ */
 public class TaskTableModel extends ListTableModel<Task> {
   private static final String[] COLUMN_NAMES = {"Content", "Due", "Status"};
 
+  /**
+   * Constructs a task table model.
+   *
+   * @param tasks the list of tasks
+   */
   public TaskTableModel(List<Task> tasks) {
     super(Task.class, COLUMN_NAMES, tasks);
   }

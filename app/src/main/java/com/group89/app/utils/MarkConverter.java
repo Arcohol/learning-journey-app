@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Converts marks from Chinese to UK and vice versa. HashMaps are used for the conversion.
+ * Converts marks from Chinese to UK and vice versa. {@code HashMap}s are used for the conversion.
  */
 public class MarkConverter {
   private Map<Integer, Integer> CNtoUK;

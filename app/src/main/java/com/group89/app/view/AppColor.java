@@ -3,7 +3,7 @@ package com.group89.app.view;
 import java.awt.Color;
 
 /**
- * All the colors used in the application.
+ * This class represents the colors used in the application.
  */
 public class AppColor {
   public static final Color LIGHT_GREY = new Color(245, 245, 245);

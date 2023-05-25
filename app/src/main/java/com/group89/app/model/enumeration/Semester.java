@@ -1,5 +1,8 @@
 package com.group89.app.model.enumeration;
 
+/**
+ * An enum class that represents semester.
+ */
 public enum Semester implements ComboBoxItem {
   Y2020_2021_1,
   Y2020_2021_2,

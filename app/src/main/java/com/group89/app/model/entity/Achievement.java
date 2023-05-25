@@ -3,6 +3,9 @@ package com.group89.app.model.entity;
 import com.group89.app.model.enumeration.AchievementType;
 import com.group89.app.model.enumeration.Semester;
 
+/**
+ * An entity class whose instance represents an achievement.
+ */
 public class Achievement {
   private Semester semester;
   private String title;

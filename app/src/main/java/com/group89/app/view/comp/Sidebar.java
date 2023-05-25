@@ -15,7 +15,7 @@ import com.group89.app.view.AppColor;
  */
 public class Sidebar extends JPanel {
   /**
-   * A button with a custom style. Used in {@link Sidebar}.
+   * A button with a custom style and is used in {@link Sidebar}.
    */
   class IButton extends JButton {
     public IButton(String text) {
@@ -148,6 +148,12 @@ public class Sidebar extends JPanel {
     return exitButton;
   }
 
+  /**
+   * This method restores the default style of the previously selected button and sets the newly
+   * selected button to the active style.
+   * 
+   * @param index the index of the new selected button
+   */
   public void onClick(int index) {
     if (index == currentButtonIndex) {
       return;

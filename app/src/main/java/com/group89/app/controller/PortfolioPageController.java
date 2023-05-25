@@ -12,7 +12,15 @@ import com.group89.app.model.entity.Portfolio;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.PortfolioPage;
 
+/**
+ * A controller class that controls the portfolio page.
+ */
 public class PortfolioPageController extends AbstractTablePageController<Portfolio, PortfolioPage> {
+  /**
+   * Constructs a portfolio page controller.
+   * 
+   * @param page the portfolio page
+   */
   public PortfolioPageController(PortfolioPage page) {
     super(page, "portfolios.json", Portfolio[].class, Portfolio.class);
     init();
@@ -52,6 +60,10 @@ public class PortfolioPageController extends AbstractTablePageController<Portfol
     sorter.setModel(model);
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();

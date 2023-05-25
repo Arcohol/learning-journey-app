@@ -2,6 +2,9 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.Semester;
 
+/**
+ * An entity class whose instance represents a role.
+ */
 public class Role {
   private Semester semester;
   private String title;

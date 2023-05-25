@@ -22,9 +22,15 @@ import com.group89.app.model.entity.Mark;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.MarkPage;
 
+/**
+ * A controller class that controls the mark page.
+ */
 public class MarkPageController extends AbstractTablePageController<Mark, MarkPage> {
-  // temporary solution for enforcing number range
-  // subject to change
+  /**
+   * A cell editor that enforces the number range of a mark.
+   * 
+   * @implNote This is a temporary solution for enforcing number range and is subject to change.
+   */
   class MarkEditor extends DefaultCellEditor {
     Integer value;
 
@@ -66,6 +72,11 @@ public class MarkPageController extends AbstractTablePageController<Mark, MarkPa
     }
   }
 
+  /**
+   * Constructs a mark page controller.
+   * 
+   * @param page the mark page
+   */
   public MarkPageController(MarkPage page) {
     super(page, "marks.json", Mark[].class, Mark.class);
 
@@ -133,6 +144,10 @@ public class MarkPageController extends AbstractTablePageController<Mark, MarkPa
     updateLabels();
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
@@ -142,6 +157,9 @@ public class MarkPageController extends AbstractTablePageController<Mark, MarkPa
     model.addItem(record);
   }
 
+  /**
+   * Updates the labels of this page.
+   */
   private void updateLabels() {
     JTable table = view.getTable();
 
