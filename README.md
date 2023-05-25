@@ -1,9 +1,11 @@
 # learning-journey-app
-![](https://github.com/se-group89/learning-journey-app/actions/workflows/gradle.yml/badge.svg)
-
 A Learning Journey Application for BUPT International School students.
 
 ## Compile & Run
+
+Building the software requires JDK 17 or later.
+
+You can build this software using Gradle by issuing the following command from the root directory of the project:
 
 ```
 $ ./gradlew run
