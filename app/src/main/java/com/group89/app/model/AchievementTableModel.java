@@ -5,9 +5,17 @@ import com.group89.app.model.enumeration.AchievementType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Achievement;
 
+/**
+ * A table model for achievements.
+ */
 public class AchievementTableModel extends ListTableModel<Achievement> {
   private static final String[] COLUMN_NAMES = {"Semester", "Title", "Detail", "Type"};
 
+  /**
+   * Constructs an achievement table model.
+   *
+   * @param achievementRecords the list of achievements
+   */
   public AchievementTableModel(List<Achievement> achievementRecords) {
     super(Achievement.class, COLUMN_NAMES, achievementRecords);
   }

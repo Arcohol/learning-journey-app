@@ -6,8 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 /**
- * An abstract table page. Assuming that all table pages have the same functionality. That is, the
- * ability to add, delete, and save.
+ * This class defines and provides a skeletal implementation of a table page.
  * 
  * @see com.group89.app.view.comp.tablepage.DefaultTablePage
  */

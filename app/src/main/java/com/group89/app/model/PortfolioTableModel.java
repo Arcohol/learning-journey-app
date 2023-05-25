@@ -5,9 +5,17 @@ import com.group89.app.model.enumeration.PortfolioType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Portfolio;
 
+/**
+ * A table model for portfolios.
+ */
 public class PortfolioTableModel extends ListTableModel<Portfolio> {
   private static final String[] COLUMN_NAMES = {"Semester", "Type", "Exhibition", "Detail"};
 
+  /**
+   * Constructs a portfolio table model.
+   *
+   * @param portfolioRecords the list of portfolios
+   */
   public PortfolioTableModel(List<Portfolio> portfolioRecords) {
     super(Portfolio.class, COLUMN_NAMES, portfolioRecords);
   }

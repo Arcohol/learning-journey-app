@@ -28,14 +28,14 @@ import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
 
 /**
- * A factory class that creates different charts.
+ * A factory class that produces chart panels with different types of charts.
  */
 public class ChartPanelFactory {
 
   /**
-   * Creates a chart panel that shows the average mark trend.
+   * Returns a chart panel that shows the average mark trend.
    * 
-   * @return a chart panel
+   * @return a chart panel containing an average mark trend chart
    */
   public static ChartPanel getAverageTrend() {
     JsonConverter<Mark> jsonConverter = new JsonConverter<>("marks.json", Mark[].class);
@@ -77,9 +77,9 @@ public class ChartPanelFactory {
   }
 
   /**
-   * Creates a chart panel that shows the course composition.
+   * Returns a chart panel that shows the course composition.
    * 
-   * @return a chart panel
+   * @return a chart panel containing a course composition chart
    */
   public static ChartPanel getCourseComposition() {
     // creates a pie chart containing different typs of courses
@@ -112,9 +112,9 @@ public class ChartPanelFactory {
   }
 
   /**
-   * Creates a chart panel that shows the distribution of marks.
+   * Returns a chart panel that shows the distribution of marks.
    * 
-   * @return a chart panel
+   * @return a chart panel containing a mark distribution chart
    */
   public static ChartPanel getMarkDistribution() {
     JsonConverter<Mark> converter = new JsonConverter<>("marks.json", Mark[].class);

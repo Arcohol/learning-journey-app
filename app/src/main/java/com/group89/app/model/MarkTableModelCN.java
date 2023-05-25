@@ -5,10 +5,18 @@ import com.group89.app.model.enumeration.CourseType;
 import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Mark;
 
+/**
+ * A mark table model that only shows the CN mark and credits of each module.
+ */
 public class MarkTableModelCN extends ListTableModel<Mark> {
   private static final String[] COLUMN_NAMES =
       {"Semester", "Module Code", "Title", "Mark (CN)", "Credits (CN)", "Type"};
 
+  /**
+   * Constructs a mark table model that only shows the CN mark and credits of each module.
+   * 
+   * @param records the list of marks
+   */
   public MarkTableModelCN(List<Mark> records) {
     super(Mark.class, COLUMN_NAMES, records);
   }

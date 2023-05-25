@@ -17,7 +17,7 @@ import com.group89.app.view.comp.tablepage.RolePage;
 import com.group89.app.view.comp.tablepage.TaskPage;
 
 /**
- * The main frame of the application. Contains the sidebar and the content.
+ * The main frame of the application. It contains a sidebar and a content page.
  */
 public class MainFrame extends JFrame {
   private Sidebar sidebar;
@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
   private static final Dimension FRAME_SIZE = new Dimension(1200, 800);
 
   /**
-   * Constructs a new MainFrame.
+   * Constructs a new {@code MainFrame}.
    */
   public MainFrame() {
     super("Group 89");
@@ -81,18 +81,18 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * Returns the sidebar.
+   * Returns the sidebar of this frame.
    * 
-   * @return MainFrame's sidebar.
+   * @return the sidebar
    */
   public Sidebar getSidebar() {
     return sidebar;
   }
 
   /**
-   * Returns the content.
+   * Returns the content page of this frame.
    * 
-   * @return MainFrame's content.
+   * @return the content page
    */
   public JPanel getContent() {
     return content;

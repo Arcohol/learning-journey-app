@@ -21,6 +21,9 @@ import com.group89.app.view.comp.Header;
 public class MarkPage extends DefaultTablePage {
   public static final String[] SCALES = {"Both", "CN", "UK"};
 
+  /**
+   * The number of labels.
+   */
   private static final int LABEL_COUNT = 5;
 
   private JComboBox<String> scaleBox;

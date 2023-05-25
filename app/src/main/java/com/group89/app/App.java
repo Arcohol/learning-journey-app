@@ -8,9 +8,9 @@ import com.group89.app.view.MainFrame;
  */
 public class App {
   /**
-   * Entry point of the application. Creates a new MainFrame.
+   * Entry point of the application. It creates a new {@code MainFrame}.
    * 
-   * @param args
+   * @param args arguments passed to the application
    */
   public static void main(String[] args) {
     SwingUtilities.invokeLater(MainFrame::new);

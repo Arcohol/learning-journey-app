@@ -2,6 +2,9 @@ package com.group89.app.model.entity;
 
 import com.group89.app.model.enumeration.ApplicationStatus;
 
+/**
+ * An entity class whose instance represents an application.
+ */
 public class Application {
   private ApplicationStatus status;
   private String country;

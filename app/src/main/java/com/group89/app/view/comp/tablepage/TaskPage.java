@@ -17,7 +17,7 @@ import com.group89.app.view.comp.IComboBox;
  */
 public class TaskPage extends DefaultTablePage {
   /**
-   * A table cell renderer for tasks. Makes the entire row green if the task is done.
+   * A table cell renderer for tasks. It renders the cell green if the task is completed.
    */
   class TaskRenderer extends DefaultTableCellRenderer {
     @Override

@@ -5,7 +5,7 @@ import javax.swing.JComboBox;
 import com.group89.app.view.AppColor;
 
 /**
- * A JComboBox with a fixed size and font size.
+ * A {@code JComboBox} with a fixed size and font sizes.
  * 
  * @param <E> the type of the items in the combo box
  */
@@ -14,9 +14,9 @@ public class IComboBox<E> extends JComboBox<E> {
   private static final Dimension SIZE = new Dimension(150, 30);
 
   /**
-   * Constructs a new IComboBox with the given items.
+   * Constructs a {@code IComboBox} with the given items.
    * 
-   * @param items the items in the combo box
+   * @param items the items to be added to the combo box
    */
   public IComboBox(E[] items) {
     super(items);

@@ -6,7 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 
 /**
- * Custom table component.
+ * A custom {@code JTable} with a fixed size and font sizes.
  */
 public class ITable extends JTable {
   private static final float FONT_SIZE = 16f;

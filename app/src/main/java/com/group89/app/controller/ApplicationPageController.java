@@ -11,8 +11,16 @@ import com.group89.app.model.entity.Application;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.ApplicationPage;
 
+/**
+ * A controller class that controls the application page.
+ */
 public class ApplicationPageController
     extends AbstractTablePageController<Application, ApplicationPage> {
+  /**
+   * Constructs an application page controller.
+   * 
+   * @param page the application page
+   */
   public ApplicationPageController(ApplicationPage page) {
     super(page, "applications.json", Application[].class, Application.class);
     init();
@@ -48,6 +56,10 @@ public class ApplicationPageController
     sorter.setModel(model);
   }
 
+  /**
+   * Add a new element with the selected items in the combo boxes to the table. If {@code All} is
+   * selected, the default value is used instead.
+   */
   @Override
   protected void add() {
     ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();
