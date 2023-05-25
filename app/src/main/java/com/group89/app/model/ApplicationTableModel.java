@@ -1,6 +1,7 @@
 package com.group89.app.model;
 
 import java.util.List;
+import com.group89.app.model.enumeration.ApplicationStatus;
 import com.group89.app.model.entity.Application;
 
 public class ApplicationTableModel extends ListTableModel<Application> {

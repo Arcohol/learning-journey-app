@@ -12,9 +12,7 @@ public class Task {
   }
 
   public Task() {
-    content = "";
-    due = "";
-    status = false;
+    this("", "", false);
   }
 
   public String getContent() {

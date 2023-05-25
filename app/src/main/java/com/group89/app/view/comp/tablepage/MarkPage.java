@@ -5,11 +5,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.group89.app.controller.MarkPageController;
-import com.group89.app.model.CourseType;
-import com.group89.app.model.SemesterList;
-import com.group89.app.view.comp.Header;
-import com.group89.app.view.comp.IComboBox;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.CourseType;
+import com.group89.app.model.enumeration.Semester;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.ILabel;
+import com.group89.app.view.comp.IComboBox;
+import com.group89.app.view.comp.Header;
 
 /**
  * A table page for the mark table.
@@ -17,20 +19,20 @@ import com.group89.app.view.comp.ILabel;
  * @see DefaultTablePage
  */
 public class MarkPage extends DefaultTablePage {
-  public static final String[] SCALES = {"BOTH", "CN", "UK"};
+  public static final String[] SCALES = {"Both", "CN", "UK"};
 
   private static final int LABEL_COUNT = 5;
 
-  private JComboBox<String> semesterBox, scaleBox;
-  private JComboBox<CourseType> typeBox;
+  private JComboBox<String> scaleBox;
+  private JComboBox<ComboBoxItem> semesterBox, typeBox;
   private JLabel[] labels;
 
   public MarkPage() {
     super();
 
-    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
+    semesterBox = new IComboBox<>(EnumFactory.addItemAll(Semester.values()));
     scaleBox = new IComboBox<>(SCALES);
-    typeBox = new IComboBox<>(CourseType.values());
+    typeBox = new IComboBox<>(EnumFactory.addItemAll(CourseType.values()));
 
     labels = new JLabel[LABEL_COUNT];
     labels[0] = new ILabel("Semester:");
@@ -100,7 +102,7 @@ public class MarkPage extends DefaultTablePage {
    * 
    * @return the semester combo box
    */
-  public JComboBox<String> getSemesterBox() {
+  public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 
@@ -118,7 +120,7 @@ public class MarkPage extends DefaultTablePage {
    * 
    * @return the type combo box
    */
-  public JComboBox<CourseType> getTypeBox() {
+  public JComboBox<ComboBoxItem> getTypeBox() {
     return typeBox;
   }
 

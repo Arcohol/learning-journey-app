@@ -1,6 +1,8 @@
 package com.group89.app.model;
 
 import java.util.List;
+import com.group89.app.model.enumeration.CourseType;
+import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Mark;
 
 public class MarkTableModelCN extends ListTableModel<Mark> {
@@ -29,7 +31,7 @@ public class MarkTableModelCN extends ListTableModel<Mark> {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     Mark record = getItem(rowIndex);
     switch (columnIndex) {
-      case 0 -> record.setSemester((String) aValue);
+      case 0 -> record.setSemester((Semester) aValue);
       case 1 -> record.setModuleCode((String) aValue);
       case 2 -> record.setTitle((String) aValue);
       case 3 -> record.setMarkCN((Integer) aValue);

@@ -2,6 +2,9 @@ package com.group89.app.controller;
 
 import javax.swing.RowFilter;
 import com.group89.app.model.ListTableModel;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.ItemAll;
+import com.group89.app.model.enumeration.TaskStatus;
 import com.group89.app.model.TaskTableModel;
 import com.group89.app.model.entity.Task;
 import com.group89.app.view.comp.tablepage.TaskPage;
@@ -27,14 +30,14 @@ public class TaskPageController extends AbstractTablePageController<Task, TaskPa
 
     view.getTable().setModel(model);
 
-    String status = (String) view.getStatusBox().getSelectedItem();
+    ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<Task>, Integer>() {
       @Override
       public boolean include(Entry<? extends ListTableModel<Task>, ? extends Integer> entry) {
         ListTableModel<Task> model = entry.getModel();
         Task record = model.getItem(entry.getIdentifier());
-        return status.equals("All") || (record.getStatus() && status.equals("Completed"))
-            || (!record.getStatus() && status.equals("In progress"));
+        return status == ItemAll.ALL || (record.getStatus() && status == TaskStatus.COMPLETED)
+            || (!record.getStatus() && status == TaskStatus.OPEN);
       }
     });
     sorter.setModel(model);
@@ -42,13 +45,8 @@ public class TaskPageController extends AbstractTablePageController<Task, TaskPa
 
   @Override
   protected void add() {
-    String status = (String) view.getStatusBox().getSelectedItem();
-    Task record = new Task("", "", switch (status) {
-      case "All" -> false;
-      case "Completed" -> true;
-      case "In progress" -> false;
-      default -> throw new IllegalStateException("Unexpected value: " + status);
-    });
+    ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();
+    Task record = new Task("", "", status == TaskStatus.COMPLETED);
     model.addItem(record);
   }
 }

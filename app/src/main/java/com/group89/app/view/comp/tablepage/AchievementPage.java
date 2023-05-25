@@ -3,22 +3,23 @@ package com.group89.app.view.comp.tablepage;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import com.group89.app.controller.AchievementPageController;
-import com.group89.app.model.AchievementType;
-import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.AchievementType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.Semester;
+import com.group89.app.utils.EnumFactory;
 import com.group89.app.view.comp.IComboBox;
 
 /**
  * A table page for the achievement table.
  */
 public class AchievementPage extends DefaultTablePage {
-  private JComboBox<String> semesterBox;
-  private JComboBox<AchievementType> typeBox;
+  private JComboBox<ComboBoxItem> semesterBox, typeBox;
 
   public AchievementPage() {
     super();
 
-    semesterBox = new IComboBox<>(new SemesterList(true).toArray());
-    typeBox = new IComboBox<>(AchievementType.values());
+    semesterBox = new IComboBox<>(EnumFactory.addItemAll(Semester.values()));
+    typeBox = new IComboBox<>(EnumFactory.addItemAll(AchievementType.values()));
 
     GridBagConstraints c = new GridBagConstraints();
     c.anchor = GridBagConstraints.WEST;
@@ -42,7 +43,7 @@ public class AchievementPage extends DefaultTablePage {
    * 
    * @return the semester combo box
    */
-  public JComboBox<String> getSemesterBox() {
+  public JComboBox<ComboBoxItem> getSemesterBox() {
     return semesterBox;
   }
 
@@ -51,7 +52,7 @@ public class AchievementPage extends DefaultTablePage {
    * 
    * @return the type combo box
    */
-  public JComboBox<AchievementType> getTypeBox() {
+  public JComboBox<ComboBoxItem> getTypeBox() {
     return typeBox;
   }
 }

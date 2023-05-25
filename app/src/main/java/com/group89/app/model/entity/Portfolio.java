@@ -1,14 +1,15 @@
 package com.group89.app.model.entity;
 
-import com.group89.app.model.PortfolioType;
+import com.group89.app.model.enumeration.PortfolioType;
+import com.group89.app.model.enumeration.Semester;
 
 public class Portfolio {
-  private String semester;
+  private Semester semester;
   private PortfolioType type;
   private String exhibition;
   private String details;
 
-  public Portfolio(String semester, PortfolioType type, String exhibition, String details) {
+  public Portfolio(Semester semester, PortfolioType type, String exhibition, String details) {
     this.semester = semester;
     this.type = type;
     this.exhibition = exhibition;
@@ -16,13 +17,10 @@ public class Portfolio {
   }
 
   public Portfolio() {
-    this.semester = "";
-    this.type = PortfolioType.OTHER;
-    this.exhibition = "";
-    this.details = "";
+    this(Semester.values()[0], PortfolioType.OTHER, "", "");
   }
 
-  public String getSemester() {
+  public Semester getSemester() {
     return semester;
   }
 
@@ -38,7 +36,7 @@ public class Portfolio {
     return details;
   }
 
-  public void setSemester(String semester) {
+  public void setSemester(Semester semester) {
     this.semester = semester;
   }
 

@@ -1,6 +1,6 @@
 package com.group89.app.model.entity;
 
-import com.group89.app.model.ApplicationStatus;
+import com.group89.app.model.enumeration.ApplicationStatus;
 
 public class Application {
   private ApplicationStatus status;
@@ -25,14 +25,7 @@ public class Application {
   }
 
   public Application() {
-    status = ApplicationStatus.PENDING;
-    country = "";
-    university = "";
-    program = "";
-    gpa = 0.0;
-    languageScore = 0.0;
-    gre = 0;
-    note = "";
+    this(ApplicationStatus.PENDING, "", "", "", 0.0, 0.0, 0, "");
   }
 
   public ApplicationStatus getStatus() {

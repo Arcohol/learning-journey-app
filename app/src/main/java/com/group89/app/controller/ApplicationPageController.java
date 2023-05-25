@@ -1,12 +1,12 @@
 package com.group89.app.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
-import com.group89.app.model.ApplicationTableModel;
-import com.group89.app.model.ApplicationStatus;
 import com.group89.app.model.ListTableModel;
+import com.group89.app.model.enumeration.ApplicationStatus;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.ItemAll;
+import com.group89.app.model.ApplicationTableModel;
 import com.group89.app.model.entity.Application;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.ApplicationPage;
@@ -32,20 +32,17 @@ public class ApplicationPageController
     model.addTableModelListener(e -> view.getSaveButton().setEnabled(true));
 
     view.getTable().setModel(model);
+    view.getTable().getColumn("Status")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(ApplicationStatus.values())));
 
-    ArrayList<ApplicationStatus> types = new ArrayList<>(Arrays.asList(ApplicationStatus.values()));
-    types.remove(ApplicationStatus.ALL);
-    view.getTable().getColumn("Status").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(types.toArray(new ApplicationStatus[0]))));
-
-    ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
+    ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<Application>, Integer>() {
       @Override
       public boolean include(
           Entry<? extends ListTableModel<Application>, ? extends Integer> entry) {
         ListTableModel<Application> model = entry.getModel();
         Application record = model.getItem(entry.getIdentifier());
-        return status == ApplicationStatus.ALL || record.getStatus() == status;
+        return status == ItemAll.ALL || status == record.getStatus();
       }
     });
     sorter.setModel(model);
@@ -53,10 +50,10 @@ public class ApplicationPageController
 
   @Override
   protected void add() {
-    ApplicationStatus status = (ApplicationStatus) view.getStatusBox().getSelectedItem();
-    Application record =
-        new Application(status != ApplicationStatus.ALL ? status : ApplicationStatus.PENDING,
-            "", "", "", 0.0, 0.0, 0, "");
+    ComboBoxItem status = (ComboBoxItem) view.getStatusBox().getSelectedItem();
+    Application record = new Application(
+        status != ItemAll.ALL ? (ApplicationStatus) status : ApplicationStatus.PENDING, "", "", "",
+        0.0, 0.0, 0, "");
     model.addItem(record);
   }
 }

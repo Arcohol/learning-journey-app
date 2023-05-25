@@ -1,15 +1,14 @@
 package com.group89.app.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.RowFilter;
-import com.group89.app.model.AchievementTableModel;
-import com.group89.app.model.AchievementType;
 import com.group89.app.model.ListTableModel;
-import com.group89.app.model.SemesterList;
+import com.group89.app.model.enumeration.AchievementType;
+import com.group89.app.model.enumeration.ComboBoxItem;
+import com.group89.app.model.enumeration.ItemAll;
+import com.group89.app.model.enumeration.Semester;
+import com.group89.app.model.AchievementTableModel;
 import com.group89.app.model.entity.Achievement;
-// import com.group89.app.utils.SemesterGenerator;
 import com.group89.app.view.comp.IComboBox;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 
@@ -36,23 +35,20 @@ public class AchievementPageController
 
     view.getTable().setModel(model);
     view.getTable().getColumn("Semester")
-        .setCellEditor(new DefaultCellEditor(new IComboBox<>(new SemesterList(false).toArray())));
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(Semester.values())));
+    view.getTable().getColumn("Type")
+        .setCellEditor(new DefaultCellEditor(new IComboBox<>(AchievementType.values())));
 
-    ArrayList<AchievementType> types = new ArrayList<>(Arrays.asList(AchievementType.values()));
-    types.remove(AchievementType.ALL);
-    view.getTable().getColumn("Type").setCellEditor(
-        new DefaultCellEditor(new IComboBox<>(types.toArray(new AchievementType[0]))));
-
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
+    ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
+    ComboBoxItem type = (ComboBoxItem) view.getTypeBox().getSelectedItem();
     sorter.setRowFilter(new RowFilter<ListTableModel<Achievement>, Integer>() {
       @Override
       public boolean include(
           Entry<? extends ListTableModel<Achievement>, ? extends Integer> entry) {
         ListTableModel<Achievement> model = entry.getModel();
         Achievement record = model.getItem(entry.getIdentifier());
-        return (semester.equals("All") || record.getSemester().equals(semester))
-            && (type == AchievementType.ALL || record.getType() == type);
+        return (semester == ItemAll.ALL || semester == record.getSemester())
+            && (type == ItemAll.ALL || type == record.getType());
       }
     });
     sorter.setModel(model);
@@ -60,10 +56,11 @@ public class AchievementPageController
 
   @Override
   protected void add() {
-    String semester = (String) view.getSemesterBox().getSelectedItem();
-    AchievementType type = (AchievementType) view.getTypeBox().getSelectedItem();
-    Achievement record = new Achievement(!semester.equals("All") ? semester : "", "",
-        "", type != AchievementType.ALL ? type : AchievementType.OTHER);
+    ComboBoxItem semester = (ComboBoxItem) view.getSemesterBox().getSelectedItem();
+    ComboBoxItem type = (ComboBoxItem) view.getTypeBox().getSelectedItem();
+    Achievement record =
+        new Achievement(semester != ItemAll.ALL ? (Semester) semester : Semester.values()[0], "", "",
+            type != ItemAll.ALL ? (AchievementType) type : AchievementType.OTHER);
     model.addItem(record);
   }
 }

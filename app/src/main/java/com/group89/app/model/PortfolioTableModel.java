@@ -1,6 +1,8 @@
 package com.group89.app.model;
 
 import java.util.List;
+import com.group89.app.model.enumeration.PortfolioType;
+import com.group89.app.model.enumeration.Semester;
 import com.group89.app.model.entity.Portfolio;
 
 public class PortfolioTableModel extends ListTableModel<Portfolio> {
@@ -26,7 +28,7 @@ public class PortfolioTableModel extends ListTableModel<Portfolio> {
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     Portfolio portfolioRecord = getItem(rowIndex);
     switch (columnIndex) {
-      case 0 -> portfolioRecord.setSemester((String) aValue);
+      case 0 -> portfolioRecord.setSemester((Semester) aValue);
       case 1 -> portfolioRecord.setType((PortfolioType) aValue);
       case 2 -> portfolioRecord.setExhibition((String) aValue);
       case 3 -> portfolioRecord.setDetails((String) aValue);
