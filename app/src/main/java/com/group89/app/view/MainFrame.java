@@ -1,12 +1,12 @@
 package com.group89.app.view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.group89.app.controller.MainFrameController;
+import com.group89.app.view.comp.ContentPage;
 import com.group89.app.view.comp.Sidebar;
 import com.group89.app.view.comp.tablepage.AchievementPage;
 import com.group89.app.view.comp.tablepage.ApplicationPage;
@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
     sidebar = new Sidebar();
     add(sidebar, BorderLayout.WEST);
 
-    content = new JPanel(new CardLayout());
+    content = new ContentPage();
     add(content, BorderLayout.CENTER);
 
     pages[0] = new MarkPage();
